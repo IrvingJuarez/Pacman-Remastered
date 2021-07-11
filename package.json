@@ -1,0 +1,25 @@
+{
+  "name": "pacman-remastered",
+  "version": "1.0.0",
+  "description": "The classic Arcade Game optimized for mobile",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IrvingJuarez/Pacman-Remastered.git"
+  },
+  "keywords": [
+    "Pacman",
+    "NPM",
+    "JavaScript",
+    "ArcadeGames"
+  ],
+  "author": "Irving Juárez <irvingjuarez274@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IrvingJuarez/Pacman-Remastered/issues"
+  },
+  "homepage": "https://github.com/IrvingJuarez/Pacman-Remastered#readme"
+}
