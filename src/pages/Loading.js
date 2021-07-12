@@ -1,4 +1,4 @@
-const Content = () => {
+const Loading = () => {
     const view = `
         <section class="ContentLoading">
             <div class="GifContainer">
@@ -10,4 +10,4 @@ const Content = () => {
     return view;
 }
 
-export default Content;
+export default Loading;

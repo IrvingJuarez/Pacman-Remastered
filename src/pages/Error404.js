@@ -1,13 +1,13 @@
-const Content = () => {
+const Error404 = () => {
     const view = `
         <section class="ContentError404">
             <h1>Error 404</h1>
             <span class="NotFound">Pacman not found</span>
-            <div class="GhostContainer"></div>
+            <div class=""></div>
         </section>
     `;
 
     return view;
 }
 
-export default Content;
+export default Error404;

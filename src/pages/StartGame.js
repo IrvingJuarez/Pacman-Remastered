@@ -1,4 +1,4 @@
-const Content = () => {
+const StartGame = () => {
     const view = `
         <section class="ContentStartGame">
             <div class="LogoContainer"></div>
@@ -12,4 +12,4 @@ const Content = () => {
     return view;
 }
 
-export default Content;
+export default StartGame;
