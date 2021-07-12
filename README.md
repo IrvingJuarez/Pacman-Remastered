@@ -20,7 +20,7 @@ The specifications of this design are the following:
 ![First view](./design/images/firstView-320.png)
 ![Start Game View](./design/images/startGameView-320.png)
 ![Main Level](./design/images/mainViewLevel1-320.png)
-![Complete view](./design/images/completeViewLevel1-320)
+![Complete view](./design/images/completeViewLevel1-320.png)
 
 ### 375 Design
 This design was created for the mobile devices with a viewport-width of 375px.
