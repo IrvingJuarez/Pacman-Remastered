@@ -7,15 +7,23 @@
     height: 136px;
     color: white;
 }
-.LogoContainer{
+.Logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 230px;
+    height: 74px;
+}
+.LogoImage{
     width: 230px;
     height: 43px;
-    border: 1px solid white;
+    background-image: url("../assets/images/logo.png");
 }
 .Subtitle{
     display: inline-block;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: 15px;
 }
 .PlayButton{
     width: 142px;
