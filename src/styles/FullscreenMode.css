@@ -14,8 +14,11 @@
 .ContentFullscreenMode button{
     width: 100%;
     border-radius: 15px;
-    color: white;
     font-weight: bold;
+}
+.ContentFullscreenMode button a{
+    color: white;
+    text-decoration: none;
 }
 .FullscreenButton{
     border-color: var(--borderColor);

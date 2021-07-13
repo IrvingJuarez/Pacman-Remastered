@@ -6,7 +6,6 @@ import Playing from "../pages/Playing";
 import goFullscreen from "../utils/goFullscreen";
 
 const routes = {
-    "loading": Loading,
     "playing-game": Playing,
     "start-game": StartGame
 }
