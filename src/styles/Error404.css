@@ -13,5 +13,9 @@ h1{
 }
 .NotFound{
     font-size: 18px;
-    font-weight: 700;
+}
+.Ghost404{
+    width: 73px;
+    height: 73px;
+    background-image: url("../assets/images/redGhost.png");
 }

@@ -5,7 +5,7 @@ const Error404 = () => {
         <section class="ContentError404">
             <h1>Error 404</h1>
             <span class="NotFound">Pacman not found</span>
-            <div class=""></div>
+            <div class="Ghost404"></div>
         </section>
     `;
 
