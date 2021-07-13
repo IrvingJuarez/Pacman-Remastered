@@ -8,9 +8,9 @@
     color: white;
 }
 .GifContainer{
-    width: 50px;
+    width: 52px;
     height: 52.86px;
-    border: 2px solid white;
+    background-image: url("../assets/gifs/pacman.gif");
 }
 .Loading{
     display: inline-block;
