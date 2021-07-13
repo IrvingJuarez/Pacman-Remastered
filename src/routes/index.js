@@ -15,7 +15,7 @@ const router = async () => {
 
     content.innerHTML = await Loading();
     setTimeout(() => {
-        content.innerHTML = FullscreenMode()
+        content.innerHTML = StartGame()
     }, 2000)
 }
 

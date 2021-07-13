@@ -1,4 +1,5 @@
 import styles from "../styles/StartGame.css"
+import goFullscreen from "../utils/goFullscreen"
 
 const StartGame = () => {
     const view = `
@@ -11,6 +12,7 @@ const StartGame = () => {
                 Play Game!
             </button>
         </section>
+        ${goFullscreen()}
     `;
 
     return view;
