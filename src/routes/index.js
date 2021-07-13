@@ -3,6 +3,7 @@ import Loading from "../pages/Loading";
 import FullscreenMode from "../pages/FullscreenMode";
 import StartGame from "../pages/StartGame";
 import Playing from "../pages/Playing";
+import goFullscreen from "../utils/goFullscreen";
 
 const routes = {
     "loading": Loading,
@@ -15,7 +16,8 @@ const router = async () => {
 
     content.innerHTML = await Loading();
     setTimeout(() => {
-        content.innerHTML = StartGame()
+        content.innerHTML = FullscreenMode()
+        goFullscreen()
     }, 2000)
 }
 
