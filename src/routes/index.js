@@ -13,7 +13,10 @@ const routes = {
 const router = async () => {
     const content = null || document.getElementById("content");
 
-    content.innerHTML = await FullscreenMode();
+    content.innerHTML = await Loading();
+    setTimeout(() => {
+        content.innerHTML = FullscreenMode()
+    }, 2000)
 }
 
 export default router;
