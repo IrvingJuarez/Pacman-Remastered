@@ -1,0 +1,17 @@
+.ContentError404{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 172px;
+    height: 156px;
+    color: white;
+}
+h1{
+    font-size: 26px;
+    font-weight: bold;
+}
+.NotFound{
+    font-size: 18px;
+    font-weight: 700;
+}

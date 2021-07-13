@@ -1,3 +1,5 @@
+import styles from "../styles/Error404.css"
+
 const Error404 = () => {
     const view = `
         <section class="ContentError404">
