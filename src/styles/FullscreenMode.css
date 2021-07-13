@@ -8,11 +8,14 @@
 .GifContainer{
     background-image: url("../assets/gifs/pacman.gif");
 }
+.ContentFullscreenMode p{
+    text-align: center;
+}
 .ContentFullscreenMode button{
     width: 100%;
     border-radius: 15px;
     color: white;
-    font-size: 18px;
+    font-weight: bold;
 }
 .FullscreenButton{
     border-color: var(--borderColor);
@@ -33,7 +36,7 @@
         width: 50px;
         height: 50px;
     }
-    .ContentFullscreenMode p{
+    .ContentFullscreenMode p, .ContentFullscreenMode button{
         font-size: 16px;
     }
     .ContentFullscreenMode button{
@@ -51,7 +54,7 @@
         width: 52px;
         height: 52px;
     }
-    .ContentFullscreenMode p{
+    .ContentFullscreenMode p, .ContentFullscreenMode button{
         font-size: 18px;
     }
     .ContentFullscreenMode button{
@@ -70,9 +73,10 @@
         height: 70px;
     }
     .ContentFullscreenMode p{
-        font-size: 30px;
+        font-size: 32px;
     }
     .ContentFullscreenMode button{
         height: 80px;
+        font-size: 28px;
     }
 }
