@@ -1,3 +1,5 @@
+import styles from "../styles/StartGame.css"
+
 const StartGame = () => {
     const view = `
         <section class="ContentStartGame">
