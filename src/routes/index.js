@@ -12,7 +12,7 @@ const routes = {
 const router = async () => {
     const content = null || document.getElementById("content");
 
-    content.innerHTML = await Error404();
+    content.innerHTML = await Loading();
 }
 
 export default router;

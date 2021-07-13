@@ -1,3 +1,5 @@
+import styles from "../styles/Loading.css"
+
 const Loading = () => {
     const view = `
         <section class="ContentLoading">
