@@ -1,0 +1,78 @@
+.ContentFullscreenMode{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+.GifContainer{
+    background-image: url("../assets/gifs/pacman.gif");
+}
+.ContentFullscreenMode button{
+    width: 100%;
+    border-radius: 15px;
+    color: white;
+    font-size: 18px;
+}
+.FullscreenButton{
+    border-color: var(--borderColor);
+    background-color: var(--borderColor);
+}
+.AnywayButton{
+    border-color: black;
+    background-color: transparent;
+}
+
+/* 230 Design */
+@media (min-width: 320px) and (max-width: 374px){
+    .ContentFullscreenMode{
+        width: 296px;
+        height: 226px;
+    }
+    .GifContainer{
+        width: 50px;
+        height: 50px;
+    }
+    .ContentFullscreenMode p{
+        font-size: 16px;
+    }
+    .ContentFullscreenMode button{
+        height: 42px;
+    }
+}
+
+/* 375 Design */
+@media (min-width: 375px){
+    .ContentFullscreenMode{
+        width: 345px;
+        height: 228px;
+    }
+    .GifContainer{
+        width: 52px;
+        height: 52px;
+    }
+    .ContentFullscreenMode p{
+        font-size: 18px;
+    }
+    .ContentFullscreenMode button{
+        height: 44px;
+    }
+}
+
+/* Desktop Design */
+@media (min-width: 1210px){
+    .ContentFullscreenMode{
+        width: 484px;
+        height: 412px;
+    }
+    .GifContainer{
+        width: 70px;
+        height: 70px;
+    }
+    .ContentFullscreenMode p{
+        font-size: 30px;
+    }
+    .ContentFullscreenMode button{
+        height: 80px;
+    }
+}
