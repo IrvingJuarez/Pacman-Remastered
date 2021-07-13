@@ -5,8 +5,8 @@
     justify-content: space-between;
     color: white;
 }
-.GifContainer{
-    background-image: url("../assets/gifs/pacman.gif");
+.GifContainerFull{
+    background-image: url("../assets/images/redGhost.png");
 }
 .ContentFullscreenMode p{
     text-align: center;
@@ -32,7 +32,7 @@
         width: 296px;
         height: 226px;
     }
-    .GifContainer{
+    .GifContainerFull{
         width: 50px;
         height: 50px;
     }
@@ -50,7 +50,7 @@
         width: 345px;
         height: 228px;
     }
-    .GifContainer{
+    .GifContainerFull{
         width: 52px;
         height: 52px;
     }
@@ -68,7 +68,7 @@
         width: 484px;
         height: 412px;
     }
-    .GifContainer{
+    .GifContainerFull{
         width: 70px;
         height: 70px;
     }
