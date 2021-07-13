@@ -1,3 +1,5 @@
+import styles from "../styles/Playing.css"
+
 const Playing = () => {
     const view = `
         <section class="ContentPlaying">

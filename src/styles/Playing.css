@@ -1,0 +1,121 @@
+.ContentPlaying{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.GameBoard{
+    border: 4px solid var(--borderColor);
+    border-radius: 15px;
+}
+.GameStatus{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.LifeContainer{
+    display: flex;
+    justify-content: space-around;
+}
+.LevelStatus{
+    font-size: 18px;
+}
+
+
+/* 320 Design */
+@media (min-width: 320px) and (max-width: 349px){
+    .ContentPlaying{
+        width: 296px;
+        height: 511.77px;
+    }
+    .GameBoard{
+        width: 296px;
+        height: 488px;
+    }
+    .GameStatus{
+        width: 296px;
+        height: 22.77px;
+    }
+    .LifeContainer{
+        width: 43px;
+        height: 20px;
+    }
+    .LifeContainer img{
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* 375 Design */
+@media (min-width: 350px){
+    .ContentPlaying{
+        width: 344px;
+        height: 591.77px;
+    }
+    .GameBoard{
+        width: 344px;
+        height: 560px;
+    }
+    .GameStatus{
+        width: 344px;
+        height: 20px;
+    }
+    .LifeContainer{
+        width: 43px;
+        height: 20px;
+    }
+    .LifeContainer img{
+        width: 20px;
+        height: 20px;
+    }
+}
+
+
+/* Higher Design */
+@media (min-height: 745px){
+    .ContentPlaying{
+        width: 344px;
+        height: 735.77px;
+    }
+    .GameBoard{
+        width: 344px;
+        height: 704px;
+    }
+    .GameStatus{
+        width: 344px;
+        height: 20px;
+    }
+    .LifeContainer{
+        width: 43px;
+        height: 20px;
+    }
+    .LifeContainer img{
+        width: 20px;
+        height: 20px;
+    }
+}
+
+
+/* Desktop design */
+@media (min-width: 1230px){
+    .ContentPlaying{
+        width: 1210px;
+        height: 861px;
+    }
+    .GameBoard{
+        width: 1210px;
+        height: 810px;
+    }
+    .GameStatus{
+        width: 1210px;
+        height: 42px;
+    }
+    .LifeContainer{
+        width: 89px;
+        height: 42px;
+    }
+    .LifeContainer img{
+        width: 42px;
+        height: 42px;
+    }
+}

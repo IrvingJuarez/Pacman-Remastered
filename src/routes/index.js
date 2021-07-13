@@ -12,7 +12,7 @@ const routes = {
 const router = async () => {
     const content = null || document.getElementById("content");
 
-    content.innerHTML = await StartGame();
+    content.innerHTML = await Playing();
 }
 
 export default router;
