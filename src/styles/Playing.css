@@ -22,11 +22,19 @@
     color: white;
 }
 .row{
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     border-top: 1px solid var(--borderColor);
 }
 .GameBoard section:nth-child(1){
     border-top: none;
+}
+.cell{
+    border-left: 1px solid var(--borderColor);
+}
+.row div:nth-child(1){
+    border-left: none;
 }
 
 /* 320 Design */
@@ -57,6 +65,9 @@
     .row{
         height: 24px;
     }
+    .cell{
+        width: 24px;
+    }
 }
 
 /* 375 Design */
@@ -86,6 +97,9 @@
     }
     .row{
         height: 24px;
+    }
+    .cell{
+        width: 24px;
     }
 }
 
@@ -118,6 +132,9 @@
     .row{
         height: 24px;
     }
+    .cell{
+        width: 24px;
+    }
 }
 
 
@@ -149,5 +166,8 @@
     }
     .row{
         height: 40.01px;
+    }
+    .cell{
+        width: 40px;
     }
 }
