@@ -6,18 +6,10 @@ import Playing from "../pages/Playing";
 import goFullscreen from "../utils/goFullscreen";
 import getHash from "../utils/getHash"
 
-const routes = {
-    "/": Loading,
-    "/start-game/": StartGame,
-    "/playing-game": Playing
-}
-
 async function router(){
     const content = null || document.getElementById("content");
-    let hash = getHash();
-    let render = routes[hash] ? routes[hash] : Error404;
 
-    content.innerHTML = await render()
+    content.innerHTML = await StartGame()
 }
 
 export default router;
