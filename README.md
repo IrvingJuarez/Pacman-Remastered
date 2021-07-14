@@ -57,3 +57,24 @@ Specifications:
 ![Start Game view](./design/images/startGameView-Desktop.png)
 ![Main View](./design/images/mainViewLevel1-Desktop.png)
 ![complete View](./design/images/completeViewLevel1-Desktop.png)
+
+# Technologies used
+The game is a Single Page Application and the technologies used for this project are:
+- Vanilla JavaScript
+- CSS
+- Html
+- Webpack
+- NPM
+- Git & GitHub
+
+# Files organization
+The "design" folder contains all Figma design images. The "dist" folder is the one sent to production (that's the one webpack generates) and the "public" folder is unnecessary, but it is according to the "good practices".
+
+Following the "good practices", there is a src directory where all the magic happens. Within it, we can find a lot of folders that I am going to explain:
+- assets: All the images and gifs used in the game, as well as sounds
+- pages: All the pages with the .js extension for the SPA
+- routes: The router to move along the webpage
+- styles: Styles
+- Utils: Stuff necessary to getHash, goFullscreen or create the grid for the game
+
+Finally, the index.js file in the src carpet is the one webpack takes to send to production
