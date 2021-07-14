@@ -9,7 +9,7 @@ import getHash from "../utils/getHash"
 async function router(){
     const content = null || document.getElementById("content");
 
-    content.innerHTML = await StartGame()
+    content.innerHTML = await Playing()
 }
 
 export default router;

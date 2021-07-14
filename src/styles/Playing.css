@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    color: white;
 }
 .GameBoard{
     border: 4px solid var(--borderColor);

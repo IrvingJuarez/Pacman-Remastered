@@ -1,4 +1,5 @@
 import styles from "../styles/Playing.css"
+import pacmanImage from "../assets/images/pacmanPhoto.png"
 
 const Playing = () => {
     const view = `
@@ -7,8 +8,8 @@ const Playing = () => {
             </div>
             <div class="GameStatus">
                 <div class="LifeContainer">
-                    <img src="pacmanImage">
-                    <img src="pacmanImage">
+                    <img src="${pacmanImage}">
+                    <img src="${pacmanImage}">
                 </div>
                 <p class="LevelStatus">Level: <span class="LevelQuantity">0</span></p>
             </div>
