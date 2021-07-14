@@ -4,20 +4,20 @@ import FullscreenMode from "../pages/FullscreenMode";
 import StartGame from "../pages/StartGame";
 import Playing from "../pages/Playing";
 import goFullscreen from "../utils/goFullscreen";
+import getHash from "../utils/getHash"
 
 const routes = {
-    "playing-game": Playing,
-    "start-game": StartGame
+    "/": Loading,
+    "/start-game/": StartGame,
+    "/playing-game": Playing
 }
 
-const router = async () => {
+async function router(){
     const content = null || document.getElementById("content");
+    let hash = getHash();
+    let render = routes[hash] ? routes[hash] : Error404;
 
-    content.innerHTML = await Loading();
-    setTimeout(() => {
-        content.innerHTML = FullscreenMode()
-        goFullscreen()
-    }, 2000)
+    content.innerHTML = await render()
 }
 
 export default router;
