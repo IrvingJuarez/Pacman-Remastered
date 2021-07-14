@@ -21,7 +21,13 @@
 .LevelStatus{
     color: white;
 }
-
+.row{
+    width: 100%;
+    border-top: 1px solid var(--borderColor);
+}
+.GameBoard section:nth-child(1){
+    border-top: none;
+}
 
 /* 320 Design */
 @media (min-width: 320px) and (max-width: 349px){
@@ -47,6 +53,9 @@
     }
     .LevelStatus{
         font-size: 18px;
+    }
+    .row{
+        height: 24px;
     }
 }
 
@@ -74,6 +83,9 @@
     }
     .LevelStatus{
         font-size: 20px;
+    }
+    .row{
+        height: 24px;
     }
 }
 
@@ -103,6 +115,9 @@
     .LevelStatus{
         font-size: 20px;
     }
+    .row{
+        height: 24px;
+    }
 }
 
 
@@ -131,5 +146,8 @@
     .LevelStatus{
         font-size: 36px;
         font-weight: bold;
+    }
+    .row{
+        height: 40.01px;
     }
 }

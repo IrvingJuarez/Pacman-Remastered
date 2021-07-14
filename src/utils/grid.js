@@ -39,7 +39,7 @@ const grid = () => {
         // 320 Design
     }else if (screenWidth >= 375 & screenHeight <= 739){
         // 375 Design
-    }else if (screenWidth >= 375 && screenHeight > 740){
+    }else if (screenWidth >= 375 && screenHeight >= 740){
         // Higher Design
     }else {
         // Desktop Design
