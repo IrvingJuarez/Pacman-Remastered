@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    color: white;
 }
 .GameBoard{
     border: 4px solid var(--borderColor);
@@ -16,10 +15,11 @@
 }
 .LifeContainer{
     display: flex;
+    align-items: center;
     justify-content: space-around;
 }
 .LevelStatus{
-    font-size: 18px;
+    color: white;
 }
 
 
@@ -45,6 +45,9 @@
         width: 20px;
         height: 20px;
     }
+    .LevelStatus{
+        font-size: 18px;
+    }
 }
 
 /* 375 Design */
@@ -68,6 +71,9 @@
     .LifeContainer img{
         width: 20px;
         height: 20px;
+    }
+    .LevelStatus{
+        font-size: 20px;
     }
 }
 
@@ -94,6 +100,9 @@
         width: 20px;
         height: 20px;
     }
+    .LevelStatus{
+        font-size: 20px;
+    }
 }
 
 
@@ -118,5 +127,9 @@
     .LifeContainer img{
         width: 42px;
         height: 42px;
+    }
+    .LevelStatus{
+        font-size: 36px;
+        font-weight: bold;
     }
 }

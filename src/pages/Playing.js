@@ -2,6 +2,8 @@ import styles from "../styles/Playing.css"
 import pacmanImage from "../assets/images/pacmanPhoto.png"
 
 const Playing = () => {
+    console.log(document.getElementById("content").childNodes[1])
+
     const view = `
         <section class="ContentPlaying">
             <div class="GameBoard">
