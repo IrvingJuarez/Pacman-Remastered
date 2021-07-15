@@ -1,12 +1,9 @@
 const mainContainer = document.getElementById("content")
 
 const createGrid = (height, width, container) => {
-    if(height === 810){
-        height -= 10;
-        height /= 40;
-
-        width -= 10;
-        width /= 40;
+    if(width >= 1208){
+        height = 20;
+        width = 30;
     }else{
         height -= 8;
         height /= 24;
