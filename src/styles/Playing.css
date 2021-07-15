@@ -7,8 +7,8 @@
     --coverLeft: 5px 0 0 5px;
     --downLeft: 0 0 0 5px;
     --downRight: 0 0 5px 0;
-    --upRight: 5px 0 0 0;
-    --upLeft: 0 5px 0 0;
+    --upRight: 0 5px 0 0;
+    --upLeft: 5px 0 0 0;
 }
 .ContentPlaying{
     display: flex;
