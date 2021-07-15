@@ -1,3 +1,15 @@
+:root{
+    --border: 2px solid var(--borderColor);
+    --square: 5px;
+    --coverDown: 0 0 5px 5px;
+    --coverRight: 0 5px 5px 0;
+    --coverUp: 5px 5px 0 0;
+    --coverLeft: 5px 0 0 5px;
+    --downLeft: 0 0 0 5px;
+    --downRight: 0 0 5px 0;
+    --upRight: 5px 0 0 0;
+    --upLeft: 0 5px 0 0;
+}
 .ContentPlaying{
     display: flex;
     flex-direction: column;
@@ -5,7 +17,6 @@
     justify-content: space-between;
 }
 .GameBoard{
-    border: 4px solid var(--borderColor);
     border-radius: 15px;
 }
 .GameStatus{
@@ -44,6 +55,7 @@
         height: 511.77px;
     }
     .GameBoard{
+        border: 4px solid var(--borderColor);
         width: 296px;
         height: 488px;
     }
@@ -77,6 +89,7 @@
         height: 591.77px;
     }
     .GameBoard{
+        border: 4px solid var(--borderColor);
         width: 344px;
         height: 560px;
     }
@@ -111,6 +124,7 @@
         height: 735.77px;
     }
     .GameBoard{
+        border: 4px solid var(--borderColor);
         width: 344px;
         height: 704px;
     }
@@ -145,6 +159,7 @@
         height: 861px;
     }
     .GameBoard{
+        border: 5px solid var(--borderColor);
         width: 1210px;
         height: 810px;
     }
