@@ -37,12 +37,6 @@
     justify-content: space-between;
     width: 100%;
 }
-.GameBoard section:nth-child(1){
-    border-top: none;
-}
-.row div:nth-child(1){
-    border-left: none;
-}
 
 /* 320 Design */
 @media (min-width: 320px) and (max-width: 349px){
