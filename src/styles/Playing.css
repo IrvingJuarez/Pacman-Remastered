@@ -1,5 +1,9 @@
 :root{
+    --mobileValue: 4px;
+    --desktopValue: 5px;
     --border: 2px solid var(--borderColor);
+    --borderSection: var(--mobileValue) solid var(--borderColor);
+    --borderSectionDesktop: var(--desktopValue) solid var(--borderColor);
     --borderJail: 2px solid var(--jailColor);
     --square: 5px;
     --coverDown: 0 0 5px 5px;
@@ -19,6 +23,18 @@
 }
 .GameBoard{
     border-radius: 15px;
+}
+.GameBoard section{
+    border-left: var(--borderSection);
+    border-right: var(--borderSection);
+}
+.GameBoard section:first-child{
+    border-top: var(--borderSection);
+    border-radius: var(--coverUp);
+}
+.GameBoard section:last-child{
+    border-bottom: var(--borderSection);
+    border-radius: var(--coverDown);
 }
 .GameStatus{
     display: flex;
@@ -46,7 +62,6 @@
         height: 511.77px;
     }
     .GameBoard{
-        border: 4px solid var(--borderColor);
         width: 296px;
         height: 488px;
     }
@@ -80,7 +95,6 @@
         height: 591.77px;
     }
     .GameBoard{
-        border: 4px solid var(--borderColor);
         width: 344px;
         height: 560px;
     }
@@ -115,7 +129,6 @@
         height: 735.77px;
     }
     .GameBoard{
-        border: 4px solid var(--borderColor);
         width: 344px;
         height: 704px;
     }
@@ -150,9 +163,20 @@
         height: 861px;
     }
     .GameBoard{
-        border: 5px solid var(--borderColor);
         width: 1210px;
         height: 810px;
+    }
+    .GameBoard section{
+        border-left: var(--borderSectionDesktop);
+        border-right: var(--borderSectionDesktop);
+    }
+    .GameBoard section:first-child{
+        border-top: var(--borderSectionDesktop);
+        border-radius: var(--coverUp);
+    }
+    .GameBoard section:last-child{
+        border-bottom: var(--borderSectionDesktop);
+        border-radius: var(--coverDown);
     }
     .GameStatus{
         width: 1210px;

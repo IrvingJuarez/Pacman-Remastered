@@ -1,3 +1,7 @@
+.GameBoard section:nth-child(10){
+    border-left: 4px solid black;
+    border-right: 4px solid black;
+}
 /* downLeft */
 .GameBoard section:nth-child(3) div:nth-child(6), .GameBoard section:nth-child(15) div:nth-child(6){
     border-left: var(--border);
@@ -64,4 +68,25 @@
 .GameBoard section:nth-child(3) div:nth-child(4), .GameBoard section:nth-child(3) div:nth-child(9), .GameBoard section:nth-child(15) div:nth-child(4), .GameBoard section:nth-child(15) div:nth-child(9){
     border: var(--border);
     border-radius: var(--square);
+}
+/* jail */
+.GameBoard section:nth-child(9) div:nth-child(6){
+    border-top: var(--borderJail);
+    border-left: var(--borderJail);
+    border-radius: var(--upLeft);
+}
+.GameBoard section:nth-child(10) div:nth-child(6){
+    border-left: var(--borderJail);
+    border-bottom: var(--borderJail);
+    border-radius: var(--downLeft);
+}
+.GameBoard section:nth-child(9) div:nth-child(7){
+    border-top: var(--borderJail);
+    border-right: var(--borderJail);
+    border-radius: var(--upRight);
+}
+.GameBoard section:nth-child(10) div:nth-child(7){
+    border-bottom: var(--borderJail);
+    border-right: var(--borderJail);
+    border-radius: var(--downRight);
 }
