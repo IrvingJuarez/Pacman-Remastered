@@ -1,5 +1,6 @@
 :root{
     --border: 2px solid var(--borderColor);
+    --borderJail: 2px solid var(--jailColor);
     --square: 5px;
     --coverDown: 0 0 5px 5px;
     --coverRight: 0 5px 5px 0;
