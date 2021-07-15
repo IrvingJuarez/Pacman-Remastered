@@ -36,13 +36,9 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    border-top: 1px solid var(--borderColor);
 }
 .GameBoard section:nth-child(1){
     border-top: none;
-}
-.cell{
-    border-left: 1px solid var(--borderColor);
 }
 .row div:nth-child(1){
     border-left: none;
