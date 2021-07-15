@@ -30,11 +30,11 @@
 }
 .GameBoard section:first-child{
     border-top: var(--borderSection);
-    border-radius: var(--coverUp);
+    border-radius: 15px 15px 0 0;
 }
 .GameBoard section:last-child{
     border-bottom: var(--borderSection);
-    border-radius: var(--coverDown);
+    border-radius: 0 0 15px 15px;
 }
 .GameStatus{
     display: flex;
@@ -172,11 +172,11 @@
     }
     .GameBoard section:first-child{
         border-top: var(--borderSectionDesktop);
-        border-radius: var(--coverUp);
+        border-radius: 15px 15px 0 0;
     }
     .GameBoard section:last-child{
         border-bottom: var(--borderSectionDesktop);
-        border-radius: var(--coverDown);
+        border-radius: 0 0 15px 15px;
     }
     .GameStatus{
         width: 1210px;
