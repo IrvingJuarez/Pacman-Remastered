@@ -25,36 +25,12 @@ const createGrid = (height, width, container) => {
     }
 }
 
-const design = () => {
-    const head = document.head
-    const link = document.createElement("link")
-    const screenWidth = screen.width;
-    const screenHeight = screen.height;
-    let source;
-
-    if(screenWidth >= 320 && screenWidth < 375){
-        source = "../src/styles/designs/320.css"
-    }else if (screenWidth >= 375 & screenHeight <= 739){
-        source = "../src/styles/designs/375.css"
-    }else if (screenWidth >= 375 && screenWidth < 1210 && screenHeight >= 740){
-        source = "../src/styles/designs/higher.css"
-    }else {
-        source = "../src/styles/designs/desktop.css"
-    }
-
-    link.rel = "stylesheet"
-    link.href = source
-
-    head.appendChild(link)
-}
-
 const grid = () => {
     const boardGame = mainContainer.childNodes[1].childNodes[1]
     const boardWidth = boardGame.offsetWidth
     const boardHeight = boardGame.offsetHeight
 
     createGrid(boardHeight, boardWidth, boardGame)
-    design()
 }
 
 export default grid;

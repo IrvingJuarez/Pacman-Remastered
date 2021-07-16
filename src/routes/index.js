@@ -5,13 +5,13 @@ import StartGame from "../pages/StartGame";
 import Playing from "../pages/Playing";
 import goFullscreen from "../utils/goFullscreen";
 import getHash from "../utils/getHash"
-import grid from "../utils/grid"
+import getLayout from "../utils/getLayout"
 
 async function router(){
     const content = null || document.getElementById("content");
 
     content.innerHTML = await Playing()
-    await grid()
+    await getLayout()
 }
 
 export default router;

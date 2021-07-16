@@ -1,0 +1,128 @@
+.ContentPlaying{
+    width: 344px;
+    height: 735.77px;
+}
+.GameBoard{
+    width: 344px;
+    height: 704px;
+}
+.GameStatus{
+    width: 344px;
+    height: 20px;
+}
+.LifeContainer{
+    width: 43px;
+    height: 20px;
+}
+.LifeContainer img{
+    width: 20px;
+    height: 20px;
+}
+.LevelStatus{
+    font-size: 20px;
+}
+.row{
+    height: 24px;
+}
+.cell{
+    width: 24px;
+}
+
+.GameBoard section:nth-child(14){
+    border-left: 4px solid black;
+    border-right: 4px solid black;
+}
+/* downLeft */
+.GameBoard section:nth-child(1) div:nth-child(6), .GameBoard section:nth-child(12) div:nth-child(6), .GameBoard section:nth-child(21) div:nth-child(10){
+    border-left: var(--border);
+    border-bottom: var(--border);
+    border-radius: var(--downLeft);
+}
+/* downRight */
+.GameBoard section:nth-child(1) div:nth-child(7), .GameBoard section:nth-child(5) div:nth-child(11), .GameBoard section:nth-child(21) div:nth-child(5){
+    border-bottom: var(--border);
+    border-right: var(--border);
+    border-radius: var(--downRight);
+}
+/* upLeft */
+.GameBoard section:nth-child(3) div:nth-child(6), .GameBoard section:nth-child(7) div:nth-child(10), .GameBoard section:nth-child(11) div:nth-child(11), .GameBoard section:nth-child(19) div:nth-child(2), .GameBoard section:nth-child(25) div:nth-child(5), .GameBoard section:nth-child(29) div:nth-child(2), .GameBoard section:nth-child(29) div:nth-child(7), .GameBoard section:nth-child(29) div:nth-child(12){
+    border-top: var(--border);
+    border-left: var(--border);
+    border-radius: var(--upLeft);
+}
+/* upRight */
+.GameBoard section:nth-child(6) div:nth-child(4), .GameBoard section:nth-child(10) div:nth-child(9), .GameBoard section:nth-child(11) div:nth-child(4), .GameBoard section:nth-child(19) div:nth-child(13), .GameBoard section:nth-child(25) div:nth-child(10), .GameBoard section:nth-child(29) div:nth-child(3), .GameBoard section:nth-child(29) div:nth-child(8), .GameBoard section:nth-child(29) div:nth-child(13){
+    border-top: var(--border);
+    border-right: var(--border);
+    border-radius: var(--upRight)
+}
+/* coverLeft */
+.GameBoard section:nth-child(2) div:nth-child(2), .GameBoard section:nth-child(2) div:nth-child(11), .GameBoard section:nth-child(5) div:nth-child(10), .GameBoard section:nth-child(6) div:nth-child(2), .GameBoard section:nth-child(9) div:nth-child(4), .GameBoard section:nth-child(9) div:nth-child(12), .GameBoard section:nth-child(10) div:nth-child(8), .GameBoard section:nth-child(11) div:nth-child(3), .GameBoard section:nth-child(11) div:nth-child(14), .GameBoard section:nth-child(13) div:nth-child(13), .GameBoard section:nth-child(15) div:nth-child(13), .GameBoard section:nth-child(17) div:nth-child(2), .GameBoard section:nth-child(17) div:nth-child(6), .GameBoard section:nth-child(17) div:nth-child(11), .GameBoard section:nth-child(19) div:nth-child(7), .GameBoard section:nth-child(19) div:nth-child(12), .GameBoard section:nth-child(21) div:nth-child(4), .GameBoard section:nth-child(21) div:nth-child(7), .GameBoard section:nth-child(23) div:nth-child(6), .GameBoard section:nth-child(25) div:nth-child(9), .GameBoard section:nth-child(25) div:nth-child(14), .GameBoard section:nth-child(27) div:nth-child(2), .GameBoard section:nth-child(27) div:nth-child(7), .GameBoard section:nth-child(27) div:nth-child(12){
+    border-top: var(--border);
+    border-bottom: var(--border);
+    border-left: var(--border);
+    border-radius: var(--coverLeft);
+}
+/* coverRight */
+.GameBoard section:nth-child(2) div:nth-child(4), .GameBoard section:nth-child(2) div:nth-child(13), .GameBoard section:nth-child(3) div:nth-child(7), .GameBoard section:nth-child(7) div:nth-child(11), .GameBoard section:nth-child(9) div:nth-child(6), .GameBoard section:nth-child(9) div:nth-child(13), .GameBoard section:nth-child(11) div:nth-child(1), .GameBoard section:nth-child(11) div:nth-child(12), .GameBoard section:nth-child(12) div:nth-child(7), .GameBoard section:nth-child(13) div:nth-child(2), .GameBoard section:nth-child(15) div:nth-child(2), .GameBoard section:nth-child(17) div:nth-child(4), .GameBoard section:nth-child(17) div:nth-child(9), .GameBoard section:nth-child(17) div:nth-child(13), .GameBoard section:nth-child(19) div:nth-child(3), .GameBoard section:nth-child(19) div:nth-child(8), .GameBoard section:nth-child(21) div:nth-child(8), .GameBoard section:nth-child(21) div:nth-child(11), .GameBoard section:nth-child(23) div:nth-child(9), .GameBoard section:nth-child(25) div:nth-child(1), .GameBoard section:nth-child(25) div:nth-child(7), .GameBoard section:nth-child(27) div:nth-child(3), .GameBoard section:nth-child(27) div:nth-child(8), .GameBoard section:nth-child(27) div:nth-child(13){
+    border-top: var(--border);
+    border-bottom: var(--border);
+    border-right: var(--border);
+    border-radius: var(--coverRight);
+}
+/* coverUp */
+.GameBoard section:nth-child(2) div:nth-child(9), .GameBoard section:nth-child(4) div:nth-child(11), .GameBoard section:nth-child(5) div:nth-child(8), .GameBoard section:nth-child(6) div:nth-child(6), .GameBoard section:nth-child(6) div:nth-child(13), .GameBoard section:nth-child(8) div:nth-child(2), .GameBoard section:nth-child(11) div:nth-child(6), .GameBoard section:nth-child(14) div:nth-child(4), .GameBoard section:nth-child(14) div:nth-child(11), .GameBoard section:nth-child(19) div:nth-child(5), .GameBoard section:nth-child(19) div:nth-child(10), .GameBoard section:nth-child(22) div:nth-child(2), .GameBoard section:nth-child(22) div:nth-child(13){
+    border-left: var(--border);
+    border-right: var(--border);
+    border-top: var(--border);
+    border-radius: var(--coverUp);
+}
+/* coverDown */
+.GameBoard section:nth-child(3) div:nth-child(9), .GameBoard section:nth-child(4) div:nth-child(6), .GameBoard section:nth-child(6) div:nth-child(8), .GameBoard section:nth-child(7) div:nth-child(4), .GameBoard section:nth-child(7) div:nth-child(6), .GameBoard section:nth-child(7) div:nth-child(13), .GameBoard section:nth-child(8) div:nth-child(10), .GameBoard section:nth-child(9) div:nth-child(2), .GameBoard section:nth-child(12) div:nth-child(4), .GameBoard section:nth-child(12) div:nth-child(9), .GameBoard section:nth-child(12) div:nth-child(11), .GameBoard section:nth-child(15) div:nth-child(4), .GameBoard section:nth-child(15) div:nth-child(11), .GameBoard section:nth-child(20) div:nth-child(2), .GameBoard section:nth-child(20) div:nth-child(13), .GameBoard section:nth-child(23) div:nth-child(2), .GameBoard section:nth-child(22) div:nth-child(13), .GameBoard section:nth-child(26) div:nth-child(5), .GameBoard section:nth-child(26) div:nth-child(10){
+    border-left: var(--border);
+    border-right: var(--border);
+    border-bottom: var(--border);
+    border-radius: var(--coverDown);
+}
+/* vertical */
+.GameBoard section:nth-child(11) div:nth-child(9), .GameBoard section:nth-child(20) div:nth-child(5), .GameBoard section:nth-child(20) div:nth-child(10){
+    border-left: var(--border);
+    border-right: var(--border);
+}
+/* horizontal */
+.GameBoard section:nth-child(2) div:nth-child(3), .GameBoard section:nth-child(2) div:nth-child(12), .GameBoard section:nth-child(6) div:nth-child(3), .GameBoard section:nth-child(9) div:nth-child(5), .GameBoard section:nth-child(13) div:nth-child(1), .GameBoard section:nth-child(13) div:nth-child(14), .GameBoard section:nth-child(15) div:nth-child(1), .GameBoard section:nth-child(15) div:nth-child(14), .GameBoard section:nth-child(17) div:nth-child(3), .GameBoard section:nth-child(17) div:nth-child(12), .GameBoard section:nth-child(17) div:nth-child(n + 7):nth-child(-n + 8), .GameBoard section:nth-child(23) div:nth-child(n + 7):nth-child(-n + 8), .GameBoard section:nth-child(25) div:nth-child(6){
+    border-top: var(--border);
+    border-bottom: var(--border);
+}
+/* square */
+.GameBoard section:nth-child(4) div:nth-child(2), .GameBoard section:nth-child(4) div:nth-child(4), .GameBoard section:nth-child(4) div:nth-child(13), .GameBoard section:nth-child(8) div:nth-child(8), .GameBoard section:nth-child(23) div:nth-child(4), .GameBoard section:nth-child(23) div:nth-child(11), .GameBoard section:nth-child(25) div:nth-child(3), .GameBoard section:nth-child(25) div:nth-child(12), .GameBoard section:nth-child(28) div:nth-child(5), .GameBoard section:nth-child(28) div:nth-child(10){
+    border: var(--border);
+    border-radius: var(--square);
+}
+/* Jail */
+.GameBoard section:nth-child(14) div:nth-child(6){
+    border-top: var(--borderJail);
+    border-left: var(--borderJail);
+    border-radius: var(--upLeft);
+}
+.GameBoard section:nth-child(15) div:nth-child(6){
+    border-left: var(--borderJail);
+    border-bottom: var(--borderJail);
+    border-radius: var(--downLeft);
+}
+.GameBoard section:nth-child(14) div:nth-child(9){
+    border-top: var(--borderJail);
+    border-right: var(--borderJail);
+    border-radius: var(--upRight);
+}
+.GameBoard section:nth-child(15) div:nth-child(9){
+    border-bottom: var(--borderJail);
+    border-right: var(--borderJail);
+    border-radius: var(--downRight);
+}
+.GameBoard section:nth-child(14) div:nth-child(n + 7):nth-child(-n + 8){
+    border-top: var(--borderJail);
+}
+.GameBoard section:nth-child(15) div:nth-child(n + 7):nth-child(-n + 8){
+    border-bottom: var(--borderJail);
+}

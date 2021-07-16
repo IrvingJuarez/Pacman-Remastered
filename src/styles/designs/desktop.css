@@ -1,3 +1,46 @@
+.ContentPlaying{
+    width: 1210px;
+    height: 861px;
+}
+.GameBoard{
+    width: 1210px;
+    height: 810px;
+}
+.GameBoard section{
+    border-left: var(--borderSectionDesktop);
+    border-right: var(--borderSectionDesktop);
+}
+.GameBoard section:first-child{
+    border-top: var(--borderSectionDesktop);
+    border-radius: 15px 15px 0 0;
+}
+.GameBoard section:last-child{
+    border-bottom: var(--borderSectionDesktop);
+    border-radius: 0 0 15px 15px;
+}
+.GameStatus{
+    width: 1210px;
+    height: 42px;
+}
+.LifeContainer{
+    width: 89px;
+    height: 42px;
+}
+.LifeContainer img{
+    width: 42px;
+    height: 42px;
+}
+.LevelStatus{
+    font-size: 36px;
+    font-weight: bold;
+}
+.row{
+    height: 40.01px;
+}
+.cell{
+    width: 40px;
+}
+
 /* downLeft */
 .GameBoard section:nth-child(1) div:nth-child(14), .GameBoard section:nth-child(7) div:nth-child(2), .GameBoard section:nth-child(7) div:nth-child(12), .GameBoard section:nth-child(7) div:nth-child(21), .GameBoard section:nth-child(11) div:nth-child(2), .GameBoard section:nth-child(11) div:nth-child(7), .GameBoard section:nth-child(12) div:nth-child(21), .GameBoard section:nth-child(14) div:nth-child(27), .GameBoard section:nth-child(15) div:nth-child(12), .GameBoard section:nth-child(14) div:nth-child(7){
     border-left: var(--border);

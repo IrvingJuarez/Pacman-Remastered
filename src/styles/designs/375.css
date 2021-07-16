@@ -1,3 +1,33 @@
+.ContentPlaying{
+    width: 344px;
+    height: 591.77px;
+}
+.GameBoard{
+    width: 344px;
+    height: 560px;
+}
+.GameStatus{
+    width: 344px;
+    height: 20px;
+}
+.LifeContainer{
+    width: 43px;
+    height: 20px;
+}
+.LifeContainer img{
+    width: 20px;
+    height: 20px;
+}
+.LevelStatus{
+    font-size: 20px;
+}
+.row{
+    height: 24px;
+}
+.cell{
+    width: 24px;
+}
+
 .GameBoard section:nth-child(12){
     border-left: 4px solid black;
     border-right: 4px solid black;
