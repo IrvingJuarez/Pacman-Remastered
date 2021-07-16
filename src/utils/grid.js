@@ -20,6 +20,9 @@ const createGrid = (height, width, container) => {
         for(let j = 0; j < width; j++){
             let cell = document.createElement("div")
             cell.classList.add("cell")
+            if(gridArray[i].includes(j)){
+                cell.dataset.value = 1
+            }
             row.appendChild(cell)
         }
     }
