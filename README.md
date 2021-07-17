@@ -82,6 +82,7 @@ Finally, the index.js file in the src carpet is the one webpack takes to send to
 # How it works?
 To understand how the program works, we need to know it is a Single Page Application where according to the size of the screen, it is displayed a different layout of the game.
 
-The logic to know what layout needs to be sent is in `src/utils/getLayout`. After two seconds, there is another function that creates the grid (according to each layout, of course), this logic is in `src/utils/grid`. Finally, this grid.js file runs another function that contains the major logic game, this is the `logic` function. This file is in `src/javascript/logic`.
+All the logic if the game actually starts at the `src/routes/index.js` file. The file calls all the necessary pages of the program and stablish the layout (according to the size of the screen).
+Afterwards, we have the `src/javascript/logic.js` file where it is imported the Pacman class in `src/javascript/Pacman.js`. The Pacman class has actually evetything needed for the pacman. From the controls for keyboard and touchScreen until the Win and Lose methods.
 
-The logic.js file imports all the major functions necessary for the program to work. All these major functions are within the utils directory.
+In summary, the logic.js file imports the Pacman class, which has all the magic.
