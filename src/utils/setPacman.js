@@ -1,28 +1,33 @@
-const mainContainer = document.getElementById("content")
-const pacman = document.createElement("article")
-pacman.classList.add("pacmanRight")
+import keyboardControls from "./keyboardControls";
+const screenWidth = screen.width;
+const screenHeight = screen.height;
 
-const setPacman = () => {
-    const container = mainContainer.childNodes[1].childNodes[1]
-    const screenWidth = screen.width;
-    const screenHeight = screen.height;
-    let pacmanContainer;
+const setPacman = (mainContainer, pacman, pacmanContainer) => {
+    const boardGame = mainContainer.childNodes[1].childNodes[1]
+    var row, column;
 
     if(screenWidth >= 320 && screenWidth < 375){
         // 320
-        pacmanContainer = container.childNodes[11].childNodes[6]
+        row = 11;
+        column = 6;
     }else if ((screenWidth >= 375 && screenWidth < 1210) && screenHeight < 736){
         // 375
-        pacmanContainer = container.childNodes[14].childNodes[7]
+        row = 14;
+        column = 7;
     }else if ((screenWidth >= 375 && screenWidth < 1210) && screenHeight >= 737){
         // higher
-        pacmanContainer = container.childNodes[16].childNodes[7]
+        row = 16;
+        column = 7;
     }else if(screenWidth >= 1210){
         // desktop
-        pacmanContainer = container.childNodes[11].childNodes[15]
+        row = 11;
+        column = 15;
     }
 
+    pacmanContainer = boardGame.childNodes[row].childNodes[column]
     pacmanContainer.appendChild(pacman)
+
+    keyboardControls(boardGame, pacman, pacmanContainer, row, column)
 }
 
 export default setPacman;

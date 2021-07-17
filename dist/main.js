@@ -246,7 +246,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _rou
   \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _utils_setPacman__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/setPacman */ \"./src/utils/setPacman.js\");\n\r\n\r\nconst logic = () => {\r\n    (0,_utils_setPacman__WEBPACK_IMPORTED_MODULE_0__.default)()\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (logic);\n\n//# sourceURL=webpack://pacman-remastered/./src/javascript/logic.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _utils_setPacman__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/setPacman */ \"./src/utils/setPacman.js\");\n/* harmony import */ var _utils_keyboardControls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/keyboardControls */ \"./src/utils/keyboardControls.js\");\n\r\n\r\n\r\nconst logic = () => {\r\n    const mainContainer = document.getElementById(\"content\")\r\n    var pacman = document.createElement(\"article\")\r\n    pacman.classList.add(\"pacmanRight\")\r\n    let pacmanContainer\r\n\r\n    ;(0,_utils_setPacman__WEBPACK_IMPORTED_MODULE_0__.default)(mainContainer, pacman, pacmanContainer)\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (logic);\n\n//# sourceURL=webpack://pacman-remastered/./src/javascript/logic.js?");
 
 /***/ }),
 
@@ -350,13 +350,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/utils/keyboardControls.js":
+/*!***************************************!*\
+  !*** ./src/utils/keyboardControls.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst keyboardControls = (boardGame, pacman, pacmanContainer, row, column) => {\r\n    document.addEventListener(\"keydown\", (event) => {\r\n        var node = pacmanContainer.childNodes[0];\r\n        pacmanContainer.removeChild(node)\r\n\r\n        switch(event.key){\r\n            case \"ArrowLeft\":\r\n                column--\r\n            break;\r\n            case \"ArrowRight\":\r\n                column++\r\n            break;\r\n            case \"ArrowUp\":\r\n                row--\r\n            break;\r\n            case \"ArrowDown\":\r\n                row++\r\n            break;\r\n        }\r\n\r\n        pacmanContainer = boardGame.childNodes[row].childNodes[column]\r\n        pacmanContainer.appendChild(pacman)\r\n    })\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (keyboardControls);\n\n//# sourceURL=webpack://pacman-remastered/./src/utils/keyboardControls.js?");
+
+/***/ }),
+
 /***/ "./src/utils/setPacman.js":
 /*!********************************!*\
   !*** ./src/utils/setPacman.js ***!
   \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst mainContainer = document.getElementById(\"content\")\r\nconst pacman = document.createElement(\"article\")\r\npacman.classList.add(\"pacmanRight\")\r\n\r\nconst setPacman = () => {\r\n    const container = mainContainer.childNodes[1].childNodes[1]\r\n    const screenWidth = screen.width;\r\n    const screenHeight = screen.height;\r\n    let pacmanContainer;\r\n\r\n    if(screenWidth >= 320 && screenWidth < 375){\r\n        // 320\r\n        pacmanContainer = container.childNodes[11].childNodes[6]\r\n    }else if ((screenWidth >= 375 && screenWidth < 1210) && screenHeight < 736){\r\n        // 375\r\n        pacmanContainer = container.childNodes[14].childNodes[7]\r\n    }else if ((screenWidth >= 375 && screenWidth < 1210) && screenHeight >= 737){\r\n        // higher\r\n        pacmanContainer = container.childNodes[16].childNodes[7]\r\n    }else if(screenWidth >= 1210){\r\n        // desktop\r\n        pacmanContainer = container.childNodes[11].childNodes[15]\r\n    }\r\n\r\n    pacmanContainer.appendChild(pacman)\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (setPacman);\n\n//# sourceURL=webpack://pacman-remastered/./src/utils/setPacman.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _keyboardControls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./keyboardControls */ \"./src/utils/keyboardControls.js\");\n\r\nconst screenWidth = screen.width;\r\nconst screenHeight = screen.height;\r\n\r\nconst setPacman = (mainContainer, pacman, pacmanContainer) => {\r\n    const boardGame = mainContainer.childNodes[1].childNodes[1]\r\n    var row, column;\r\n\r\n    if(screenWidth >= 320 && screenWidth < 375){\r\n        // 320\r\n        row = 11;\r\n        column = 6;\r\n    }else if ((screenWidth >= 375 && screenWidth < 1210) && screenHeight < 736){\r\n        // 375\r\n        row = 14;\r\n        column = 7;\r\n    }else if ((screenWidth >= 375 && screenWidth < 1210) && screenHeight >= 737){\r\n        // higher\r\n        row = 16;\r\n        column = 7;\r\n    }else if(screenWidth >= 1210){\r\n        // desktop\r\n        row = 11;\r\n        column = 15;\r\n    }\r\n\r\n    pacmanContainer = boardGame.childNodes[row].childNodes[column]\r\n    pacmanContainer.appendChild(pacman)\r\n\r\n    ;(0,_keyboardControls__WEBPACK_IMPORTED_MODULE_0__.default)(boardGame, pacman, pacmanContainer, row, column)\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (setPacman);\n\n//# sourceURL=webpack://pacman-remastered/./src/utils/setPacman.js?");
 
 /***/ })
 
