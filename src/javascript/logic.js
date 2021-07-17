@@ -1,4 +1,3 @@
-import keyboardControls from "../utils/keyboardControls";
 import Pacman from "./Pacman"
 
 const logic = () => {

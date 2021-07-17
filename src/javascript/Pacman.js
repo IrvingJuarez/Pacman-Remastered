@@ -36,7 +36,7 @@ class Pacman{
             var expectedRow = row, expectedColumn = column, expectedContainer;
 
             expectedContainer = this.movement(event.key, expectedRow, expectedColumn, boardGame)
-            let datasetValue = expectedContainer.dataset.value
+            let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
 
             if(datasetValue === undefined){
                 var node = this.pacmanContainer.childNodes[0];
@@ -79,7 +79,11 @@ class Pacman{
             break;
         }
     
-        return boardGame.childNodes[y].childNodes[x]
+        if(boardGame.childNodes[y]){
+            return boardGame.childNodes[y].childNodes[x]
+        }else{
+            return null;
+        }
     }
 }
 
