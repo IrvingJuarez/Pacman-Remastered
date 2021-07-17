@@ -240,6 +240,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _rou
 
 /***/ }),
 
+/***/ "./src/javascript/logic.js":
+/*!*********************************!*\
+  !*** ./src/javascript/logic.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _utils_setPacman__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/setPacman */ \"./src/utils/setPacman.js\");\n\r\n\r\nconst logic = () => {\r\n    (0,_utils_setPacman__WEBPACK_IMPORTED_MODULE_0__.default)()\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (logic);\n\n//# sourceURL=webpack://pacman-remastered/./src/javascript/logic.js?");
+
+/***/ }),
+
 /***/ "./src/pages/Error404.js":
 /*!*******************************!*\
   !*** ./src/pages/Error404.js ***!
@@ -336,7 +346,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \***************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst mainContainer = document.getElementById(\"content\")\r\n\r\nconst createGrid = (height, width, container) => {\r\n    if(width >= 1208){\r\n        height = 20;\r\n        width = 30;\r\n    }else{\r\n        height -= 8;\r\n        height /= 24;\r\n\r\n        width -= 8;\r\n        width /= 24;\r\n    }\r\n\r\n    for(let i = 0; i < height; i++){\r\n        let row = document.createElement(\"section\")\r\n        row.classList.add(\"row\")\r\n        container.appendChild(row)\r\n\r\n        for(let j = 0; j < width; j++){\r\n            let cell = document.createElement(\"div\")\r\n            cell.classList.add(\"cell\")\r\n            if(gridArray[i].includes(j)){\r\n                cell.dataset.value = 1\r\n            }\r\n            row.appendChild(cell)\r\n        }\r\n    }\r\n}\r\n\r\nconst grid = () => {\r\n    const boardGame = mainContainer.childNodes[1].childNodes[1]\r\n    const boardWidth = boardGame.offsetWidth\r\n    const boardHeight = boardGame.offsetHeight\r\n\r\n    createGrid(boardHeight, boardWidth, boardGame)\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (grid);\n\n//# sourceURL=webpack://pacman-remastered/./src/utils/grid.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _javascript_logic__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../javascript/logic */ \"./src/javascript/logic.js\");\n\r\n\r\nconst mainContainer = document.getElementById(\"content\")\r\n\r\nconst createGrid = (height, width, container) => {\r\n    if(width >= 1208){\r\n        height = 20;\r\n        width = 30;\r\n    }else{\r\n        height -= 8;\r\n        height /= 24;\r\n\r\n        width -= 8;\r\n        width /= 24;\r\n    }\r\n\r\n    for(let i = 0; i < height; i++){\r\n        let row = document.createElement(\"section\")\r\n        row.classList.add(\"row\")\r\n        container.appendChild(row)\r\n\r\n        for(let j = 0; j < width; j++){\r\n            let cell = document.createElement(\"div\")\r\n            cell.classList.add(\"cell\")\r\n            if(gridArray[i].includes(j)){\r\n                cell.dataset.value = 1\r\n            }\r\n            row.appendChild(cell)\r\n        }\r\n    }\r\n}\r\n\r\nconst grid = () => {\r\n    const boardGame = mainContainer.childNodes[1].childNodes[1]\r\n    const boardWidth = boardGame.offsetWidth\r\n    const boardHeight = boardGame.offsetHeight\r\n\r\n    createGrid(boardHeight, boardWidth, boardGame)\r\n\r\n    ;(0,_javascript_logic__WEBPACK_IMPORTED_MODULE_0__.default)()\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (grid);\n\n//# sourceURL=webpack://pacman-remastered/./src/utils/grid.js?");
+
+/***/ }),
+
+/***/ "./src/utils/setPacman.js":
+/*!********************************!*\
+  !*** ./src/utils/setPacman.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst mainContainer = document.getElementById(\"content\")\r\nconst pacman = document.createElement(\"div\")\r\npacman.classList.add(\"pacmanRight\")\r\n\r\nconst setPacman = () => {\r\n    const container = mainContainer.childNodes[1].childNodes[1]\r\n    const screenWidth = screen.width;\r\n    const screenHeight = screen.height;\r\n    let pacmanContainer;\r\n\r\n    if(screenWidth >= 320 && screenWidth < 375){\r\n        // 320\r\n        pacmanContainer = container.childNodes[11].childNodes[6]\r\n    }else if ((screenWidth >= 375 && screenWidth < 1210) && screenHeight < 736){\r\n        // 375\r\n        pacmanContainer = container.childNodes[14].childNodes[7]\r\n    }else if ((screenWidth >= 375 && screenWidth < 1210) && screenHeight >= 737){\r\n        // higher\r\n        pacmanContainer = container.childNodes[16].childNodes[7]\r\n    }else if(screenWidth >= 1210){\r\n        // desktop\r\n        pacmanContainer = container.childNodes[11].childNodes[15]\r\n    }\r\n\r\n    pacmanContainer.appendChild(pacman)\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (setPacman);\n\n//# sourceURL=webpack://pacman-remastered/./src/utils/setPacman.js?");
 
 /***/ })
 

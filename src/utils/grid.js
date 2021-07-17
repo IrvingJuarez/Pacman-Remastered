@@ -1,3 +1,5 @@
+import logic from "../javascript/logic"
+
 const mainContainer = document.getElementById("content")
 
 const createGrid = (height, width, container) => {
@@ -34,6 +36,8 @@ const grid = () => {
     const boardHeight = boardGame.offsetHeight
 
     createGrid(boardHeight, boardWidth, boardGame)
+
+    logic()
 }
 
 export default grid;
