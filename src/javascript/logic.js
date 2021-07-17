@@ -1,13 +1,14 @@
-import setPacman from "../utils/setPacman";
 import keyboardControls from "../utils/keyboardControls";
+import Pacman from "./Pacman"
 
 const logic = () => {
     const mainContainer = document.getElementById("content")
-    var pacman = document.createElement("article")
-    pacman.classList.add("pacmanRight")
-    let pacmanContainer
+    const boardGame = mainContainer.childNodes[1].childNodes[1]
+    const screenWidth = screen.width;
+    const screenHeight = screen.height;
+    const pacman = new Pacman()
 
-    setPacman(mainContainer, pacman, pacmanContainer)
+    pacman.setPacman(boardGame, screenWidth, screenHeight)
 }
 
 export default logic;
