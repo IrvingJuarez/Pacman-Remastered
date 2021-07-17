@@ -25,10 +25,61 @@ class Pacman{
             column = 15;
         }
 
-        var pacmanContainer = boardGame.childNodes[row].childNodes[column]
-        pacmanContainer.appendChild(this.currentPacman)
+        this.pacmanContainer = boardGame.childNodes[row].childNodes[column]
+        this.pacmanContainer.appendChild(this.currentPacman)
 
-        // keyboardControls(boardGame, pacman, pacmanContainer, row, column)
+        this.keyboardControls(boardGame, row, column)
+    }
+
+    keyboardControls(boardGame, row, column){
+        document.addEventListener("keydown", (event) => {
+            var expectedRow = row, expectedColumn = column, expectedContainer;
+
+            expectedContainer = this.movement(event.key, expectedRow, expectedColumn, boardGame)
+            let datasetValue = expectedContainer.dataset.value
+
+            if(datasetValue === undefined){
+                var node = this.pacmanContainer.childNodes[0];
+                this.pacmanContainer.removeChild(node)
+
+                switch(event.key){
+                    case "ArrowLeft":
+                        column--
+                    break;
+                    case "ArrowRight":
+                        column++
+                    break;
+                    case "ArrowUp":
+                        row--
+                    break;
+                    case "ArrowDown":
+                        row++
+                    break;
+                }
+
+                this.pacmanContainer = boardGame.childNodes[row].childNodes[column]
+                this.pacmanContainer.appendChild(this.currentPacman)
+            }
+        })
+    }
+
+    movement(key, y, x, boardGame){
+        switch(key){
+            case "ArrowLeft":
+                x--
+            break;
+            case "ArrowRight":
+                x++
+            break;
+            case "ArrowUp":
+                y--
+            break;
+            case "ArrowDown":
+                y++
+            break;
+        }
+    
+        return boardGame.childNodes[y].childNodes[x]
     }
 }
 
