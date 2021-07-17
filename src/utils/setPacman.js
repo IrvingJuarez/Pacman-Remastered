@@ -1,5 +1,5 @@
 const mainContainer = document.getElementById("content")
-const pacman = document.createElement("div")
+const pacman = document.createElement("article")
 pacman.classList.add("pacmanRight")
 
 const setPacman = () => {
