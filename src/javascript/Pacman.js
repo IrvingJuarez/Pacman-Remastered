@@ -29,6 +29,7 @@ class Pacman{
         this.pacmanContainer.appendChild(this.currentPacman)
 
         this.keyboardControls(boardGame, row, column)
+        this.touchControls()
     }
 
     keyboardControls(boardGame, row, column){
@@ -84,6 +85,13 @@ class Pacman{
         }else{
             return null;
         }
+    }
+
+    touchControls(){
+        // el.addEventListener("touchstart", handleStart, false);
+        // el.addEventListener("touchend", handleEnd, false);
+        // el.addEventListener("touchcancel", handleCancel, false);
+        // el.addEventListener("touchmove", handleMove, false);
     }
 }
 
