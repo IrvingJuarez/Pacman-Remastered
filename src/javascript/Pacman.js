@@ -5,6 +5,7 @@ class Pacman{
     }
 
     setPacman(boardGame, width, height){
+        this.boardGame = boardGame
         var row, column;
 
         if(width >= 320 && width < 375){
@@ -31,20 +32,20 @@ class Pacman{
         this.pacmanContainer = boardGame.childNodes[this.row].childNodes[this.column]
         this.pacmanContainer.appendChild(this.currentPacman)
 
-        this.keyboardControls(boardGame)
-        this.touchControls(boardGame)
+        this.keyboardControls()
+        this.touchControls()
     }
 
-    keyboardControls(boardGame){
+    keyboardControls(){
         document.addEventListener("keydown", (event) => {
-            this.movementResolve(event.key, boardGame)
+            this.movementResolve(event.key, this.boardGame)
         })
     }
 
-    movementResolve(eventKey, boardGame){
+    movementResolve(eventKey){
         var expectedRow = this.row, expectedColumn = this.column, expectedContainer;
 
-        expectedContainer = this.movement(eventKey, expectedRow, expectedColumn, boardGame)
+        expectedContainer = this.movement(eventKey, expectedRow, expectedColumn)
         let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
 
         if(datasetValue === undefined){
@@ -66,12 +67,16 @@ class Pacman{
                 break;
             }
 
-            this.pacmanContainer = boardGame.childNodes[this.row].childNodes[this.column]
+            this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
             this.pacmanContainer.appendChild(this.currentPacman)
+
+            setTimeout(() => {
+                this.movementResolve(eventKey)
+            }, 1000)
         }
     }
 
-    movement(key, y, x, boardGame){
+    movement(key, y, x){
         switch(key){
             case "ArrowLeft":
                 x--
@@ -87,17 +92,17 @@ class Pacman{
             break;
         }
     
-        if(boardGame.childNodes[y]){
-            return boardGame.childNodes[y].childNodes[x]
+        if(this.boardGame.childNodes[y]){
+            return this.boardGame.childNodes[y].childNodes[x]
         }else{
             return null;
         }
     }
 
-    touchControls(boardGame){
+    touchControls(){
         let xAxisPoints = []
         let yAxisPoints = []
-        this.flag = true
+        let flag = true
 
         document.addEventListener("touchmove", (event) => {
             var xAxis = event.changedTouches[0].screenX
@@ -111,7 +116,7 @@ class Pacman{
             xAxisPoints.push(xAxis)
             yAxisPoints.push(yAxis)
 
-            if (xAxisPoints.length >= 3 && yAxisPoints.length >= 3 && this.flag === true){
+            if (xAxisPoints.length >= 3 && yAxisPoints.length >= 3 && flag === true){
 
                 if(changeInX < 0){
                     xDir = "ArrowRight"
@@ -128,19 +133,19 @@ class Pacman{
                 }
 
                 if(changeInX > changeInY){
-                    this.movementResolve(xDir, boardGame)
+                    this.movementResolve(xDir, this.boardGame)
                 }else{
-                    this.movementResolve(yDir, boardGame)
+                    this.movementResolve(yDir, this.boardGame)
                 }
 
-                this.flag = false
+                flag = false
             }
         }, false);
 
         document.addEventListener("touchend", () => {
             xAxisPoints = [];
             yAxisPoints = []
-            this.flag = true
+            flag = true
         })
     }
 }
