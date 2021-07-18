@@ -97,7 +97,7 @@ class Pacman{
     touchControls(boardGame){
         let xAxisPoints = []
         let yAxisPoints = []
-        let flag = true
+        this.flag = true
 
         document.addEventListener("touchmove", (event) => {
             var xAxis = event.changedTouches[0].screenX
@@ -111,7 +111,7 @@ class Pacman{
             xAxisPoints.push(xAxis)
             yAxisPoints.push(yAxis)
 
-            if (xAxisPoints.length >= 2 && yAxisPoints.length >= 2 && flag === true){
+            if (xAxisPoints.length >= 3 && yAxisPoints.length >= 3 && this.flag === true){
 
                 if(changeInX < 0){
                     xDir = "ArrowRight"
@@ -133,14 +133,14 @@ class Pacman{
                     this.movementResolve(yDir, boardGame)
                 }
 
-                flag = false
+                this.flag = false
             }
         }, false);
 
         document.addEventListener("touchend", () => {
             xAxisPoints = [];
             yAxisPoints = []
-            flag = true
+            this.flag = true
         })
     }
 }
