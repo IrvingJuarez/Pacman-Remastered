@@ -2,6 +2,8 @@ class Pacman{
     constructor(){
         this.currentPacman = document.createElement("article")
         this.currentPacman.classList.add("pacmanRight")
+
+        this.currentDir = "ArrowLeft"
     }
 
     setPacman(boardGame, width, height){
@@ -32,13 +34,15 @@ class Pacman{
         this.pacmanContainer = boardGame.childNodes[this.row].childNodes[this.column]
         this.pacmanContainer.appendChild(this.currentPacman)
 
+        this.movementResolve(this.currentDir)
         this.keyboardControls()
         this.touchControls()
     }
 
     keyboardControls(){
         document.addEventListener("keydown", (event) => {
-            this.movementResolve(event.key, this.boardGame)
+            this.newDir = event.key
+            this.movementResolve()
         })
     }
 
@@ -48,31 +52,40 @@ class Pacman{
         expectedContainer = this.movement(eventKey, expectedRow, expectedColumn)
         let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
 
-        if(datasetValue === undefined){
-            var node = this.pacmanContainer.childNodes[0];
-            this.pacmanContainer.removeChild(node)
-
-            switch(eventKey){
-                case "ArrowLeft":
-                    this.column--
-                break;
-                case "ArrowRight":
-                    this.column++
-                break;
-                case "ArrowUp":
-                    this.row--
-                break;
-                case "ArrowDown":
-                    this.row++
-                break;
+        if(eventKey){
+            if(datasetValue === undefined){
+                var node = this.pacmanContainer.childNodes[0];
+                this.pacmanContainer.removeChild(node)
+                
+                switch(eventKey){
+                    case "ArrowLeft":
+                        this.column--
+                    break;
+                    case "ArrowRight":
+                        this.column++
+                    break;
+                    case "ArrowUp":
+                        this.row--
+                    break;
+                    case "ArrowDown":
+                        this.row++
+                    break;
+                }
+    
+                this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
+                this.pacmanContainer.appendChild(this.currentPacman)
+                this.running = true
+    
+                setTimeout(() => {
+                    this.movementResolve(eventKey)
+                }, 1000)
+            }else{
+                this.running = false
             }
-
-            this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
-            this.pacmanContainer.appendChild(this.currentPacman)
-
-            setTimeout(() => {
-                this.movementResolve(eventKey)
-            }, 1000)
+        }else{
+            if(this.running === false){
+                this.movementResolve(this.newDir)
+            }
         }
     }
 
@@ -132,11 +145,8 @@ class Pacman{
                     yDir = "ArrowUp"
                 }
 
-                if(changeInX > changeInY){
-                    this.movementResolve(xDir, this.boardGame)
-                }else{
-                    this.movementResolve(yDir, this.boardGame)
-                }
+                (changeInX > changeInY) ? this.newDir = xDir : this.newDir = yDir
+                this.movementResolve()
 
                 flag = false
             }
