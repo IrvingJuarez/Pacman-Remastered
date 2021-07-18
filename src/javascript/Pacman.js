@@ -1,7 +1,8 @@
 class Pacman{
     constructor(){
         this.currentPacman = document.createElement("article")
-        this.currentPacman.classList.add("pacmanRight")
+        this.classDir = "pacmanRight"
+        this.currentPacman.classList.add(this.classDir)
         this.time = 1000
 
         this.currentDir = "ArrowLeft"
@@ -57,22 +58,28 @@ class Pacman{
             if(datasetValue === undefined){
                 var node = this.pacmanContainer.childNodes[0];
                 this.pacmanContainer.removeChild(node)
+                this.currentPacman.classList.remove(this.classDir)
                 
                 switch(eventKey){
                     case "ArrowLeft":
                         this.column--
+                        this.classDir = "pacmanLeft"
                     break;
                     case "ArrowRight":
                         this.column++
+                        this.classDir = "pacmanRight"
                     break;
                     case "ArrowUp":
                         this.row--
+                        this.classDir = "pacmanUp"
                     break;
                     case "ArrowDown":
                         this.row++
+                        this.classDir = "pacmanDown"
                     break;
                 }
     
+                this.currentPacman.classList.add(this.classDir)
                 this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
                 this.pacmanContainer.appendChild(this.currentPacman)
                 this.running = true
