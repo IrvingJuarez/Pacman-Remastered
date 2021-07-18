@@ -31,17 +31,17 @@ class Pacman{
         this.pacmanContainer = boardGame.childNodes[this.row].childNodes[this.column]
         this.pacmanContainer.appendChild(this.currentPacman)
 
-        this.keyboardControls(boardGame, row, column)
-        this.touchControls()
+        this.keyboardControls(boardGame)
+        this.touchControls(boardGame)
     }
 
-    keyboardControls(boardGame, row, column){
+    keyboardControls(boardGame){
         document.addEventListener("keydown", (event) => {
             this.movementResolve(event.key, boardGame)
         })
     }
 
-    movementResolve(eventKey, boardGame, row, column){
+    movementResolve(eventKey, boardGame){
         var expectedRow = this.row, expectedColumn = this.column, expectedContainer;
 
         expectedContainer = this.movement(eventKey, expectedRow, expectedColumn, boardGame)
@@ -94,9 +94,10 @@ class Pacman{
         }
     }
 
-    touchControls(){
+    touchControls(boardGame){
         let xAxisPoints = []
         let yAxisPoints = []
+        let flag = true
 
         document.addEventListener("touchmove", (event) => {
             var xAxis = event.changedTouches[0].screenX
@@ -110,29 +111,36 @@ class Pacman{
             xAxisPoints.push(xAxis)
             yAxisPoints.push(yAxis)
 
-            if (xAxisPoints.length >= 2 && yAxisPoints.length >= 2){
+            if (xAxisPoints.length >= 2 && yAxisPoints.length >= 2 && flag === true){
 
                 if(changeInX < 0){
-                    xDir = "Right"
+                    xDir = "ArrowRight"
                     changeInX *= -1
                 }else{
-                    xDir = "Left"
+                    xDir = "ArrowLeft"
                 }
 
                 if(changeInY < 0){
-                    yDir = "Down"
+                    yDir = "ArrowDown"
                     changeInY *= -1
                 }else{
-                    yDir = "Up"
+                    yDir = "ArrowUp"
                 }
 
-                console.log(`${changeInX > changeInY ? xDir : yDir}`)
+                if(changeInX > changeInY){
+                    this.movementResolve(xDir, boardGame)
+                }else{
+                    this.movementResolve(yDir, boardGame)
+                }
+
+                flag = false
             }
         }, false);
 
         document.addEventListener("touchend", () => {
             xAxisPoints = [];
             yAxisPoints = []
+            flag = true
         })
     }
 }
