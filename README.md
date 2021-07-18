@@ -86,3 +86,10 @@ All the logic if the game actually starts at the `src/routes/index.js` file. The
 Afterwards, we have the `src/javascript/logic.js` file where it is imported the Pacman class in `src/javascript/Pacman.js`. The Pacman class has actually evetything needed for the pacman. From the controls for keyboard and touchScreen until the Win and Lose methods.
 
 In summary, the logic.js file imports the Pacman class, which has all the magic.
+
+# Understanding the Pacman class
+The constructor creates the Pacman container (where the gif of the pacman will be) and a `currentDir`. This currentDir is the "by default" direction towards the pacman will move, which in this case is Left. The actual `currentDir` property is ArrowLeft because the keyboard Events use that syntaxis.
+
+It is important to keep in mind that the first method in the Pacman class (`setPacman()`) is called from Logic.js file. From this call, we get the boardGame to set the pacman in the correct place (according to the game layout).
+
+The setPacman() method calls all the controls to play the game and the movement with the default direction of the pacman. In these two controls is where the pacman can moves all around.
