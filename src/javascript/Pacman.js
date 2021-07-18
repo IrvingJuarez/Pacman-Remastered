@@ -2,6 +2,7 @@ class Pacman{
     constructor(){
         this.currentPacman = document.createElement("article")
         this.currentPacman.classList.add("pacmanRight")
+        this.time = 1000
 
         this.currentDir = "ArrowLeft"
     }
@@ -76,15 +77,30 @@ class Pacman{
                 this.pacmanContainer.appendChild(this.currentPacman)
                 this.running = true
     
-                setTimeout(() => {
-                    this.movementResolve(eventKey)
-                }, 1000)
+                if(this.newDir){
+                    let comprobation = this.movement(this.newDir, expectedRow, expectedColumn)
+                    let datasetComp = comprobation ? comprobation.dataset.value : 1;
+
+                    if(datasetComp === undefined){
+                        console.log("Change in direction")
+                    }else{
+                        setTimeout(() => {
+                            this.movementResolve(eventKey)
+                        }, this.time)
+                    }
+                }else{
+                    setTimeout(() => {
+                        this.movementResolve(eventKey)
+                    }, this.time)
+                }
             }else{
                 this.running = false
             }
         }else{
             if(this.running === false){
-                this.movementResolve(this.newDir)
+                this.currentDir = this.newDir
+                this.newDir = null
+                this.movementResolve(this.currentDir)
             }
         }
     }
