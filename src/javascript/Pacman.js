@@ -37,21 +37,21 @@ class Pacman{
 
     keyboardControls(boardGame, row, column){
         document.addEventListener("keydown", (event) => {
-            this.movementResolve(event, boardGame)
+            this.movementResolve(event.key, boardGame)
         })
     }
 
-    movementResolve(event, boardGame, row, column){
+    movementResolve(eventKey, boardGame, row, column){
         var expectedRow = this.row, expectedColumn = this.column, expectedContainer;
 
-        expectedContainer = this.movement(event.key, expectedRow, expectedColumn, boardGame)
+        expectedContainer = this.movement(eventKey, expectedRow, expectedColumn, boardGame)
         let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
 
         if(datasetValue === undefined){
             var node = this.pacmanContainer.childNodes[0];
             this.pacmanContainer.removeChild(node)
 
-            switch(event.key){
+            switch(eventKey){
                 case "ArrowLeft":
                     this.column--
                 break;
