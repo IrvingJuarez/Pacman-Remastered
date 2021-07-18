@@ -25,7 +25,10 @@ class Pacman{
             column = 15;
         }
 
-        this.pacmanContainer = boardGame.childNodes[row].childNodes[column]
+        this.row = row
+        this.column = column
+
+        this.pacmanContainer = boardGame.childNodes[this.row].childNodes[this.column]
         this.pacmanContainer.appendChild(this.currentPacman)
 
         this.keyboardControls(boardGame, row, column)
@@ -34,34 +37,38 @@ class Pacman{
 
     keyboardControls(boardGame, row, column){
         document.addEventListener("keydown", (event) => {
-            var expectedRow = row, expectedColumn = column, expectedContainer;
-
-            expectedContainer = this.movement(event.key, expectedRow, expectedColumn, boardGame)
-            let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
-
-            if(datasetValue === undefined){
-                var node = this.pacmanContainer.childNodes[0];
-                this.pacmanContainer.removeChild(node)
-
-                switch(event.key){
-                    case "ArrowLeft":
-                        column--
-                    break;
-                    case "ArrowRight":
-                        column++
-                    break;
-                    case "ArrowUp":
-                        row--
-                    break;
-                    case "ArrowDown":
-                        row++
-                    break;
-                }
-
-                this.pacmanContainer = boardGame.childNodes[row].childNodes[column]
-                this.pacmanContainer.appendChild(this.currentPacman)
-            }
+            this.movementResolve(event, boardGame)
         })
+    }
+
+    movementResolve(event, boardGame, row, column){
+        var expectedRow = this.row, expectedColumn = this.column, expectedContainer;
+
+        expectedContainer = this.movement(event.key, expectedRow, expectedColumn, boardGame)
+        let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
+
+        if(datasetValue === undefined){
+            var node = this.pacmanContainer.childNodes[0];
+            this.pacmanContainer.removeChild(node)
+
+            switch(event.key){
+                case "ArrowLeft":
+                    this.column--
+                break;
+                case "ArrowRight":
+                    this.column++
+                break;
+                case "ArrowUp":
+                    this.row--
+                break;
+                case "ArrowDown":
+                    this.row++
+                break;
+            }
+
+            this.pacmanContainer = boardGame.childNodes[this.row].childNodes[this.column]
+            this.pacmanContainer.appendChild(this.currentPacman)
+        }
     }
 
     movement(key, y, x, boardGame){
@@ -88,10 +95,45 @@ class Pacman{
     }
 
     touchControls(){
-        // el.addEventListener("touchstart", handleStart, false);
-        // el.addEventListener("touchend", handleEnd, false);
-        // el.addEventListener("touchcancel", handleCancel, false);
-        // el.addEventListener("touchmove", handleMove, false);
+        let xAxisPoints = []
+        let yAxisPoints = []
+
+        document.addEventListener("touchmove", (event) => {
+            var xAxis = event.changedTouches[0].screenX
+            var yAxis = event.changedTouches[0].screenY
+            let xLength = xAxisPoints.length - 1
+            let yLength = yAxisPoints.length - 1
+            var changeInX = xAxisPoints[0] - xAxisPoints[xLength]
+            var changeInY = yAxisPoints[0] - yAxisPoints[yLength]
+            var xDir, yDir
+
+            xAxisPoints.push(xAxis)
+            yAxisPoints.push(yAxis)
+
+            if (xAxisPoints.length >= 2 && yAxisPoints.length >= 2){
+
+                if(changeInX < 0){
+                    xDir = "Right"
+                    changeInX *= -1
+                }else{
+                    xDir = "Left"
+                }
+
+                if(changeInY < 0){
+                    yDir = "Down"
+                    changeInY *= -1
+                }else{
+                    yDir = "Up"
+                }
+
+                console.log(`${changeInX > changeInY ? xDir : yDir}`)
+            }
+        }, false);
+
+        document.addEventListener("touchend", () => {
+            xAxisPoints = [];
+            yAxisPoints = []
+        })
     }
 }
 
