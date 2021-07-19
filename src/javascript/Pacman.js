@@ -132,11 +132,20 @@ class Pacman{
     }
 
     movementExpected(key){
-        let expectedRow = this.row, expectedColumn = this.column, expectedContainer;
-
         if(this.newDir){
             key = this.newDir
         }
+
+        let value = this.cellExpected(key)
+
+        if(this.newDir){
+            console.log(value)
+        }
+        return value
+    }
+
+    cellExpected(key){
+        let expectedRow = this.row, expectedColumn = this.column, expectedContainer;
 
         switch(key){
             case "ArrowLeft":
@@ -160,9 +169,6 @@ class Pacman{
         }
 
         let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
-        if(this.newDir){
-            console.log(datasetValue)
-        }
         return datasetValue
     }
 
