@@ -1,9 +1,11 @@
 class Pacman{
     constructor(){
         this.currentPacman = document.createElement("article")
+        this.currentPacman.classList.add("pacman")
         this.classDir = "pacmanRight"
         this.currentPacman.classList.add(this.classDir)
-        this.time = 1000
+        this.time = 1500
+        this.distance = 24
 
         this.currentDir = "ArrowLeft"
     }
@@ -28,6 +30,7 @@ class Pacman{
             // desktop
             row = 11;
             column = 15;
+            this.distance = 40
         }
 
         this.row = row
@@ -43,8 +46,7 @@ class Pacman{
 
     keyboardControls(){
         document.addEventListener("keydown", (event) => {
-            this.newDir = event.key
-            this.movementResolve()
+            this.movementResolve(event.key)
         })
     }
 
@@ -54,61 +56,47 @@ class Pacman{
         expectedContainer = this.movement(eventKey, expectedRow, expectedColumn)
         let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
 
-        if(eventKey){
-            if(datasetValue === undefined){
-                var node = this.pacmanContainer.childNodes[0];
-                this.pacmanContainer.removeChild(node)
-                this.currentPacman.classList.remove(this.classDir)
-                
-                switch(eventKey){
-                    case "ArrowLeft":
-                        this.column--
-                        this.classDir = "pacmanLeft"
-                    break;
-                    case "ArrowRight":
-                        this.column++
-                        this.classDir = "pacmanRight"
-                    break;
-                    case "ArrowUp":
-                        this.row--
-                        this.classDir = "pacmanUp"
-                    break;
-                    case "ArrowDown":
-                        this.row++
-                        this.classDir = "pacmanDown"
-                    break;
-                }
-    
-                this.currentPacman.classList.add(this.classDir)
+        if(datasetValue === undefined){
+            let transformAxis, transformSign;
+            this.currentPacman.classList.remove(this.classDir)
+            
+            switch(eventKey){
+                case "ArrowLeft":
+                    this.column--
+                    this.classDir = "pacmanLeft"
+                    transformAxis = "X"
+                    transformSign = "-"
+                break;
+                case "ArrowRight":
+                    this.column++
+                    this.classDir = "pacmanRight"
+                    transformAxis = "X"
+                    transformSign = "+"
+                break;
+                case "ArrowUp":
+                    this.row--
+                    this.classDir = "pacmanUp"
+                    transformAxis = "Y"
+                    transformSign = "-"
+                break;
+                case "ArrowDown":
+                    this.row++
+                    this.classDir = "pacmanDown"
+                    transformAxis = "Y"
+                    transformSign = "+"
+                break;
+            }
+
+            this.currentPacman.classList.add(this.classDir)
+            this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+this.distance}px)`
+
+            setTimeout(() => {
+                this.currentPacman.style.transform = ""
+                this.pacmanContainer.removeChild(this.currentPacman)
                 this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
                 this.pacmanContainer.appendChild(this.currentPacman)
-                this.running = true
-    
-                if(this.newDir){
-                    let comprobation = this.movement(this.newDir, expectedRow, expectedColumn)
-                    let datasetComp = comprobation ? comprobation.dataset.value : 1;
-
-                    if(datasetComp === undefined){
-                        console.log("Change in direction")
-                    }else{
-                        setTimeout(() => {
-                            this.movementResolve(eventKey)
-                        }, this.time)
-                    }
-                }else{
-                    setTimeout(() => {
-                        this.movementResolve(eventKey)
-                    }, this.time)
-                }
-            }else{
-                this.running = false
-            }
-        }else{
-            if(this.running === false){
-                this.currentDir = this.newDir
-                this.newDir = null
-                this.movementResolve(this.currentDir)
-            }
+                // this.movementResolve(eventKey)
+            }, this.time)
         }
     }
 
@@ -168,8 +156,7 @@ class Pacman{
                     yDir = "ArrowUp"
                 }
 
-                (changeInX > changeInY) ? this.newDir = xDir : this.newDir = yDir
-                this.movementResolve()
+                (changeInX > changeInY) ? this.movementResolve(xDir) : this.movementResolve(yDir)
 
                 flag = false
             }
