@@ -51,7 +51,6 @@ class Pacman{
                 this.movementResolve(this.currentDir)
             }else{
                 this.newDir = event.key
-                this.interruption = true
             }
         })
     }
@@ -63,20 +62,15 @@ class Pacman{
     }
 
     movementEffect(flag, transformAxis, transformSign, eventKey){
-        if(this.interruption && this.changingCell === false){
-            //
+        this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+flag}px)`
+        flag += 2
+
+        if(flag < this.distance){
+            setTimeout(() => {
+                this.movementEffect(flag, transformAxis, transformSign)
+            }, this.time)
         }else{
-            this.changingCell = true
-            this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+flag}px)`
-            flag += 2
-    
-            if(flag < this.distance){
-                setTimeout(() => {
-                    this.movementEffect(flag, transformAxis, transformSign)
-                }, this.time)
-            }else{
-                this.changeInCell()
-            }
+            this.changeInCell()
         }
     }
 
@@ -127,21 +121,26 @@ class Pacman{
         this.pacmanContainer.removeChild(this.currentPacman)
         this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
         this.pacmanContainer.appendChild(this.currentPacman)
-        this.changingCell = false
         this.movementResolve(this.currentDir)
     }
 
     movementExpected(key){
+        let value
         if(this.newDir){
-            key = this.newDir
-        }
+            value = this.cellExpected(this.newDir)
 
-        let value = this.cellExpected(key)
-
-        if(this.newDir){
-            console.log(value)
+            if(value === undefined){
+                this.currentDir = this.newDir
+                this.newDir = null
+                this.realMovement(value)
+            }else{
+                value = this.cellExpected(key)
+                return value
+            }
+        }else{
+            value = this.cellExpected(key)
+            return value
         }
-        return value
     }
 
     cellExpected(key){
@@ -210,7 +209,6 @@ class Pacman{
                     this.movementResolve(this.currentDir)
                 }else{
                     (changeInX > changeInY) ? this.newDir = xDir : this.newDir = yDir
-                    this.interruption = true
                 }
 
                 flag = false
