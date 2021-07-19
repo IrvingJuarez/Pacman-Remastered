@@ -132,7 +132,6 @@ class Pacman{
             if(value === undefined){
                 this.currentDir = this.newDir
                 this.newDir = null
-                this.realMovement(value)
             }else{
                 value = this.cellExpected(key)
                 return value
