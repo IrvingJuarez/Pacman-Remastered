@@ -46,12 +46,13 @@ class Pacman{
 
     keyboardControls(){
         document.addEventListener("keydown", (event) => {
-            this.movementResolve(event.key)
+            this.currentDir = event.key
+            this.movementResolve(this.currentDir)
         })
     }
 
     movementResolve(eventKey){
-        var expectedRow = this.row, expectedColumn = this.column, expectedContainer;
+        let expectedRow = this.row, expectedColumn = this.column, expectedContainer;
 
         expectedContainer = this.movementExpected(eventKey, expectedRow, expectedColumn)
         let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
@@ -94,7 +95,7 @@ class Pacman{
         }
     }
 
-    movementEffect(flag, transformAxis, transformSign){
+    movementEffect(flag, transformAxis, transformSign, eventKey){
         this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+flag}px)`
         flag += 2
 
@@ -107,6 +108,7 @@ class Pacman{
             this.pacmanContainer.removeChild(this.currentPacman)
             this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
             this.pacmanContainer.appendChild(this.currentPacman)
+            this.movementResolve(this.currentDir)
         }
     }
 
@@ -166,7 +168,9 @@ class Pacman{
                     yDir = "ArrowUp"
                 }
 
-                (changeInX > changeInY) ? this.movementResolve(xDir) : this.movementResolve(yDir)
+                (changeInX > changeInY) ? this.currentDir = xDir : this.currentDir = yDir
+
+                this.movementResolve(this.currentDir)
 
                 flag = false
             }
