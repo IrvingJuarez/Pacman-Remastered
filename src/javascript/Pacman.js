@@ -64,8 +64,7 @@ class Pacman{
 
     movementEffect(flag, transformAxis, transformSign, eventKey){
         if(this.interruption && this.changingCell === false){
-            let value = this.movementExpected(this.newDir)
-            console.log(value)
+            //
         }else{
             this.changingCell = true
             this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+flag}px)`
@@ -135,6 +134,10 @@ class Pacman{
     movementExpected(key){
         let expectedRow = this.row, expectedColumn = this.column, expectedContainer;
 
+        if(this.newDir){
+            key = this.newDir
+        }
+
         switch(key){
             case "ArrowLeft":
                 expectedColumn--
@@ -157,6 +160,9 @@ class Pacman{
         }
 
         let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
+        if(this.newDir){
+            console.log(datasetValue)
+        }
         return datasetValue
     }
 
