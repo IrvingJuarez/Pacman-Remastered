@@ -64,7 +64,8 @@ class Pacman{
 
     movementEffect(flag, transformAxis, transformSign, eventKey){
         if(this.interruption && this.changingCell === false){
-            console.log(this.movementExpected(this.newDir))
+            let value = this.movementExpected(this.newDir)
+            console.log(value)
         }else{
             this.changingCell = true
             this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+flag}px)`
