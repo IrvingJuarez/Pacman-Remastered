@@ -4,7 +4,7 @@ class Pacman{
         this.currentPacman.classList.add("pacman")
         this.classDir = "pacmanRight"
         this.currentPacman.classList.add(this.classDir)
-        this.time = 1500
+        this.time = 30
         this.distance = 24
 
         this.currentDir = "ArrowLeft"
@@ -39,7 +39,7 @@ class Pacman{
         this.pacmanContainer = boardGame.childNodes[this.row].childNodes[this.column]
         this.pacmanContainer.appendChild(this.currentPacman)
 
-        this.movementResolve(this.currentDir)
+        // this.movementResolve(this.currentDir)
         this.keyboardControls()
         this.touchControls()
     }
@@ -53,11 +53,12 @@ class Pacman{
     movementResolve(eventKey){
         var expectedRow = this.row, expectedColumn = this.column, expectedContainer;
 
-        expectedContainer = this.movement(eventKey, expectedRow, expectedColumn)
+        expectedContainer = this.movementExpected(eventKey, expectedRow, expectedColumn)
         let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
 
         if(datasetValue === undefined){
             let transformAxis, transformSign;
+            let flag = 0;
             this.currentPacman.classList.remove(this.classDir)
             
             switch(eventKey){
@@ -88,19 +89,21 @@ class Pacman{
             }
 
             this.currentPacman.classList.add(this.classDir)
-            this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+this.distance}px)`
 
-            setTimeout(() => {
-                this.currentPacman.style.transform = ""
-                this.pacmanContainer.removeChild(this.currentPacman)
-                this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
-                this.pacmanContainer.appendChild(this.currentPacman)
-                // this.movementResolve(eventKey)
-            }, this.time)
+            this.movementEffect(flag, transformAxis, transformSign)
         }
     }
 
-    movement(key, y, x){
+    movementEffect(flag, transformAxis, transformSign){
+        this.currentPacman.style.transform = `translate${transformAxis}(${transformSign}2px)`
+        flag += 2
+
+        if(flag < this.distance){
+            this.movementEffect(flag, transformAxis, transformSign)
+        }
+    }
+
+    movementExpected(key, y, x){
         switch(key){
             case "ArrowLeft":
                 x--
