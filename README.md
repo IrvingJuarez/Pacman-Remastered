@@ -1,5 +1,5 @@
 # Release date
-The Release of this project will be on July 18th, 2021
+The Release of this project will be on July 19th, 2021
 
 # User Interface Design
 For this project, there will be 4 different designs. Therefore, each one will be different.
