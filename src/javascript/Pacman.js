@@ -59,13 +59,35 @@ class Pacman{
     movementResolve(eventKey){
         let datasetValue = this.movementExpected(eventKey)
 
+        this.realMovement(datasetValue)
+    }
+
+    movementEffect(flag, transformAxis, transformSign, eventKey){
+        if(this.interruption && this.changingCell === false){
+            console.log(this.movementExpected(this.newDir))
+        }else{
+            this.changingCell = true
+            this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+flag}px)`
+            flag += 2
+    
+            if(flag < this.distance){
+                setTimeout(() => {
+                    this.movementEffect(flag, transformAxis, transformSign)
+                }, this.time)
+            }else{
+                this.changeInCell()
+            }
+        }
+    }
+
+    realMovement(datasetValue){
         if(datasetValue === undefined){
             this.running = true
             let transformAxis, transformSign;
             this.currentPacman.classList.remove(this.classDir)
             let flag = 2;
             
-            switch(eventKey){
+            switch(this.currentDir){
                 case "ArrowLeft":
                     this.column--
                     this.classDir = "pacmanLeft"
@@ -97,24 +119,6 @@ class Pacman{
             this.movementEffect(flag, transformAxis, transformSign)
         }else{
             this.running = false
-        }
-    }
-
-    movementEffect(flag, transformAxis, transformSign, eventKey){
-        if(this.interruption && this.changingCell === false){
-            console.log(this.pacmanContainer)
-        }else{
-            this.changingCell = true
-            this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+flag}px)`
-            flag += 2
-    
-            if(flag < this.distance){
-                setTimeout(() => {
-                    this.movementEffect(flag, transformAxis, transformSign)
-                }, this.time)
-            }else{
-                this.changeInCell()
-            }
         }
     }
 
