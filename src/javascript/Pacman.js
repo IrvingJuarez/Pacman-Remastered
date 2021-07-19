@@ -58,32 +58,37 @@ class Pacman{
 
         if(datasetValue === undefined){
             let transformAxis, transformSign;
+            this.currentPacman.classList.remove(this.classDir)
             let flag = 2;
             
             switch(eventKey){
                 case "ArrowLeft":
                     this.column--
+                    this.classDir = "pacmanLeft"
                     transformAxis = "X"
                     transformSign = "-"
                 break;
                 case "ArrowRight":
                     this.column++
+                    this.classDir = "pacmanRight"
                     transformAxis = "X"
                     transformSign = "+"
                 break;
                 case "ArrowUp":
                     this.row--
+                    this.classDir = "pacmanUp"
                     transformAxis = "Y"
                     transformSign = "-"
                 break;
                 case "ArrowDown":
                     this.row++
+                    this.classDir = "pacmanDown"
                     transformAxis = "Y"
                     transformSign = "+"
                 break;
             }
 
-            // this.currentPacman.classList.add(this.classDir)
+            this.currentPacman.classList.add(this.classDir)
 
             this.movementEffect(flag, transformAxis, transformSign)
         }
@@ -96,7 +101,7 @@ class Pacman{
         if(flag < this.distance){
             setTimeout(() => {
                 this.movementEffect(flag, transformAxis, transformSign)
-            }, 1000)
+            }, this.time)
         }else{
             this.currentPacman.style.transform = ""
             this.pacmanContainer.removeChild(this.currentPacman)
