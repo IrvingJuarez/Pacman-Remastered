@@ -31,6 +31,7 @@ class Pacman{
             row = 11;
             column = 15;
             this.distance = 40
+            this.time = 15
         }
 
         this.row = row
