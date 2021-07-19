@@ -39,25 +39,28 @@ class Pacman{
         this.pacmanContainer = boardGame.childNodes[this.row].childNodes[this.column]
         this.pacmanContainer.appendChild(this.currentPacman)
 
-        // this.movementResolve(this.currentDir)
+        this.movementResolve(this.currentDir)
         this.keyboardControls()
         this.touchControls()
     }
 
     keyboardControls(){
         document.addEventListener("keydown", (event) => {
-            this.currentDir = event.key
-            this.movementResolve(this.currentDir)
+            if(this.running === false){
+                this.currentDir = event.key
+                this.movementResolve(this.currentDir)
+            }else{
+                this.newDir = event.key
+                this.interruption = true
+            }
         })
     }
 
     movementResolve(eventKey){
-        let expectedRow = this.row, expectedColumn = this.column, expectedContainer;
-
-        expectedContainer = this.movementExpected(eventKey, expectedRow, expectedColumn)
-        let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
+        let datasetValue = this.movementExpected(eventKey)
 
         if(datasetValue === undefined){
+            this.running = true
             let transformAxis, transformSign;
             this.currentPacman.classList.remove(this.classDir)
             let flag = 2;
@@ -92,47 +95,64 @@ class Pacman{
             this.currentPacman.classList.add(this.classDir)
 
             this.movementEffect(flag, transformAxis, transformSign)
+        }else{
+            this.running = false
         }
     }
 
     movementEffect(flag, transformAxis, transformSign, eventKey){
-        this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+flag}px)`
-        flag += 2
-
-        if(flag < this.distance){
-            setTimeout(() => {
-                this.movementEffect(flag, transformAxis, transformSign)
-            }, this.time)
+        if(this.interruption && this.changingCell === false){
+            console.log(this.pacmanContainer)
         }else{
-            this.currentPacman.style.transform = ""
-            this.pacmanContainer.removeChild(this.currentPacman)
-            this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
-            this.pacmanContainer.appendChild(this.currentPacman)
-            this.movementResolve(this.currentDir)
+            this.changingCell = true
+            this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+flag}px)`
+            flag += 2
+    
+            if(flag < this.distance){
+                setTimeout(() => {
+                    this.movementEffect(flag, transformAxis, transformSign)
+                }, this.time)
+            }else{
+                this.changeInCell()
+            }
         }
     }
 
-    movementExpected(key, y, x){
+    changeInCell(){
+        this.currentPacman.style.transform = ""
+        this.pacmanContainer.removeChild(this.currentPacman)
+        this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
+        this.pacmanContainer.appendChild(this.currentPacman)
+        this.changingCell = false
+        this.movementResolve(this.currentDir)
+    }
+
+    movementExpected(key){
+        let expectedRow = this.row, expectedColumn = this.column, expectedContainer;
+
         switch(key){
             case "ArrowLeft":
-                x--
+                expectedColumn--
             break;
             case "ArrowRight":
-                x++
+                expectedColumn++
             break;
             case "ArrowUp":
-                y--
+                expectedRow--
             break;
             case "ArrowDown":
-                y++
+                expectedRow++
             break;
         }
     
-        if(this.boardGame.childNodes[y]){
-            return this.boardGame.childNodes[y].childNodes[x]
+        if(this.boardGame.childNodes[expectedRow]){
+            expectedContainer = this.boardGame.childNodes[expectedRow].childNodes[expectedColumn]
         }else{
-            return null;
+            expectedContainer = null;
         }
+
+        let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
+        return datasetValue
     }
 
     touchControls(){
@@ -168,9 +188,13 @@ class Pacman{
                     yDir = "ArrowUp"
                 }
 
-                (changeInX > changeInY) ? this.currentDir = xDir : this.currentDir = yDir
-
-                this.movementResolve(this.currentDir)
+                if(this.running === false){
+                    (changeInX > changeInY) ? this.currentDir = xDir : this.currentDir = yDir
+                    this.movementResolve(this.currentDir)
+                }else{
+                    (changeInX > changeInY) ? this.newDir = xDir : this.newDir = yDir
+                    this.interruption = true
+                }
 
                 flag = false
             }
