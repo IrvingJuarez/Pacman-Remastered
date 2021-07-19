@@ -58,48 +58,50 @@ class Pacman{
 
         if(datasetValue === undefined){
             let transformAxis, transformSign;
-            let flag = 0;
-            this.currentPacman.classList.remove(this.classDir)
+            let flag = 2;
             
             switch(eventKey){
                 case "ArrowLeft":
                     this.column--
-                    this.classDir = "pacmanLeft"
                     transformAxis = "X"
                     transformSign = "-"
                 break;
                 case "ArrowRight":
                     this.column++
-                    this.classDir = "pacmanRight"
                     transformAxis = "X"
                     transformSign = "+"
                 break;
                 case "ArrowUp":
                     this.row--
-                    this.classDir = "pacmanUp"
                     transformAxis = "Y"
                     transformSign = "-"
                 break;
                 case "ArrowDown":
                     this.row++
-                    this.classDir = "pacmanDown"
                     transformAxis = "Y"
                     transformSign = "+"
                 break;
             }
 
-            this.currentPacman.classList.add(this.classDir)
+            // this.currentPacman.classList.add(this.classDir)
 
             this.movementEffect(flag, transformAxis, transformSign)
         }
     }
 
     movementEffect(flag, transformAxis, transformSign){
-        this.currentPacman.style.transform = `translate${transformAxis}(${transformSign}2px)`
+        this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+flag}px)`
         flag += 2
 
         if(flag < this.distance){
-            this.movementEffect(flag, transformAxis, transformSign)
+            setTimeout(() => {
+                this.movementEffect(flag, transformAxis, transformSign)
+            }, 1000)
+        }else{
+            this.currentPacman.style.transform = ""
+            this.pacmanContainer.removeChild(this.currentPacman)
+            this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
+            this.pacmanContainer.appendChild(this.currentPacman)
         }
     }
 
