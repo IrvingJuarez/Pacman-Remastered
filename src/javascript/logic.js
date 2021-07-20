@@ -9,7 +9,7 @@ const logic = () => {
     const pacman = new Pacman()
     
     pacman.setPacman(boardGame, screenWidth, screenHeight)
-    const redGhost = new Ghost("red", pacman)
+    const redGhost = new Ghost("red", pacman, boardGame, screenWidth, screenHeight)
 }
 
 export default logic;
