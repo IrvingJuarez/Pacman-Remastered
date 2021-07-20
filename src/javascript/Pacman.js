@@ -175,11 +175,24 @@ class Pacman{
             expectedContainer = null;
         }
 
-        let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
-        if(expectedRow == this.portalRow && (expectedColumn < 0 || expectedColumn >= this.portalColumn)){
-            console.log("Portal entry")
+        let datasetValue
+        if(expectedRow == this.portalRow && expectedColumn < 0){
+            datasetValue = this.portal(this.portalColumn)
+        }else if(expectedRow == this.portalRow && expectedColumn >= this.portalColumn){
+            datasetValue = this.portal(-1)
+        }else{
+            datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
         }
         return datasetValue
+    }
+
+    portal(column){
+        this.column = column
+        this.boardGame.style.boxShadow = "5px 5px 25px #3498DB, -5px -5px 25px #3498DB"
+        setTimeout(() => {
+            this.boardGame.style.boxShadow = ""
+        }, 250)
+        return undefined
     }
 
     touchControls(){
