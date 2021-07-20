@@ -70,7 +70,7 @@ class Pacman{
         this.realMovement(datasetValue)
     }
 
-    movementEffect(flag, transformAxis, transformSign, eventKey){
+    movementEffect(flag, transformAxis, transformSign){
         this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+flag}px)`
         flag += 2
 

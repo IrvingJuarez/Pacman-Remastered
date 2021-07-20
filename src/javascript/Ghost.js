@@ -2,6 +2,8 @@ class Ghost{
     constructor(id, target, boardGame, screenWidth, screenHeight){
         this.id = id
         this.boardGame = boardGame
+        this.time = 500
+        this.distance = 24
         this.currentGhost = document.createElement("article")
         this.currentGhost.classList.add("ghost")
         this.currentGhost.classList.add(`${this.id}Ghost`)
@@ -11,7 +13,7 @@ class Ghost{
     }
 
     setGhost(width, height){
-        var row, column;
+        let row, column;
 
         if(width >= 320 && width < 375){
             // 320
@@ -29,13 +31,13 @@ class Ghost{
             // desktop
             row = 10;
             column = 15;
+            this.distance = 40
         }
 
         this.row = row
         this.column = column
 
         this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
-        console.log(this.ghostContainer)
         this.ghostContainer.appendChild(this.currentGhost)
 
         this.movementResolve()
@@ -46,9 +48,10 @@ class Ghost{
 
         let available = this.cellExpected(randomDir)
         if(available != this.inactiveDatasetValue){
-            console.log("Go ahead")
+            let flag = 2
+            this.movementEffect(flag, randomDir)
         }else{
-            console.log("No available")
+            this.movementResolve()
         }
     }
 
@@ -97,9 +100,50 @@ class Ghost{
             expectedContainer = null;
         }
 
-        console.log(expectedContainer)
         let datasetValue = expectedContainer ? expectedContainer.dataset.value : this.inactiveDatasetValue;
         return datasetValue
+    }
+
+    movementEffect(flag, direction){
+        let sign, axis
+        switch (direction) {
+            case "left":
+                this.column--
+                axis = "X"
+                sign = "-"
+            break;
+            case "right":
+                this.column++
+                axis = "X"
+                sign = "+"
+            break;
+            case "up":
+                this.row--
+                axis = "Y"
+                sign = "-"
+            break;
+            case "down":
+                this.row++
+                axis = "Y"
+                sign = "+"
+            break;
+        }
+
+        this.currentGhost.style.transform = `translate${axis}(${sign+flag}px)`
+        flag += 2
+
+        if(flag < this.distance){
+            setTimeout(() => {
+                this.movementEffect(flag, direction)
+            }, this.time)
+        }else{
+            this.changeInCell()
+        }
+    }
+
+    changeInCell(){
+        console.log(this.ghostContainer)
+        console.log(this.boardGame)
     }
 }
 
