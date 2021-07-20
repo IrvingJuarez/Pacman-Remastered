@@ -262,6 +262,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _rou
 
 /***/ }),
 
+/***/ "./src/javascript/Ghost.js":
+/*!*********************************!*\
+  !*** ./src/javascript/Ghost.js ***!
+  \*********************************/
+/***/ ((module) => {
+
+eval("class Ghost{\r\n    constructor(id){\r\n        this.id = id\r\n        console.log(`Hi, I am the ${this.id} ghost`)\r\n    }\r\n}\r\n\r\nmodule.exports = Ghost;\n\n//# sourceURL=webpack://pacman-remastered/./src/javascript/Ghost.js?");
+
+/***/ }),
+
 /***/ "./src/javascript/Pacman.js":
 /*!**********************************!*\
   !*** ./src/javascript/Pacman.js ***!
@@ -279,7 +289,7 @@ eval("class Pacman{\r\n    constructor(){\r\n        this.currentPacman = docume
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _Pacman__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Pacman */ \"./src/javascript/Pacman.js\");\n/* harmony import */ var _Pacman__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Pacman__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\nconst logic = () => {\r\n    const mainContainer = document.getElementById(\"content\")\r\n    const boardGame = mainContainer.childNodes[1].childNodes[1]\r\n    const screenWidth = screen.width;\r\n    const screenHeight = screen.height;\r\n    const pacman = new (_Pacman__WEBPACK_IMPORTED_MODULE_0___default())()\r\n\r\n    pacman.setPacman(boardGame, screenWidth, screenHeight)\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (logic);\n\n//# sourceURL=webpack://pacman-remastered/./src/javascript/logic.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _Pacman__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Pacman */ \"./src/javascript/Pacman.js\");\n/* harmony import */ var _Pacman__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Pacman__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Ghost__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ghost */ \"./src/javascript/Ghost.js\");\n/* harmony import */ var _Ghost__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Ghost__WEBPACK_IMPORTED_MODULE_1__);\n\r\n\r\n\r\nconst logic = () => {\r\n    const mainContainer = document.getElementById(\"content\")\r\n    const boardGame = mainContainer.childNodes[1].childNodes[1]\r\n    const screenWidth = screen.width;\r\n    const screenHeight = screen.height;\r\n    const pacman = new (_Pacman__WEBPACK_IMPORTED_MODULE_0___default())()\r\n    const redGhost = new (_Ghost__WEBPACK_IMPORTED_MODULE_1___default())(\"red\")\r\n\r\n    pacman.setPacman(boardGame, screenWidth, screenHeight)\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (logic);\n\n//# sourceURL=webpack://pacman-remastered/./src/javascript/logic.js?");
 
 /***/ }),
 
