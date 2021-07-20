@@ -44,6 +44,7 @@ class Ghost{
         this.movementResolve()
         setTimeout(() => {
             this.inactiveDatasetValue = 1
+            this.jailOpen()
         }, 10000)
     }
 
@@ -57,6 +58,13 @@ class Ghost{
         }else{
             this.movementResolve()
         }
+    }
+
+    jailOpen(){
+        document.documentElement.style.setProperty("--jailColor", "black")
+        setTimeout(() => {
+            document.documentElement.style.setProperty("--jailColor", "#00FFDE")
+        }, 4000)
     }
 
     getDirection(){
