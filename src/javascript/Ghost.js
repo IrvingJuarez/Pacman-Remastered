@@ -2,7 +2,7 @@ class Ghost{
     constructor(id, target, boardGame, screenWidth, screenHeight){
         this.id = id
         this.boardGame = boardGame
-        this.time = 500
+        this.time = 125
         this.distance = 24
         this.currentGhost = document.createElement("article")
         this.currentGhost.classList.add("ghost")
@@ -32,6 +32,7 @@ class Ghost{
             row = 10;
             column = 15;
             this.distance = 40
+            this.time = 150
         }
 
         this.row = row
@@ -41,6 +42,9 @@ class Ghost{
         this.ghostContainer.appendChild(this.currentGhost)
 
         this.movementResolve()
+        setTimeout(() => {
+            this.inactiveDatasetValue = 1
+        }, 10000)
     }
 
     movementResolve(){
@@ -69,7 +73,7 @@ class Ghost{
                 dir = "up"
             break;
             case 3:
-                dir = "up"
+                dir = "down"
             break;
         }
 
