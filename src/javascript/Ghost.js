@@ -108,24 +108,28 @@ class Ghost{
         let sign, axis
         switch (direction) {
             case "left":
-                this.column--
                 axis = "X"
                 sign = "-"
+                if(flag <= 2) 
+                    this.column--
             break;
             case "right":
-                this.column++
                 axis = "X"
                 sign = "+"
+                if(flag <= 2) 
+                    this.column++
             break;
             case "up":
-                this.row--
                 axis = "Y"
                 sign = "-"
+                if(flag <= 2) 
+                    this.row--
             break;
             case "down":
-                this.row++
                 axis = "Y"
                 sign = "+"
+                if(flag <= 2) 
+                    this.row++
             break;
         }
 
@@ -142,8 +146,11 @@ class Ghost{
     }
 
     changeInCell(){
-        console.log(this.ghostContainer)
-        console.log(this.boardGame)
+        this.currentGhost.style.transform = ""
+        this.ghostContainer.removeChild(this.currentGhost)
+        this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
+        this.ghostContainer.appendChild(this.currentGhost)
+        this.movementResolve()
     }
 }
 
