@@ -12,20 +12,26 @@ class Pacman{
 
     setPacman(boardGame, width, height){
         this.boardGame = boardGame
-        var row, column;
+        var row, column, portalRow, portalColumn;
 
         if(width >= 320 && width < 375){
             // 320
             row = 11;
             column = 6;
+            portalRow = 10;
+            portalColumn = 12;
         }else if ((width >= 375 && width < 1210) && height < 736){
             // 375
             row = 14;
             column = 7;
+            portalRow = 12
+            portalColumn = 14
         }else if ((width >= 375 && width < 1210) && height >= 737){
             // higher
             row = 16;
             column = 7;
+            portalRow = 14
+            portalColumn = 14
         }else if(width >= 1210){
             // desktop
             row = 11;
@@ -36,6 +42,8 @@ class Pacman{
 
         this.row = row
         this.column = column
+        this.portalRow = portalRow
+        this.portalColumn = portalColumn
 
         this.pacmanContainer = boardGame.childNodes[this.row].childNodes[this.column]
         this.pacmanContainer.appendChild(this.currentPacman)
@@ -168,6 +176,9 @@ class Pacman{
         }
 
         let datasetValue = expectedContainer ? expectedContainer.dataset.value : 1;
+        if(expectedRow == this.portalRow && (expectedColumn < 0 || expectedColumn >= this.portalColumn)){
+            console.log("Portal entry")
+        }
         return datasetValue
     }
 
