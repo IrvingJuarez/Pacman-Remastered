@@ -15,7 +15,7 @@ const Playing = () => {
                 </div>
                 <div class="Timer">
                     <img src="${clock}">
-                    <p id="timer" class="LevelStatus">6</p>
+                    <p id="timer" class="LevelStatus"></p>
                 </div>
                 <p class="LevelStatus">Level: <span class="LevelQuantity">0</span></p>
             </div>
