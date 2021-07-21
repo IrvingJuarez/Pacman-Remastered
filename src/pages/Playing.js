@@ -1,4 +1,5 @@
 import styles from "../styles/Playing.css"
+import clock from "../assets/images/clock.svg"
 import pacmanImage from "../assets/images/pacmanPhoto.png"
 
 const Playing = () => {
@@ -11,6 +12,10 @@ const Playing = () => {
                 <div class="LifeContainer">
                     <img src="${pacmanImage}">
                     <img src="${pacmanImage}">
+                </div>
+                <div class="Timer">
+                    <img src="${clock}">
+                    <p id="timer" class="LevelStatus">6</p>
                 </div>
                 <p class="LevelStatus">Level: <span class="LevelQuantity">0</span></p>
             </div>

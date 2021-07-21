@@ -27,6 +27,9 @@
 .cell{
     width: 24px;
 }
+.Timer img{
+    width: 18px;
+}
 
 .GameBoard section:nth-child(10){
     border-left: 4px solid black;

@@ -40,6 +40,12 @@
 .cell{
     width: 40px;
 }
+.Timer{
+    width: 6%;
+}
+.Timer img{
+    width: 42px;
+}
 
 /* downLeft */
 .GameBoard section:nth-child(1) div:nth-child(14), .GameBoard section:nth-child(7) div:nth-child(2), .GameBoard section:nth-child(7) div:nth-child(12), .GameBoard section:nth-child(7) div:nth-child(21), .GameBoard section:nth-child(11) div:nth-child(2), .GameBoard section:nth-child(11) div:nth-child(7), .GameBoard section:nth-child(12) div:nth-child(21), .GameBoard section:nth-child(14) div:nth-child(27), .GameBoard section:nth-child(15) div:nth-child(12), .GameBoard section:nth-child(14) div:nth-child(7){
