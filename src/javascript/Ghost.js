@@ -62,18 +62,22 @@ class Ghost{
         if(dir === "center"){
             console.log("Pacman lost")
         }else{
-            let available = this.cellExpected(dir)
+            this.availability(dir)
+        }
+    }
+
+    availability(direction){
+        let available = this.cellExpected(direction)
             
-            if(available != this.inactiveDatasetValue){
-                this.targetDirs = []
-                let flag = 2
-                this.movementEffect(flag, dir)
+        if(available != this.inactiveDatasetValue){
+            this.targetDirs = []
+            let flag = 2
+            this.movementEffect(flag, direction)
+        }else{
+            if(this.targetX != undefined){
+                this.escape(direction)
             }else{
-                if(this.targetX != undefined){
-                    this.escape(dir)
-                }else{
-                    this.movementResolve()
-                }
+                this.movementResolve()
             }
         }
     }
@@ -95,7 +99,7 @@ class Ghost{
         }else{
             yAxis = "down"
         }
-
+        
         this.targetDirs.push(xAxis, yAxis)
 
         if(xAxis == "center" && yAxis == "center"){
@@ -211,8 +215,14 @@ class Ghost{
         this.targetDirs = this.targetDirs.filter(item => {
             return item !== direction
         })
-        console.log(`The direction ${direction} failed. The other supposed dir is in the array below`)
-        console.log(this.targetDirs)
+
+        if(this.targetDirs.length > 0){
+            let otherDir = this.targetDirs[0]
+            console.log(`The direction ${direction} failed. The other supposed dir is ${otherDir}`)
+            this.availability(otherDir)
+        }else{
+            console.log("Figure out the other dirs")
+        }
     }
 
     changeInCell(){
@@ -220,6 +230,7 @@ class Ghost{
         this.ghostContainer.removeChild(this.currentGhost)
         this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
         this.ghostContainer.appendChild(this.currentGhost)
+        this.allDirs = ["left", "right", "up", "down"]
         this.movementResolve()
     }
 }
