@@ -2,6 +2,7 @@ class Ghost{
     constructor(id, target, boardGame, screenWidth, screenHeight){
         this.id = id
         this.boardGame = boardGame
+        this.target = target
         this.time = 125
         this.distance = 24
         this.currentGhost = document.createElement("article")
@@ -53,6 +54,7 @@ class Ghost{
         if(available != this.inactiveDatasetValue){
             let flag = 2
             this.movementEffect(flag, randomDir)
+            console.log(`Target row: ${this.target.row} & target column: ${this.target.column}`)
         }else{
             this.movementResolve()
         }
