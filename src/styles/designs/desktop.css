@@ -40,10 +40,8 @@
 .cell{
     width: 40px;
 }
-.Timer{
-    width: 6%;
-}
 .Timer img{
+    margin-right: 20px;
     width: 42px;
 }
 

@@ -61,12 +61,13 @@
     justify-content: center;
 }
 .Timer{
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
-    width: 12%;
+    width: auto;
     height: 100%;
 }
 .Timer img{
+    margin-right: 9px;
     height: 100%;
 }

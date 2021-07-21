@@ -35,6 +35,7 @@ const logic = () => {
     pacman.setPacman(boardGame, screenWidth, screenHeight)
     const redGhost = new Ghost("red", pacman, boardGame, screenWidth, screenHeight)
 
+    timerContainer.style.display = "flex"
     counterClock(timer, jailTime, timerContainer)
 }
 
