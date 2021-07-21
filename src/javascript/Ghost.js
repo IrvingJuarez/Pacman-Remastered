@@ -3,12 +3,14 @@ class Ghost{
         this.id = id
         this.boardGame = boardGame
         this.target = target
+        this.targetDirs = []
         this.time = 125
         this.distance = 24
         this.currentGhost = document.createElement("article")
         this.currentGhost.classList.add("ghost")
         this.currentGhost.classList.add(`${this.id}Ghost`)
         this.inactiveDatasetValue = undefined
+
         this.setGhost(screenWidth, screenHeight)
     }
 
@@ -44,23 +46,78 @@ class Ghost{
         this.movementResolve()
         setTimeout(() => {
             this.inactiveDatasetValue = 1
+            this.targetY = 20;
+            this.targetX = 0;
         }, 10000)
     }
 
     movementResolve(){
-        let randomDir = this.getDirection()
-
-        let available = this.cellExpected(randomDir)
-        if(available != this.inactiveDatasetValue){
-            let flag = 2
-            this.movementEffect(flag, randomDir)
-            console.log(`Target row: ${this.target.row} & target column: ${this.target.column}`)
+        let dir
+        if(this.targetX != undefined){
+            dir = this.getTarget()
         }else{
-            this.movementResolve()
+            dir = this.randomDirection()
+        }
+
+        if(dir === "center"){
+            console.log("Pacman lost")
+        }else{
+            let available = this.cellExpected(dir)
+            
+            if(available != this.inactiveDatasetValue){
+                this.targetDirs = []
+                let flag = 2
+                this.movementEffect(flag, dir)
+            }else{
+                if(this.targetX != undefined){
+                    this.escape(dir)
+                }else{
+                    this.movementResolve()
+                }
+            }
         }
     }
 
-    getDirection(){
+    getTarget(){
+        let xAxis, yAxis
+        if(this.column == this.targetX){
+            xAxis = "center"
+        }else if(this.column > this.targetX){
+            xAxis = "left"
+        }else{
+            xAxis = "Right"
+        }
+
+        if(this.row == this.targetY){
+            yAxis = "center"
+        }else if(this.row > this.targetY){
+            yAxis = "up"
+        }else{
+            yAxis = "down"
+        }
+
+        this.targetDirs.push(xAxis, yAxis)
+
+        if(xAxis == "center" && yAxis == "center"){
+            return "center"
+        }else if(xAxis == "center" && yAxis != "center"){
+            return xAxis
+        }else if(yAxis == "center" && xAxis != "center"){
+            return yAxis
+        }else{
+            let random = Math.floor(Math.random() * 2)
+            switch(random){
+                case 0:
+                    return xAxis
+                break;
+                case 1:
+                    return yAxis
+                break;
+            }
+        }
+    }
+
+    randomDirection(){
         let dir = Math.floor(Math.random() * 4)
 
         switch(dir){
@@ -148,6 +205,14 @@ class Ghost{
         }else{
             this.changeInCell()
         }
+    }
+
+    escape(direction){
+        this.targetDirs = this.targetDirs.filter(item => {
+            return item !== direction
+        })
+        console.log(`The direction ${direction} failed. The other supposed dir is in the array below`)
+        console.log(this.targetDirs)
     }
 
     changeInCell(){
