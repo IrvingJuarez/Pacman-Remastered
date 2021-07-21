@@ -13,7 +13,7 @@ const Playing = () => {
                     <img src="${pacmanImage}">
                     <img src="${pacmanImage}">
                 </div>
-                <div class="Timer">
+                <div class="Timer" id="timerContainer">
                     <img src="${clock}">
                     <p id="timer" class="LevelStatus"></p>
                 </div>

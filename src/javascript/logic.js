@@ -8,9 +8,23 @@ const jailOpen = () => {
     }, 4000)
 }
 
+const counterClock = (tag, time, container) => {
+    tag.innerHTML = time;
+    time--
+    if(time < 0){
+        jailOpen()
+        container.innerHTML = ""
+    }else{
+        setTimeout(() => {
+            counterClock(tag, time, container)
+        }, 1000)
+    }
+}
+
 const logic = () => {
     const mainContainer = document.getElementById("content")
     const timer = document.getElementById("timer")
+    const timerContainer = document.getElementById("timerContainer")
     const boardGame = mainContainer.childNodes[1].childNodes[1]
     const screenWidth = screen.width;
     const screenHeight = screen.height;
@@ -21,9 +35,7 @@ const logic = () => {
     pacman.setPacman(boardGame, screenWidth, screenHeight)
     const redGhost = new Ghost("red", pacman, boardGame, screenWidth, screenHeight)
 
-    setTimeout(() => {
-        jailOpen()
-    }, jailTime * 1000)
+    counterClock(timer, jailTime, timerContainer)
 }
 
 export default logic;
