@@ -1,12 +1,13 @@
 # Release date
-The Release of this project will be on July 21th, 2021
+The Release of this project will be on July 23th, 2021
 
 # User Interface Design
-For this project, there will be 4 different designs. Therefore, each one will be different.
+For this project, there will be 4 different designs or layouts.
+
 ## Why are there 4 different designs?
 - The quantity of different devices is huge
 - The responsive design doesn't apply when working with complex designs such as pacman arcade game
-- In order to give a high-quality experience, the different designs are necessary.
+- In order to give a high-quality experience, the 4 different designs are necessary.
 
 ## Sizes and specifications of the designs
 ### 320 Design
@@ -83,9 +84,9 @@ Finally, the index.js file in the src carpet is the one webpack takes to send to
 To understand how the program works, we need to know it is a Single Page Application where according to the size of the screen, it is displayed a different layout of the game.
 
 All the logic if the game actually starts at the `src/routes/index.js` file. The file calls all the necessary pages of the program and stablish the layout (according to the size of the screen).
-Afterwards, we have the `src/javascript/logic.js` file where it is imported the Pacman class in `src/javascript/Pacman.js`. The Pacman class has actually evetything needed for the pacman. From the controls for keyboard and touchScreen until the Win and Lose methods.
+Afterwards, we have the `src/javascript/logic.js` file where it is imported the Pacman class in `src/javascript/Pacman.js`. The Pacman class has actually everything needed for the pacman. From the controls for keyboard and touchScreen until the movement methods.
 
-In summary, the logic.js file imports the Pacman class, which has all the magic.
+In summary, the logic.js file imports the Pacman & Ghost classes, that have all the magic.
 
 # Understanding the Pacman class
 The constructor creates the Pacman container (where the gif of the pacman will be) and a `currentDir` property, which is the "by default" direction towards the pacman will move, which in this case is Left. The actual `currentDir` property is ArrowLeft because the keyboard Events use that syntaxis.
@@ -95,7 +96,7 @@ It is important to keep in mind that the first method in the Pacman class (`setP
 The setPacman() method calls all the controls to play the game and the movement with the default direction of the pacman. In these two controls is where the pacman can move all around.
 
 ## Pacman movement
-The pacman moving can be seen as confusing at the first glance because there are some methods related to the movement. This was made this way to make reuse code. All the methods related to the 'movement' are the following:
+The pacman moving can be seen as confusing at the first glance because there are some methods related to the movement. This was made this way to make reusable code. All the methods related to the 'movement' are the following:
 - movementResolve
 - realMovement
 - movementEffect
@@ -108,7 +109,7 @@ This is the controller, all the other functions are made for `movementResolve` t
 
 ### realMovement
 `realMovement`, are you serious? Well, I am not the best with names, that's a fact (open to feedback). But anyways, I am going to explain what this function does.
-`realMovement` just will trigger the function movementEffect, but in the midtime, realMovement will tell to us the direction towards the pacman will actually move. In other words, `realMovement` will handle if there are or not walls towards we want to move to. But now, how it knows if there are walls or not?
+`realMovement` just will trigger the function movementEffect(), but in the midtime, realMovement will tell to us the direction towards the pacman will actually move. In other words, `realMovement` will handle if there are or not walls towards we want to move to. But now, how it knows if there are walls or not?
 
 #### Feeling the walls
 The pacman knows if there are 'walls' because in the `src/javascript/` directory, there are the "coordinates" of the walls (according to the layout of the game), the files have their respective layout names.
@@ -137,3 +138,36 @@ this.pacmanContainer.appendChild(this.currentPacman)
 ```
 
 As well as other things.
+
+# Understanding the Ghost class
+The ghost class is slightly challenging because it doesn't depend on any user input. Actually, in order to make the __Ghost__ class 'smart', the first thing needed is to know the target coordinates, or in other words, the row and the cell positions of the __pacman__ object.
+
+## Getting the pacman coordinates
+At the moment the ghosts are created, they receive as parameter a target (an object), that target is the __pacman__ object (this object must be first created, for sure). With this parameter, the ghost can follow every movement of the pacman just creating a method in the __Ghost__ class:
+```
+this.targetX = target.cell
+```
+The __pacman__ object has the property "cell" & "row", which are the coordinates in the boardGame.
+
+## "Smartly" movements of the ghost
+Ok, once we get the coordinates of the __pacman__ object, it is easier to drive the ghost all around, right? Well, the problem is that I usually get into the "function names Hell"
+
+> Function names Hell: A term I just invented that happens when there are a lot of functions with similar names, such as: firstMovement(), halfwayMovement(), finalMovement(), realMovement(), realFinalMovement(), superMovement(), lastMovement(), realLastMovement().
+
+I am trying to figure out a way to avoid getting into the "Function names Hell".
+
+### Functions to move the ghost
+Among the functions to move the ghost, there are:
+- movementResolve()
+- availability()
+- cellExpected()
+- movementEffect()
+- randomDirection()
+- escape()
+- changeInCell()
+
+All the functions are created to finish in the movementResolve(). I will give an overview and you can study the code if you want to really understand how things work in the game.
+
+First of all, we start with random movements, because the ghosts are in the jail, so they have no a target yet. After the jail 'opens', they got a target (the pacman) and they will get a kind of orientation in order to know where they have to move.
+
+They will receive an "x" and a "y" direction, which will be stored in the `this.targetDirs` array. Afterwards, the ghosts try to figure out if they can actually move to some of these two coordinates, if they can't, they will try with the directions left in the `this.allPosibleDirs` array. At last, the ghost needs to have a direction to move to. Once it gets until the target, the target lose a life and the ghost keep quiet.
