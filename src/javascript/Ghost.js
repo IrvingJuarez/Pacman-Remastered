@@ -10,6 +10,7 @@ class Ghost{
         this.currentGhost.classList.add("ghost")
         this.currentGhost.classList.add(`${this.id}Ghost`)
         this.inactiveDatasetValue = undefined
+        this.allPosibleDirs = ["left", "right", "up", "down"]
 
         this.setGhost(screenWidth, screenHeight)
     }
@@ -216,14 +217,22 @@ class Ghost{
             return item !== direction
         })
 
+        // if(this.allPosibleDirs.includes(direction)){
+        //     this.depurate(this.allPosibleDirs)
+        // }
+
         if(this.targetDirs.length > 0){
             let otherDir = this.targetDirs[0]
             console.log(`The direction ${direction} failed. The other supposed dir is ${otherDir}`)
-            this.availability(otherDir)
+            // this.availability(otherDir)
         }else{
             console.log("Figure out the other dirs")
         }
     }
+
+    // depurate(array, target){
+    //     array = array.fil
+    // }
 
     changeInCell(){
         this.currentGhost.style.transform = ""
