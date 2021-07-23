@@ -217,22 +217,15 @@ class Ghost{
             return item !== direction
         })
 
-        // if(this.allPosibleDirs.includes(direction)){
-        //     this.depurate(this.allPosibleDirs)
-        // }
-
         if(this.targetDirs.length > 0){
             let otherDir = this.targetDirs[0]
             console.log(`The direction ${direction} failed. The other supposed dir is ${otherDir}`)
-            // this.availability(otherDir)
+            debugger
+            this.availability(otherDir)
         }else{
             console.log("Figure out the other dirs")
         }
     }
-
-    // depurate(array, target){
-    //     array = array.fil
-    // }
 
     changeInCell(){
         this.currentGhost.style.transform = ""
