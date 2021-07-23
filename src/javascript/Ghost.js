@@ -213,17 +213,28 @@ class Ghost{
     }
 
     escape(direction){
-        this.targetDirs = this.targetDirs.filter(item => {
-            return item !== direction
-        })
-
-        if(this.targetDirs.length > 0){
-            let otherDir = this.targetDirs[0]
-            console.log(`The direction ${direction} failed. The other supposed dir is ${otherDir}`)
-            debugger
-            this.availability(otherDir)
+        if(this.allPosibleDirs.length <= 2){
+            let lastDir = this.allPosibleDirs[1]
+            this.allPosibleDirs = []
+            this.findExit(lastDir)
         }else{
-            console.log("Figure out the other dirs")
+            this.targetDirs = this.targetDirs.filter(item => {
+                return item !== direction
+            })
+    
+            if(this.allPosibleDirs.includes(direction)){
+                this.allPosibleDirs = this.allPosibleDirs.filter(dir => {
+                    return dir !== direction
+                })
+            }
+    
+            if(this.targetDirs.length > 0){
+                let otherDir = this.targetDirs[0]
+                // console.log(`The direction ${direction} failed. The other supposed dir is ${otherDir}`)
+                this.availability(otherDir)
+            }else{
+                this.findExit()
+            }
         }
     }
 
@@ -234,6 +245,16 @@ class Ghost{
         this.ghostContainer.appendChild(this.currentGhost)
         this.allDirs = ["left", "right", "up", "down"]
         this.movementResolve()
+    }
+
+    findExit(dir){
+        if(dir){
+            this.allPosibleDirs = ["left", "right", "up", "down"]
+            this.availability(dir)
+        }else{
+            let newDir = this.allPosibleDirs[0]
+            this.availability(newDir)
+        }
     }
 }
 
