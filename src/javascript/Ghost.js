@@ -4,13 +4,15 @@ class Ghost{
         this.boardGame = boardGame
         this.target = target
         this.targetDirs = []
-        this.time = 125
-        this.distance = 24
+        this.time = 60
+        this.cellDistance = 24
+        this.allPosibleDirs = ["left", "right", "up", "down"]
+        this.directions = 4
+
         this.currentGhost = document.createElement("article")
         this.currentGhost.classList.add("ghost")
         this.currentGhost.classList.add(`${this.id}Ghost`)
         this.inactiveDatasetValue = undefined
-        this.allPosibleDirs = ["left", "right", "up", "down"]
 
         this.setGhost(screenWidth, screenHeight)
     }
@@ -18,33 +20,100 @@ class Ghost{
     setGhost(width, height){
         let row, column;
 
-        if(width >= 320 && width < 375){
-            // 320
+        if(width >= 320 && width < 375){ // 320
             row = 10;
             column = 6;
-        }else if ((width >= 375 && width < 1210) && height < 736){
-            // 375
+        }else if ((width >= 375 && width < 1210) && height < 736){ // 375
             row = 13;
             column = 7;
-        }else if ((width >= 375 && width < 1210) && height >= 737){
-            // higher
+        }else if ((width >= 375 && width < 1210) && height >= 737){ // higher
             row = 15;
             column = 7;
-        }else if(width >= 1210){
-            // desktop
+        }else if(width >= 1210){ // desktop
             row = 10;
             column = 15;
-            this.distance = 40
-            this.time = 150
+            this.cellDistance = 40
         }
-
         this.row = row
         this.column = column
 
         this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
         this.ghostContainer.appendChild(this.currentGhost)
-
         this.movementResolve()
+        this.openJail()
+    }
+
+    movementResolve(){
+        let dir, value
+        dir = this.getDirection()
+        value = this.cellExpected(dir)
+
+        if(value == this.inactiveDatasetValue){
+            this.movementResolve()
+        }else{
+            this.updateCoordinates(dir)
+            this.setMovement(dir)
+        }
+    }
+
+    updateCoordinates(direction){
+        switch(direction){
+            case "left":
+                this.column--
+            break;
+            case "right":
+                this.column++
+            break;
+            case "up":
+                this.row--
+            break;
+            case "down":
+                this.row++
+            break;
+        }
+    }
+
+    setMovement(direction){
+        let sign, axis, flag
+
+        if(direction === "up" || direction === "down"){
+            axis = "Y"
+        }else{
+            axis = "X"
+        }
+
+        if(direction === "down" || direction === "right"){
+            sign = "+"
+        }else{
+            sign = "-"
+        }
+        
+        flag = 2
+        this.movement(flag, axis, sign, direction)
+    }
+
+    movement(distance, axis, sign, direction){
+        this.currentGhost.style.transform = `translate${axis}(${sign+distance}px)`
+        distance += 2
+
+        if(distance < this.cellDistance){
+            setTimeout(() => {
+                this.movement(distance, axis, sign, direction)
+            }, this.time)
+        }else{
+            this.changeCell()
+        }
+    }
+
+    changeCell(){
+        this.currentGhost.style.transform = ""
+        this.ghostContainer.removeChild(this.currentGhost)
+        this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
+        this.ghostContainer.appendChild(this.currentGhost)
+        this.movementResolve()
+    }
+
+    openJail(){
         setTimeout(() => {
             this.inactiveDatasetValue = 1
             this.targetY = 20;
@@ -52,99 +121,31 @@ class Ghost{
         }, 10000)
     }
 
-    movementResolve(){
-        let dir
-        if(this.targetX != undefined){
-            dir = this.getTarget()
-        }else{
-            dir = this.randomDirection()
-        }
+    getDirection(){
+        let direction = Math.floor(Math.random() * this.directions)
 
-        if(dir === "center"){
-            console.log("Pacman lost")
-        }else{
-            this.availability(dir)
-        }
-    }
-
-    availability(direction){
-        let available = this.cellExpected(direction)
-            
-        if(available != this.inactiveDatasetValue){
-            this.targetDirs = []
-            let flag = 2
-            this.movementEffect(flag, direction)
-        }else{
-            if(this.targetX != undefined){
-                this.escape(direction)
-            }else{
-                this.movementResolve()
-            }
-        }
-    }
-
-    getTarget(){
-        let xAxis, yAxis
-        if(this.column == this.targetX){
-            xAxis = "center"
-        }else if(this.column > this.targetX){
-            xAxis = "left"
-        }else{
-            xAxis = "Right"
-        }
-
-        if(this.row == this.targetY){
-            yAxis = "center"
-        }else if(this.row > this.targetY){
-            yAxis = "up"
-        }else{
-            yAxis = "down"
-        }
-        
-        this.targetDirs.push(xAxis, yAxis)
-
-        if(xAxis == "center" && yAxis == "center"){
-            return "center"
-        }else if(xAxis == "center" && yAxis != "center"){
-            return xAxis
-        }else if(yAxis == "center" && xAxis != "center"){
-            return yAxis
-        }else{
-            let random = Math.floor(Math.random() * 2)
-            switch(random){
-                case 0:
-                    return xAxis
-                break;
-                case 1:
-                    return yAxis
-                break;
-            }
-        }
-    }
-
-    randomDirection(){
-        let dir = Math.floor(Math.random() * 4)
-
-        switch(dir){
+        switch(direction){
             case 0:
-                dir = "left"
+                direction = "left"
             break;
             case 1:
-                dir = "right"
+                direction = "right"
             break;
             case 2:
-                dir = "up"
+                direction = "up"
             break;
             case 3:
-                dir = "down"
+                direction = "down"
             break;
         }
 
-        return dir
+        return direction
     }
 
     cellExpected(direction){
-        let expectedRow = this.row, expectedColumn = this.column, expectedContainer;
+        let expectedRow, expectedColumn, expectedContainer;
+        expectedRow = this.row
+        expectedColumn = this.column
 
         switch(direction){
             case "left":
@@ -160,7 +161,7 @@ class Ghost{
                 expectedRow++
             break;
         }
-    
+
         if(this.boardGame.childNodes[expectedRow]){
             expectedContainer = this.boardGame.childNodes[expectedRow].childNodes[expectedColumn]
         }else{
@@ -169,92 +170,6 @@ class Ghost{
 
         let datasetValue = expectedContainer ? expectedContainer.dataset.value : this.inactiveDatasetValue;
         return datasetValue
-    }
-
-    movementEffect(flag, direction){
-        let sign, axis
-        switch (direction) {
-            case "left":
-                axis = "X"
-                sign = "-"
-                if(flag <= 2) 
-                    this.column--
-            break;
-            case "right":
-                axis = "X"
-                sign = "+"
-                if(flag <= 2) 
-                    this.column++
-            break;
-            case "up":
-                axis = "Y"
-                sign = "-"
-                if(flag <= 2) 
-                    this.row--
-            break;
-            case "down":
-                axis = "Y"
-                sign = "+"
-                if(flag <= 2) 
-                    this.row++
-            break;
-        }
-
-        this.currentGhost.style.transform = `translate${axis}(${sign+flag}px)`
-        flag += 2
-
-        if(flag < this.distance){
-            setTimeout(() => {
-                this.movementEffect(flag, direction)
-            }, this.time)
-        }else{
-            this.changeInCell()
-        }
-    }
-
-    escape(direction){
-        if(this.allPosibleDirs.length <= 2){
-            let lastDir = this.allPosibleDirs[1]
-            this.allPosibleDirs = []
-            this.findExit(lastDir)
-        }else{
-            this.targetDirs = this.targetDirs.filter(item => {
-                return item !== direction
-            })
-    
-            if(this.allPosibleDirs.includes(direction)){
-                this.allPosibleDirs = this.allPosibleDirs.filter(dir => {
-                    return dir !== direction
-                })
-            }
-    
-            if(this.targetDirs.length > 0){
-                let otherDir = this.targetDirs[0]
-                // console.log(`The direction ${direction} failed. The other supposed dir is ${otherDir}`)
-                this.availability(otherDir)
-            }else{
-                this.findExit()
-            }
-        }
-    }
-
-    changeInCell(){
-        this.currentGhost.style.transform = ""
-        this.ghostContainer.removeChild(this.currentGhost)
-        this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
-        this.ghostContainer.appendChild(this.currentGhost)
-        this.allDirs = ["left", "right", "up", "down"]
-        this.movementResolve()
-    }
-
-    findExit(dir){
-        if(dir){
-            this.allPosibleDirs = ["left", "right", "up", "down"]
-            this.availability(dir)
-        }else{
-            let newDir = this.allPosibleDirs[0]
-            this.availability(newDir)
-        }
     }
 }
 
