@@ -76,7 +76,7 @@ class Ghost{
     retrySmartMovement(direction){
         let value, secondDir
         secondDir = this.leftDir(direction)
-        value = this.noCenter(direction)
+        value = this.noCenter(secondDir)
 
         if(value == this.inactiveDatasetValue){
             this.setEscapeLoop()
@@ -97,18 +97,11 @@ class Ghost{
 
     noCenter(dir){
         let value
-        if(dir == this.moveToInX){
-            if(this.moveToInY != "center"){
-                value = this.cellExpected(this.moveToInY)
-            }else{
-                value = this.inactiveDatasetValue
-            }
-        }else if(dir == this.moveToInY){
-            if(this.moveToInX != "center"){
-                value = this.cellExpected(this.moveToInX)
-            }else{
-                value = this.inactiveDatasetValue
-            }
+
+        if(dir == "center"){
+            value = this.inactiveDatasetValue
+        }else{
+            value = this.cellExpected(dir)
         }
 
         return value
