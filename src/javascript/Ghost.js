@@ -69,58 +69,111 @@ class Ghost{
                 this.retrySmartMovement(dir)
             }
         }else{
-            this.updateCoordinates(dir)
-            this.setMovement(dir)
+            this.escapeLoopMovement(dir, false)
         }
     }
 
     retrySmartMovement(direction){
         let value
-        if(direction == this.moveToInX){
-            value = this.cellExpected(this.moveToInY)
-        }else{
-            value = this.cellExpected(this.moveToInX)
-        }
+        value = this.noCenter(direction)
 
         if(value == this.inactiveDatasetValue){
             this.setEscapeLoop()
         }else{
-            this.availability(value, direction, "smart")
+            this.escapeLoopMovement(direction, false)
         }
     }
 
+    noCenter(dir){
+        let value
+        if(dir == this.moveToInX && this.moveToInY != "center"){
+            value = this.cellExpected(this.moveToInY)
+        }else if(dir == this.moveToInY && this.moveToInX != "center"){
+            value = this.cellExpected(this.moveToInX)
+        }else if(dir == this.moveToInX && this.moveToInY == "center"){
+            value = this.inactiveDatasetValue
+        }else if(dir == this.moveToInY && this.moveToInX != "center"){
+            value = this.inactiveDatasetValue
+        }
+
+        return value
+    }
+
     setEscapeLoop(){
-        let newXAxis, newYAxis, valueX, valueY
-        newXAxis = this.getNewDirs(this.moveToInX)
-        newYAxis = this.getNewDirs(this.moveToInY)
+        let newXAxis, newYAxis, valueX, valueY, loopDir
+        newXAxis = this.getNewDirs(this.moveToInX, "X") //right
+        newYAxis = this.getNewDirs(this.moveToInY, "Y") //up
 
         valueX = this.cellExpected(newXAxis)
         valueY = this.cellExpected(newYAxis)
 
         if(valueX != this.inactiveDatasetValue && valueY != this.inactiveDatasetValue){
-            //random
+            loopDir = this.randomSmartMovement(newXAxis, newYAxis)
         }else if(valueX != this.inactiveDatasetValue){
-
+            loopDir = newXAxis
         }else if(valueY != this.inactiveDatasetValue){
-            
+            loopDir = newYAxis
+        }else{
+            loopDir = null
+        }
+
+        if(loopDir){
+            this.escapeLoopMovement(loopDir, true)
+        }else{
+            this.setEscapeLoop()
+        }
+    }
+    
+    escapeLoopMovement(direction, value){
+        this.updateCoordinates(direction)
+        this.setMovement(direction, value)
+    }
+
+    escapeLoop(direction, axis){
+        let testingValue
+        if(axis == "X"){
+            testingValue = this.cellExpected(this.moveToInY)
+        }else{
+            testingValue = this.cellExpected(this.moveToInX)
+        }
+
+        if(testingValue == this.inactiveDatasetValue){
+            this.escapeLoopMovement(direction, true)
+        }else{
+            if(axis == "X"){
+                this.escapeLoopMovement(this.moveToInY, false)
+            }else{
+                this.escapeLoopMovement(this.moveToInX, false)
+            }
         }
     }
 
-    getNewDirs(currentDir){
+    getNewDirs(currentDir, axis){
         let result
-        switch(currentDir){
-            case "left":
-                result = "right"
-            break;
-            case "right":
-                result = "left"
-            break;
-            case "up":
-                result = "down"
-            break;
-            case "down":
-                result = "up"
-            break;
+        if(currentDir == "center"){
+            switch(axis){
+                case "X":
+                    result = this.randomSmartMovement("left", "right")
+                break;
+                case "Y":
+                    result = this.randomSmartMovement("up", "down")
+                break;
+            }
+        }else{
+            switch(currentDir){
+                case "left":
+                    result = "right"
+                break;
+                case "right":
+                    result = "left"
+                break;
+                case "up":
+                    result = "down"
+                break;
+                case "down":
+                    result = "up"
+                break;
+            }
         }
 
         return result
@@ -143,8 +196,8 @@ class Ghost{
         }
     }
 
-    setMovement(direction){
-        let sign, axis, flag
+    setMovement(direction, scpLoop){
+        let sign, axis, flag, loop
 
         if(direction === "up" || direction === "down"){
             axis = "Y"
@@ -159,10 +212,12 @@ class Ghost{
         }
         
         flag = 2
-        this.movement(flag, axis, sign, direction)
+        loop = scpLoop ? true : false
+
+        this.movement(flag, axis, sign, direction, loop)
     }
 
-    movement(distance, axis, sign, direction){
+    movement(distance, axis, sign, direction, loop){
         this.currentGhost.style.transform = `translate${axis}(${sign+distance}px)`
         distance += 2
 
@@ -171,16 +226,25 @@ class Ghost{
                 this.movement(distance, axis, sign, direction)
             }, this.time)
         }else{
-            this.changeCell()
+            if(loop){
+                this.changeCell(loop, direction, axis)
+            }else{
+                this.changeCell()
+            }
         }
     }
 
-    changeCell(){
+    changeCell(loop, direction, axis){
         this.currentGhost.style.transform = ""
         this.ghostContainer.removeChild(this.currentGhost)
         this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
         this.ghostContainer.appendChild(this.currentGhost)
-        this.movementResolve()
+
+        if(loop){
+            this.escapeLoop(direction, axis)
+        }else{
+            this.movementResolve()
+        }
     }
 
     openJail(){
@@ -215,8 +279,8 @@ class Ghost{
             moveToInX = "right"
         }
 
-        this.moveToInY = moveToInY //center
-        this.moveToInX = moveToInX //left
+        this.moveToInY = moveToInY //down
+        this.moveToInX = moveToInX //center
 
         givenMovement = this.resolveSmartMovement(moveToInX, moveToInY)
 
@@ -238,14 +302,14 @@ class Ghost{
         return result
     }
 
-    randomSmartMovement(){
+    randomSmartMovement(newX, newY){
         let randomResult = Math.floor(Math.random() * this.directions)
         switch(randomResult){
             case 0:
-                randomResult = this.moveToInX
+                randomResult = newX || this.moveToInX
             break;
             case 1:
-                randomResult = this.moveToInY
+                randomResult = newY || this.moveToInY
             break;
         }
 
