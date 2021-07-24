@@ -74,26 +74,41 @@ class Ghost{
     }
 
     retrySmartMovement(direction){
-        let value
+        let value, secondDir
+        secondDir = this.leftDir(direction)
         value = this.noCenter(direction)
 
         if(value == this.inactiveDatasetValue){
             this.setEscapeLoop()
         }else{
-            this.escapeLoopMovement(direction, false)
+            this.escapeLoopMovement(secondDir, false)
         }
+    }
+
+    leftDir(dir){
+        let result
+        if(dir == this.moveToInX){
+            result = this.moveToInY
+        }else{
+            result = this.moveToInX
+        }
+        return result
     }
 
     noCenter(dir){
         let value
-        if(dir == this.moveToInX && this.moveToInY != "center"){
-            value = this.cellExpected(this.moveToInY)
-        }else if(dir == this.moveToInY && this.moveToInX != "center"){
-            value = this.cellExpected(this.moveToInX)
-        }else if(dir == this.moveToInX && this.moveToInY == "center"){
-            value = this.inactiveDatasetValue
-        }else if(dir == this.moveToInY && this.moveToInX != "center"){
-            value = this.inactiveDatasetValue
+        if(dir == this.moveToInX){
+            if(this.moveToInY != "center"){
+                value = this.cellExpected(this.moveToInY)
+            }else{
+                value = this.inactiveDatasetValue
+            }
+        }else if(dir == this.moveToInY){
+            if(this.moveToInX != "center"){
+                value = this.cellExpected(this.moveToInX)
+            }else{
+                value = this.inactiveDatasetValue
+            }
         }
 
         return value
@@ -256,8 +271,8 @@ class Ghost{
     }
 
     getTarget(){
-        this.targetY = 10;
-        this.targetX = 8;
+        this.targetY = 20;
+        this.targetX = 0;
         console.log(this.boardGame.childNodes[this.targetY].childNodes[this.targetX])
     }
 
