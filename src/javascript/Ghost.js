@@ -44,15 +44,48 @@ class Ghost{
     }
 
     movementResolve(){
-        let dir, value
+        let dir, value, status
         dir = this.getDirection()
         value = this.cellExpected(dir)
 
+        if(this.directions <= 2){
+            status = "smart"
+        }else{
+            status = "random"
+        }
+
+        if(value == 2){
+            console.log("Ghost won")
+        }else{
+            this.availability(value, dir, status)
+        }
+    }
+
+    availability(value, dir, status){
         if(value == this.inactiveDatasetValue){
-            this.movementResolve()
+            if(status == "random"){
+                this.movementResolve()
+            }else{
+                this.retrySmartMovement(dir)
+            }
         }else{
             this.updateCoordinates(dir)
             this.setMovement(dir)
+        }
+    }
+
+    retrySmartMovement(direction){
+        let value
+        if(direction == this.moveToInX){
+            value = this.cellExpected(this.moveToInY)
+        }else{
+            value = this.cellExpected(this.moveToInX)
+        }
+
+        if(value == this.inactiveDatasetValue){
+            console.log("We need a scape loop to get out of here")
+        }else{
+            this.availability(value, direction, "smart")
         }
     }
 
@@ -115,28 +148,92 @@ class Ghost{
 
     openJail(){
         setTimeout(() => {
+            this.directions = 2
             this.inactiveDatasetValue = 1
-            this.targetY = 20;
-            this.targetX = 0;
+            this.getTarget()
         }, 10000)
+    }
+
+    getTarget(){
+        this.targetY = 10;
+        this.targetX = 8;
+        console.log(this.boardGame.childNodes[this.targetY].childNodes[this.targetX])
+    }
+
+    getSmartMovement(){
+        let moveToInX, moveToInY, givenMovement
+        if(this.row == this.targetY){
+            moveToInY = "center"
+        }else if(this.row > this.targetY){
+            moveToInY = "up"
+        }else{
+            moveToInY = "down"
+        }
+
+        if(this.column == this.targetX){
+            moveToInX = "center"
+        }else if(this.column > this.targetX){
+            moveToInX = "left"
+        }else{
+            moveToInX = "right"
+        }
+
+        this.moveToInY = moveToInY //center
+        this.moveToInX = moveToInX //left
+
+        givenMovement = this.resolveSmartMovement(moveToInX, moveToInY)
+
+        return givenMovement
+    }
+
+    resolveSmartMovement(xAxis, yAxis){
+        let result
+        if(xAxis == "center" && yAxis == "center"){
+            result = "center"
+        }else if(xAxis == "center"){
+            result = yAxis
+        }else if(yAxis == "center"){
+            result = xAxis
+        }else{
+            result = this.randomSmartMovement()
+        }
+
+        return result
+    }
+
+    randomSmartMovement(){
+        let randomResult = Math.floor(Math.random() * this.directions)
+        switch(randomResult){
+            case 0:
+                randomResult = this.moveToInX
+            break;
+            case 1:
+                randomResult = this.moveToInY
+            break;
+        }
+
+        return randomResult
     }
 
     getDirection(){
         let direction = Math.floor(Math.random() * this.directions)
-
-        switch(direction){
-            case 0:
-                direction = "left"
-            break;
-            case 1:
-                direction = "right"
-            break;
-            case 2:
-                direction = "up"
-            break;
-            case 3:
-                direction = "down"
-            break;
+        if(this.directions <= 2){
+            direction = this.getSmartMovement()
+        }else{
+            switch(direction){
+                case 0:
+                    direction = "left"
+                break;
+                case 1:
+                    direction = "right"
+                break;
+                case 2:
+                    direction = "up"
+                break;
+                case 3:
+                    direction = "down"
+                break;
+            }
         }
 
         return direction
@@ -159,6 +256,9 @@ class Ghost{
             break;
             case "down":
                 expectedRow++
+            break;
+            default:
+                return 2
             break;
         }
 
