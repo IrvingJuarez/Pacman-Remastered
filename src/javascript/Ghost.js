@@ -83,10 +83,47 @@ class Ghost{
         }
 
         if(value == this.inactiveDatasetValue){
-            console.log("We need a scape loop to get out of here")
+            this.setEscapeLoop()
         }else{
             this.availability(value, direction, "smart")
         }
+    }
+
+    setEscapeLoop(){
+        let newXAxis, newYAxis, valueX, valueY
+        newXAxis = this.getNewDirs(this.moveToInX)
+        newYAxis = this.getNewDirs(this.moveToInY)
+
+        valueX = this.cellExpected(newXAxis)
+        valueY = this.cellExpected(newYAxis)
+
+        if(valueX != this.inactiveDatasetValue && valueY != this.inactiveDatasetValue){
+            //random
+        }else if(valueX != this.inactiveDatasetValue){
+
+        }else if(valueY != this.inactiveDatasetValue){
+            
+        }
+    }
+
+    getNewDirs(currentDir){
+        let result
+        switch(currentDir){
+            case "left":
+                result = "right"
+            break;
+            case "right":
+                result = "left"
+            break;
+            case "up":
+                result = "down"
+            break;
+            case "down":
+                result = "up"
+            break;
+        }
+
+        return result
     }
 
     updateCoordinates(direction){
