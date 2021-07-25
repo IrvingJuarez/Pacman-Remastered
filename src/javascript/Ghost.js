@@ -112,8 +112,8 @@ class Ghost{
         newXAxis = this.getNewDirs(this.moveToInX, "X") //right
         newYAxis = this.getNewDirs(this.moveToInY, "Y") //up
 
-        valueX = this.cellExpected(newXAxis)
-        valueY = this.cellExpected(newYAxis)
+        valueX = this.cellExpected(newXAxis) //1
+        valueY = this.cellExpected(newYAxis) //undefined
 
         if(valueX != this.inactiveDatasetValue && valueY != this.inactiveDatasetValue){
             loopDir = this.randomSmartMovement(newXAxis, newYAxis)
@@ -205,7 +205,7 @@ class Ghost{
     }
 
     setMovement(direction, scpLoop){
-        let sign, axis, flag, loop
+        let sign, axis, flag
 
         if(direction === "up" || direction === "down"){
             axis = "Y"
@@ -220,9 +220,12 @@ class Ghost{
         }
         
         flag = 2
-        loop = scpLoop ? true : false
 
-        this.movement(flag, axis, sign, direction, loop)
+        if(scpLoop){
+            this.movement(flag, axis, sign, direction, true)
+        }else{
+            this.movement(flag, axis, sign, direction, false)
+        }
     }
 
     movement(distance, axis, sign, direction, loop){
@@ -231,11 +234,17 @@ class Ghost{
 
         if(distance < this.cellDistance){
             setTimeout(() => {
-                this.movement(distance, axis, sign, direction)
+                let value
+                if(loop){
+                    value = true
+                }else{
+                    value = false
+                }
+                this.movement(distance, axis, sign, direction, value)
             }, this.time)
         }else{
             if(loop){
-                this.changeCell(loop, direction, axis)
+                this.changeCell(true, direction, axis)
             }else{
                 this.changeCell()
             }
@@ -264,8 +273,8 @@ class Ghost{
     }
 
     getTarget(){
-        this.targetY = 20;
-        this.targetX = 0;
+        this.targetY = 1;
+        this.targetX = 29;
         console.log(this.boardGame.childNodes[this.targetY].childNodes[this.targetX])
     }
 
