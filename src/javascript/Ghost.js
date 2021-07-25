@@ -1,8 +1,9 @@
 class Ghost{
-    constructor(id, target, boardGame, screenWidth, screenHeight){
+    constructor(id, target, boardGame, screenWidth, screenHeight, jailTime){
         this.id = id
         this.boardGame = boardGame
         this.target = target
+        this.jailTime = jailTime
         this.targetDirs = []
         this.time = 40
         this.cellDistance = 24
@@ -41,7 +42,7 @@ class Ghost{
         this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
         this.ghostContainer.appendChild(this.currentGhost)
         this.movementResolve()
-        this.openJail()
+        this.goingOutOfJail()
     }
 
     movementResolve(){
@@ -266,12 +267,12 @@ class Ghost{
         }
     }
 
-    openJail(){
+    goingOutOfJail(){
         setTimeout(() => {
             this.directions = 2
             this.inactiveDatasetValue = 1
             this.time -= 5
-        }, 10000)
+        }, this.jailTime * 1000)
     }
 
     getTarget(){

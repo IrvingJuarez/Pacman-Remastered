@@ -30,10 +30,10 @@ const logic = () => {
     const screenHeight = screen.height;
     const pacman = new Pacman()
 
-    const jailTime = 10;
+    const jailTime = 5;
     
     pacman.setPacman(boardGame, screenWidth, screenHeight)
-    const redGhost = new Ghost("red", pacman, boardGame, screenWidth, screenHeight)
+    const redGhost = new Ghost("red", pacman, boardGame, screenWidth, screenHeight, jailTime)
 
     timerContainer.style.display = "flex"
     counterClock(timer, jailTime, timerContainer)
