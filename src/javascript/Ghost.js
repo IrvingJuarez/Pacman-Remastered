@@ -256,6 +256,7 @@ class Ghost{
         this.ghostContainer.removeChild(this.currentGhost)
         this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
         this.ghostContainer.appendChild(this.currentGhost)
+        this.getTarget()
 
         if(loop){
             this.escapeLoop(direction, axis)
@@ -275,11 +276,31 @@ class Ghost{
     getTarget(){
         this.targetY = this.getCoordinate("Y");
         this.targetX = this.getCoordinate("X");
-        console.log(this.boardGame.childNodes[this.targetY].childNodes[this.targetX])
     }
 
     getCoordinate(axis){
-        this.target
+        let targetRow = this.target.row
+        let targetColumn = this.target.column
+        
+        if(this.target.transformAxis == "X"){
+            if(this.target.transformSign == "+"){
+                targetColumn++
+            }else{
+                targetColumn--
+            }
+        }else{
+            if(this.target.transformSign == "+"){
+                targetRow++
+            }else{
+                targetRow--
+            }
+        }
+
+        if(axis == "X"){
+            return targetColumn
+        }else{
+            return targetRow
+        }
     }
 
     getSmartMovement(){
