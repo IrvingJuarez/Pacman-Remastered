@@ -4,7 +4,7 @@ class Ghost{
         this.boardGame = boardGame
         this.target = target
         this.targetDirs = []
-        this.time = 60
+        this.time = 40
         this.cellDistance = 24
         this.allPosibleDirs = ["left", "right", "up", "down"]
         this.directions = 4
@@ -33,6 +33,7 @@ class Ghost{
             row = 10;
             column = 15;
             this.cellDistance = 40
+            this.time = 25
         }
         this.row = row
         this.column = column
@@ -269,6 +270,7 @@ class Ghost{
         setTimeout(() => {
             this.directions = 2
             this.inactiveDatasetValue = 1
+            this.time -= 5
         }, 10000)
     }
 
