@@ -143,31 +143,61 @@ As well as other things.
 The ghost class is slightly challenging because it doesn't depend on any user input. Actually, in order to make the __Ghost__ class 'smart', the first thing needed is to know the target coordinates, or in other words, the row and the cell positions of the __pacman__ object.
 
 ## Getting the pacman coordinates
-At the moment the ghosts are created, they receive as parameter a target (an object), that target is the __pacman__ object (this object must be first created, for sure). With this parameter, the ghost can follow every movement of the pacman just creating a method in the __Ghost__ class:
-```
-this.targetX = target.cell
-```
-The __pacman__ object has the property "cell" & "row", which are the coordinates in the boardGame.
+The main important thing to know about the __Ghost__ class is that it is initialized in the `src/javascript/logic` file. This file just imports the real Ghost class, which is in the `src/javascript/Ghost` file. At the moment the ghosts are created, they receive some parameters, such as:
+- Color of the ghost
+- Target (there is only one target; the pacman)
+- Others related to the boardGame
+
+The interesting parameter is the "target", because thanks to it, we can access to all the properties of the __pacman__ object. Some of the most important are:
+- pacman.row
+- pacman.column
+- pacman.transformAxis
+- pacman.transformSign
+
+In order to "predict" the movement of the pacman, the __Ghost__ has to keep in mind the `target.transformAxis` and the `target.transformSign`. With these two properties, the Ghost tries to get ahead of the objective. This "prediction" is solved in the `getTarget()` and `resolveTargetCoordinates()` functions in the Ghost class.
+
+> The target.transformAxis and target.transformSign are produced every time the Pacman moves. You can see how this happens in the `src/javascript/Pacman.js/realMovement()`
 
 ## "Smartly" movements of the ghost
-Ok, once we get the coordinates of the __pacman__ object, it is easier to drive the ghost all around, right? Well, the problem is that I usually get into the "function names Hell"
+Ok, once we get the coordinates of the __pacman__ object, it is easier to drive the ghost all around, right? 
+Well, no exactly, because we need to keep in mind the "walls" and the real borders of the boardGame. As well as the directions of the Ghost & pacman.
 
-> Function names Hell: A term I just invented that happens when there are a lot of functions with similar names, such as: firstMovement(), halfwayMovement(), finalMovement(), realMovement(), realFinalMovement(), superMovement(), lastMovement(), realLastMovement().
+Anyways, all those problems were overcome. I will describe the __key__ functions for the movement of the Ghost and if you want to go deeper, you can study the whole file in `src/javascript/Ghost`. Although, knowing the __key__ functions, everything else is a piece of cake.
 
-I am trying to figure out a way to avoid getting into the "Function names Hell".
+### Key functions to move the ghost smartly
+I splitted the most important function into 4 categories
+- Functions that are always important
+- Functions for movement in general
+- Functions for the smart movements
+- Functions for the escape loop
 
-### Functions to move the ghost
-Among the functions to move the ghost, there are:
-- movementResolve()
-- availability()
-- cellExpected()
-- movementEffect()
-- randomDirection()
-- escape()
-- changeInCell()
+### Functions that are always important
+The unique function that it is always important is **cellExpected()**. It tells us if the expected cell towards the Ghost wants to move is free of walls or any other obstacle.
 
-All the functions are created to finish in the movementResolve(). I will give an overview and you can study the code if you want to really understand how things work in the game.
+### Functions for movement in general
+We have two important functions for the movement in general:
+**movementResolve()**. This functions is in charge of the movement in general. It tells us the direction where the ghost should move and if the ghost killed the pacman or not.
 
-First of all, we start with random movements, because the ghosts are in the jail, so they have no a target yet. After the jail 'opens', they got a target (the pacman) and they will get a kind of orientation in order to know where they have to move.
+**availability()**.  This function tells us if the ghost entered to an "escape loop", or if we have to move the ghost again or if the ghost will move randomly (this only applies when the jail is closed).
 
-They will receive an "x" and a "y" direction, which will be stored in the `this.targetDirs` array. Afterwards, the ghosts try to figure out if they can actually move to some of these two coordinates, if they can't, they will try with the directions left in the `this.allPosibleDirs` array. At last, the ghost needs to have a direction to move to. Once it gets until the target, the target lose a life and the ghost keep quiet.
+### Functions for the escape loop
+The __escape loop__ happens when the Ghost doesn't have any "smart" option available. In other words, the ghost knows where he has to go. For example, the directions of the ghost can be: "left and down" or "right and up", even "center and down" or "left and center". If the directions are "center and center", the ghost won
+
+When the ghost tries these two coordinates/directions without success, is when the __escape loop__ comes into the game. The key functions for this loop are:
+**getNewDirs()**. It returns a direction opposite of the 'smart direction'. For example, if the smart directions were "right and down", now the newDirs will be "left and up". In the case some of the directions became "center", getNewDirs() will return an random direction, either for the x or y axis. For example, if the x axis direction is "center", the function will return "left" or "right"
+
+**setEscapeLoop()**. This function will return us a direction where we can start the loop. For example, if the ghost got trapped and cannot access to the smart movements (let's say: left and down), setEscapeLoop() will return us "right or up". It is important that this function will return only 1 direction.
+
+**escapeLoopMovement()**. This function will trigger all the necessary actions to make the Ghost move.
+
+**escapeLoop()**. This function is where all the magic actually happens. This function will test if there is wall or other obstacle. The first time it realizes there is any obstacle, it will trigger the movement of the Ghost.
+
+### Functions for the smart movements
+To make the Ghost smart is no so easy, there are 4 key functions that make this possible. Although without all the other functions, there would no be possinle at all. These are:
+**getCoordinate()**. This function will return us the x and y coordinate of the target. Although these coordinates will be a kind of "prediction". That's why this function uses target.transformAxis and target.transformSign
+
+**getTarget()**. This is kind a "Control tower", where it will get the coordinates and will call to other function to resolve the specific cell.
+
+**resolveTargetCoordinates()**. In this function the Ghost acquaries two properties, the `this.targetX` and `this.targetY`. Knowing that, the Ghost knows the directions in the x and y axis
+
+**resolveSmartMovement()**. This function will tell us the smart direction or give return an random direction (this only applies when the ghost is in the jail)
