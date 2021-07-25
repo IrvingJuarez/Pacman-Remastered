@@ -273,9 +273,13 @@ class Ghost{
     }
 
     getTarget(){
-        this.targetY = 1;
-        this.targetX = 29;
+        this.targetY = this.getCoordinate("Y");
+        this.targetX = this.getCoordinate("X");
         console.log(this.boardGame.childNodes[this.targetY].childNodes[this.targetX])
+    }
+
+    getCoordinate(axis){
+        this.target
     }
 
     getSmartMovement(){

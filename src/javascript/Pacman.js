@@ -70,13 +70,13 @@ class Pacman{
         this.realMovement(datasetValue)
     }
 
-    movementEffect(flag, transformAxis, transformSign){
-        this.currentPacman.style.transform = `translate${transformAxis}(${transformSign+flag}px)`
+    movementEffect(flag){
+        this.currentPacman.style.transform = `translate${this.transformAxis}(${this.transformSign+flag}px)`
         flag += 2
 
         if(flag < this.distance){
             setTimeout(() => {
-                this.movementEffect(flag, transformAxis, transformSign)
+                this.movementEffect(flag)
             }, this.time)
         }else{
             this.changeInCell()
@@ -117,9 +117,11 @@ class Pacman{
                 break;
             }
 
+            this.transformAxis = transformAxis
+            this.transformSign = transformSign
             this.currentPacman.classList.add(this.classDir)
 
-            this.movementEffect(flag, transformAxis, transformSign)
+            this.movementEffect(flag)
         }else{
             this.running = false
         }
