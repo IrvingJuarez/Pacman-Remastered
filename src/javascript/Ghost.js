@@ -269,13 +269,30 @@ class Ghost{
         setTimeout(() => {
             this.directions = 2
             this.inactiveDatasetValue = 1
-            this.getTarget()
         }, 10000)
     }
 
     getTarget(){
-        this.targetY = this.getCoordinate("Y");
-        this.targetX = this.getCoordinate("X");
+        let supposedTargetY, supposedTargetX
+        supposedTargetY = this.getCoordinate("Y");
+        supposedTargetX = this.getCoordinate("X");
+        this.resolveTargetCoordinates(supposedTargetX, supposedTargetY)
+    }
+
+    resolveTargetCoordinates(xAxis, yAxis){
+        let supposedTargetContainer, value
+        if(this.boardGame.childNodes[yAxis] == undefined){
+            yAxis = this.target.row
+        }
+        supposedTargetContainer = this.boardGame.childNodes[yAxis].childNodes[xAxis]
+        value = supposedTargetContainer ? supposedTargetContainer.dataset.value : 1
+        if(value != this.inactiveDatasetValue){
+            this.targetY = yAxis
+            this.targetX = xAxis
+        }else{
+            this.targetY = this.target.row
+            this.targetX = this.target.column
+        }
     }
 
     getCoordinate(axis){
