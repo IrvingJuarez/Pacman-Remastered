@@ -65,9 +65,12 @@ class Pacman{
     }
 
     movementResolve(eventKey){
-        let datasetValue = this.movementExpected(eventKey)
-
-        this.realMovement(datasetValue)
+        if(this.pacmanContainer.childElementCount >= 2){
+            console.log(`Pacman death`)
+        }else{
+            let datasetValue = this.movementExpected(eventKey)
+            this.realMovement(datasetValue)
+        }
     }
 
     movementEffect(flag){
