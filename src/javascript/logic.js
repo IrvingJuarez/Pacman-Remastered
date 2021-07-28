@@ -1,5 +1,5 @@
 import Pacman from "./Pacman"
-import Ghost from "./Ghost"
+import resolveGhosts from "../utils/resolveGhosts"
 
 const jailOpen = () => {
     document.documentElement.style.setProperty("--jailColor", "black")
@@ -33,7 +33,7 @@ const logic = () => {
     const jailTime = 5;
     
     pacman.setPacman(boardGame, screenWidth, screenHeight)
-    const redGhost = new Ghost("red", pacman, boardGame, screenWidth, screenHeight, jailTime)
+    resolveGhosts(pacman, screenWidth, screenHeight, boardGame, jailTime)
 
     timerContainer.style.display = "flex"
     counterClock(timer, jailTime, timerContainer)
