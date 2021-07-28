@@ -1,42 +1,19 @@
+import Game from "./Game"
 import Pacman from "./Pacman"
 import resolveGhosts from "../utils/resolveGhosts"
 
-const jailOpen = () => {
-    document.documentElement.style.setProperty("--jailColor", "black")
-    setTimeout(() => {
-        document.documentElement.style.setProperty("--jailColor", "#00FFDE")
-    }, 4000)
-}
-
-const counterClock = (tag, time, container) => {
-    tag.innerHTML = time;
-    time--
-    if(time < 0){
-        jailOpen()
-        container.innerHTML = ""
-    }else{
-        setTimeout(() => {
-            counterClock(tag, time, container)
-        }, 1000)
-    }
-}
-
 const logic = () => {
     const mainContainer = document.getElementById("content")
-    const timer = document.getElementById("timer")
-    const timerContainer = document.getElementById("timerContainer")
     const boardGame = mainContainer.childNodes[1].childNodes[1]
     const screenWidth = screen.width;
     const screenHeight = screen.height;
+    const jailTime = 5;
+    const game = new Game(jailTime)
     const pacman = new Pacman()
 
-    const jailTime = 5;
-    
     pacman.setPacman(boardGame, screenWidth, screenHeight)
     resolveGhosts(pacman, screenWidth, screenHeight, boardGame, jailTime)
-
-    timerContainer.style.display = "flex"
-    counterClock(timer, jailTime, timerContainer)
+    game.counterClock()
 }
 
 export default logic;
