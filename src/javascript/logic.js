@@ -9,10 +9,10 @@ const logic = () => {
     const screenHeight = screen.height;
     const jailTime = 5;
     const game = new Game(jailTime)
-    const pacman = new Pacman()
+    const pacman = new Pacman(game)
 
     pacman.setPacman(boardGame, screenWidth, screenHeight)
-    resolveGhosts(pacman, screenWidth, screenHeight, boardGame, jailTime)
+    resolveGhosts(pacman, game, screenWidth, screenHeight, boardGame, jailTime)
     game.counterClock()
 }
 

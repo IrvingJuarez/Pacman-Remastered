@@ -3,6 +3,7 @@ class Game{
         this.tag = document.getElementById("timer")
         this.time = time
         this.container = document.getElementById("timerContainer")
+        this.lifeContainer = document.querySelector(".LifeContainer")
         this.container.style.display = "flex"
     }
 
@@ -24,6 +25,31 @@ class Game{
                 this.counterClock()
             }, 1000)
         }
+    }
+
+    gameOver(){
+        if(!this.gameOverFlag){
+            if(this.lifeContainer.childElementCount <= 0){
+                console.log("Game over action")
+            }else{
+                this.removeLife()
+            }
+        }
+        this.gameOverFlag = true
+    }
+
+    removeLife(){
+        let firstLife = this.lifeContainer.childNodes[0]
+        this.lifeContainer.removeChild(firstLife)
+        this.rearrangeNodes()
+    }
+    
+    rearrangeNodes(){
+        let arr = []
+        let ghostsNodeList = document.querySelectorAll(".ghost")
+        arr.push(...ghostsNodeList)
+        arr.push(document.querySelector(".pacman"))
+        console.log(arr)
     }
 }
 

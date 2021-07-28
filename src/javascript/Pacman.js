@@ -1,5 +1,6 @@
 class Pacman{
-    constructor(){
+    constructor(gameObject){
+        this.game = gameObject
         this.currentPacman = document.createElement("article")
         this.currentPacman.classList.add("pacman")
         this.classDir = "pacmanRight"
@@ -66,7 +67,7 @@ class Pacman{
 
     movementResolve(eventKey){
         if(this.pacmanContainer.childElementCount >= 2){
-            console.log(`Pacman death`)
+            this.game.gameOver()
         }else{
             let datasetValue = this.movementExpected(eventKey)
             this.realMovement(datasetValue)

@@ -1,8 +1,9 @@
 class Ghost{
-    constructor(id, target, boardGame, screenWidth, screenHeight, jailTime){
+    constructor(id, gameObject, target, boardGame, screenWidth, screenHeight, jailTime){
         this.id = id
         this.boardGame = boardGame
         this.target = target
+        this.game = gameObject
         this.jailTime = jailTime
         this.targetDirs = []
         this.time = 40
@@ -57,7 +58,7 @@ class Ghost{
         }
 
         if(value == 2){
-            console.log("Ghost won")
+            this.game.gameOver()
         }else{
             this.availability(value, dir, status)
         }

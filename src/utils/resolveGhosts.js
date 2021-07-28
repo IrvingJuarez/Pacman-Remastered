@@ -1,6 +1,6 @@
 import Ghost from "../javascript/Ghost"
 
-const resolveGhost = (target, width, height, boardGame, jailTime) => {
+const resolveGhost = (target, gameObject, width, height, boardGame, jailTime) => {
     let ghosts = []
 
     if(width >= 320 && width < 375){
@@ -14,7 +14,7 @@ const resolveGhost = (target, width, height, boardGame, jailTime) => {
     }
 
     for(let item of ghosts){
-        let ghost = new Ghost(item, target, boardGame, width, height, jailTime)
+        let ghost = new Ghost(item, gameObject, target, boardGame, width, height, jailTime)
     }
 }
 
