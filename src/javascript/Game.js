@@ -39,8 +39,8 @@ class Game{
     }
 
     removeLife(){
-        let firstLife = this.lifeContainer.childNodes[0]
-        this.lifeContainer.removeChild(firstLife)
+        let life = document.querySelector(".LifeContainer>img")
+        life.remove()
         this.rearrangeNodes()
     }
     

@@ -45,7 +45,10 @@
 .LifeContainer{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
+}
+.LifeContainer img{
+    margin-right: 9px;
 }
 .LevelStatus{
     color: white;
