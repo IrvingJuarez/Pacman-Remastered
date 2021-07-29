@@ -131,12 +131,16 @@ class Pacman{
         }
     }
 
-    changeInCell(){
+    changeInCell(flag){
         this.currentPacman.style.transform = ""
         this.pacmanContainer.removeChild(this.currentPacman)
         this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
         this.pacmanContainer.appendChild(this.currentPacman)
-        this.movementResolve(this.currentDir)
+        if(flag){
+            this.pacmanContainer.removeChild(this.currentPacman)
+        }else{
+            this.movementResolve(this.currentDir)
+        }
     }
 
     movementExpected(key){

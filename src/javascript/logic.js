@@ -10,6 +10,7 @@ const logic = () => {
     const jailTime = 5;
     const game = new Game(jailTime)
     const pacman = new Pacman(game)
+    game.pacman = pacman
 
     pacman.setPacman(boardGame, screenWidth, screenHeight)
     resolveGhosts(pacman, game, screenWidth, screenHeight, boardGame, jailTime)

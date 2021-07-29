@@ -1,3 +1,5 @@
+import logic from "./logic"
+
 class Game{
     constructor(time){
         this.tag = document.getElementById("timer")
@@ -42,14 +44,19 @@ class Game{
         let life = document.querySelector(".LifeContainer>img")
         life.remove()
         this.rearrangeNodes()
+        this.pacman.changeInCell("flag")
     }
     
     rearrangeNodes(){
         let arr = []
         let ghostsNodeList = document.querySelectorAll(".ghost")
         arr.push(...ghostsNodeList)
-        arr.push(document.querySelector(".pacman"))
-        console.log(arr)
+        setTimeout(() => {
+            arr.map(item => {
+                item.remove()
+            })
+            logic()
+        }, 2000)
     }
 }
 
