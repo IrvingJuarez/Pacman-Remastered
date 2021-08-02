@@ -8,15 +8,15 @@ class Ghost{
         this.time = 40
         this.cellDistance = 24
         this.allPosibleDirs = ["left", "right", "up", "down"]
-        this.directions = 4
-
+        
         this.currentGhost = document.createElement("article")
         this.currentGhost.classList.add("ghost")
         this.currentGhost.classList.add(`${this.id}Ghost`)
-        this.inactiveDatasetValue = undefined
     }
-
+    
     setInstance(boardGame, width, height){
+        this.directions = 4
+        this.inactiveDatasetValue = undefined
         this.boardGame = boardGame
         let row, column;
 

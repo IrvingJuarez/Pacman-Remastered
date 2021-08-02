@@ -3,15 +3,12 @@ class Pacman{
         this.game = gameObject
         this.currentPacman = document.createElement("article")
         this.currentPacman.classList.add("pacman")
-        this.classDir = "pacmanRight"
-        this.currentPacman.classList.add(this.classDir)
         this.time = 30
         this.distance = 24
-
-        this.currentDir = "ArrowLeft"
     }
-
+    
     setInstance(boardGame, width, height){
+        this.currentDir = "ArrowLeft"
         this.boardGame = boardGame
         var row, column, portalRow, portalColumn;
 

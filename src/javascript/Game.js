@@ -26,8 +26,10 @@ class Game{
         if(this.time < 0){
             this.jailOpen()
             this.container.style.display = "none"
-            this.instances.push(pacman[0])
-            this.instances.push(...ghosts)
+            if(this.instances.length <= 1){
+                this.instances.push(pacman[0])
+                this.instances.push(...ghosts)
+            }
         }else{
             setTimeout(() => {
                 this.counterClock(pacman, ghosts)
@@ -57,6 +59,8 @@ class Game{
             this.instances.map(instance => {
                 instance.setInstance(this.boardGame, this.width, this.height)
             })
+            document.documentElement.style.setProperty("--jailColor", "#00FFDE")
+            this.counterClock()
         }, 2000)
     }
 }
