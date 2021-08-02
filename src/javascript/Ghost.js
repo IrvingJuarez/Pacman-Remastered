@@ -111,7 +111,7 @@ class Ghost{
 
     setEscapeLoop(){
         let newXAxis, newYAxis, valueX, valueY, loopDir
-        newXAxis = this.getNewDirs(this.moveToInX, "X") //right
+        newXAxis = this.getNewDirs(this.moveToInX, "X") //left
         newYAxis = this.getNewDirs(this.moveToInY, "Y") //up
 
         valueX = this.cellExpected(newXAxis) //1
@@ -147,7 +147,10 @@ class Ghost{
             testingValue = this.cellExpected(this.moveToInX)
         }
 
-        if(testingValue == this.inactiveDatasetValue){
+        if(testingValue == 2){
+            console.log("Hi")
+            debugger
+        }else if(testingValue == this.inactiveDatasetValue){
             this.escapeLoopMovement(direction, true)
         }else{
             if(axis == "X"){
