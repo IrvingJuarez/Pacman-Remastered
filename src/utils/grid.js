@@ -3,15 +3,18 @@ import logic from "../javascript/logic"
 const mainContainer = document.getElementById("content")
 
 const createGrid = (height, width, container) => {
+    let food
     if(width >= 1208){
         height = 20;
         width = 30;
+        food = "desktopFood"
     }else{
         height -= 8;
         height /= 24;
 
         width -= 8;
         width /= 24;
+        food = "mobileFood"
     }
 
     for(let i = 0; i < height; i++){
@@ -24,10 +27,14 @@ const createGrid = (height, width, container) => {
             cell.classList.add("cell")
             if(gridArray[i].includes(j)){
                 cell.dataset.value = 1
+            }else{
+                cell.classList.add(food)
             }
             row.appendChild(cell)
         }
     }
+
+    debugger
 }
 
 const grid = () => {

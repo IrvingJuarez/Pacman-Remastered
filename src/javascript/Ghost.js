@@ -275,7 +275,7 @@ class Ghost{
             this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
             this.ghostContainer.appendChild(this.currentInstance)
             this.getTarget()
-            
+
             if(loop){
                 this.escapeLoop(direction, axis)
             }else{
@@ -288,7 +288,6 @@ class Ghost{
         setTimeout(() => {
             this.directions = 2
             this.inactiveDatasetValue = 1
-            this.time -= 5
         }, this.jailTime * 1000)
     }
 
