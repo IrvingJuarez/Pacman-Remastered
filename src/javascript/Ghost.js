@@ -148,9 +148,21 @@ class Ghost{
         }
 
         if(testingValue == 2){
-            console.log("Hi")
-            debugger
-        }else if(testingValue == this.inactiveDatasetValue){
+            let randomDir
+            if(axis == "Y"){
+                randomDir = this.randomSmartMovement("left", "right")
+            }else{
+                randomDir = this.randomSmartMovement("up", "down")
+            }
+
+            testingValue = this.cellExpected(randomDir)
+        }
+
+        this.escapeLoopComprobation(testingValue, direction, axis)
+    }
+
+    escapeLoopComprobation(testingValue, direction, axis){
+        if(testingValue == this.inactiveDatasetValue){
             this.escapeLoopMovement(direction, true)
         }else{
             if(axis == "X"){
@@ -257,13 +269,13 @@ class Ghost{
     }
 
     changeCell(loop, direction, axis){
-        this.currentInstance.style.transform = ""
-        this.ghostContainer.removeChild(this.currentInstance)
-        this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
-        this.ghostContainer.appendChild(this.currentInstance)
-        this.getTarget()
-
         if(!this.stop){
+            this.currentInstance.style.transform = ""
+            this.ghostContainer.removeChild(this.currentInstance)
+            this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
+            this.ghostContainer.appendChild(this.currentInstance)
+            this.getTarget()
+            
             if(loop){
                 this.escapeLoop(direction, axis)
             }else{
