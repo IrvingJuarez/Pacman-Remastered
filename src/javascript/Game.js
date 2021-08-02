@@ -50,18 +50,13 @@ class Game{
         let life = document.querySelector(".LifeContainer>img")
         life.remove()
         this.rearrangeNodes()
-        this.pacman.changeInCell("flag")
     }
     
     rearrangeNodes(){
-        let arr = []
-        let ghostsNodeList = document.querySelectorAll(".ghost")
-        arr.push(...ghostsNodeList)
         setTimeout(() => {
-            arr.map(item => {
-                item.remove()
+            this.instances.map(instance => {
+                instance.setInstance(this.boardGame, this.width, this.height)
             })
-            console.log(this.instances)
         }, 2000)
     }
 }
