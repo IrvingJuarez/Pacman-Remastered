@@ -45,9 +45,9 @@ class Ghost{
     }
 
     movementResolve(){
-        let dir, value, status
+        let dir, status
         dir = this.getDirection()
-        value = this.cellExpected(dir)
+        this.value = this.cellExpected(dir)
 
         if(this.directions <= 2){
             status = "smart"
@@ -55,10 +55,10 @@ class Ghost{
             status = "random"
         }
 
-        if(value == 2){
+        if(this.value == 2){
             this.game.gameOver()
         }else{
-            this.availability(value, dir, status)
+            this.availability(this.value, dir, status)
         }
     }
 
