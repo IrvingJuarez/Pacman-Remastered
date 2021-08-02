@@ -1,6 +1,7 @@
 import logic from "../javascript/logic"
 
 const mainContainer = document.getElementById("content")
+let foodQuantity = 0
 
 const createGrid = (height, width, container) => {
     let food
@@ -28,13 +29,14 @@ const createGrid = (height, width, container) => {
             if(gridArray[i].includes(j)){
                 cell.dataset.value = 1
             }else{
+                foodQuantity++
                 cell.classList.add(food)
             }
             row.appendChild(cell)
         }
     }
 
-    debugger
+    return foodQuantity
 }
 
 const grid = () => {
@@ -42,9 +44,9 @@ const grid = () => {
     const boardWidth = boardGame.offsetWidth
     const boardHeight = boardGame.offsetHeight
 
-    createGrid(boardHeight, boardWidth, boardGame)
+    let i = createGrid(boardHeight, boardWidth, boardGame)
 
-    logic()
+    logic(i)
 }
 
 export default grid;

@@ -38,6 +38,10 @@ class Game{
         }
     }
 
+    win(){
+        this.rearrangeNodes()
+    }
+
     gameOver(){
         if(!this.gameOverFlag){
             if(this.lifeContainer.childElementCount <= 0){
@@ -52,14 +56,16 @@ class Game{
     removeLife(){
         let life = document.querySelector(".LifeContainer>img")
         life.remove()
-        this.rearrangeNodes()
+        this.rearrangeNodes(true)
     }
     
-    rearrangeNodes(){
+    rearrangeNodes(trigger){
         this.instances.map(instance => {
             instance.stop = true
         })
-        this.otherRound()
+
+        if(trigger)
+            this.otherRound()
     }
 
     otherRound(){

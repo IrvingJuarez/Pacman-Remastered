@@ -1,6 +1,7 @@
 class Pacman{
-    constructor(gameObject){
+    constructor(gameObject, foodQuantity){
         this.game = gameObject
+        this.foodQuantity = foodQuantity
         this.currentInstance = document.createElement("article")
         this.currentInstance.classList.add("pacman")
         this.time = 30
@@ -12,6 +13,7 @@ class Pacman{
         this.currentDir = "ArrowLeft"
         this.boardGame = boardGame
         var row, column, portalRow, portalColumn;
+        this.foodClass = "mobileFood"
 
         if(width >= 320 && width < 375){
             // 320
@@ -37,6 +39,7 @@ class Pacman{
             column = 15;
             this.distance = 40
             this.time = 15
+            this.foodClass = "desktopFood"
         }
 
         this.row = row
@@ -134,6 +137,20 @@ class Pacman{
         this.pacmanContainer.removeChild(this.currentInstance)
         this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
         this.pacmanContainer.appendChild(this.currentInstance)
+
+        if(this.pacmanContainer.classList.contains(this.foodClass)){
+            this.foodQuantity--
+            this.pacmanContainer.classList.remove(this.foodClass)
+        }
+
+        if(this.foodQuantity <= 0){
+            this.game.win()
+        }else{
+            this.newMovement(flag)
+        }
+    }
+
+    newMovement(flag){
         if(!this.stop){
             if(flag){
                 this.pacmanContainer.removeChild(this.currentInstance)
