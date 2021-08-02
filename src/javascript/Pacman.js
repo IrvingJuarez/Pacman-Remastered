@@ -1,13 +1,14 @@
 class Pacman{
     constructor(gameObject){
         this.game = gameObject
-        this.currentPacman = document.createElement("article")
-        this.currentPacman.classList.add("pacman")
+        this.currentInstance = document.createElement("article")
+        this.currentInstance.classList.add("pacman")
         this.time = 30
         this.distance = 24
     }
     
     setInstance(boardGame, width, height){
+        this.stop = false
         this.currentDir = "ArrowLeft"
         this.boardGame = boardGame
         var row, column, portalRow, portalColumn;
@@ -44,7 +45,7 @@ class Pacman{
         this.portalColumn = portalColumn
 
         this.pacmanContainer = boardGame.childNodes[this.row].childNodes[this.column]
-        this.pacmanContainer.appendChild(this.currentPacman)
+        this.pacmanContainer.appendChild(this.currentInstance)
 
         this.movementResolve(this.currentDir)
         this.keyboardControls()
@@ -72,7 +73,7 @@ class Pacman{
     }
 
     movementEffect(flag){
-        this.currentPacman.style.transform = `translate${this.transformAxis}(${this.transformSign+flag}px)`
+        this.currentInstance.style.transform = `translate${this.transformAxis}(${this.transformSign+flag}px)`
         flag += 2
 
         if(flag < this.distance){
@@ -88,7 +89,7 @@ class Pacman{
         if(datasetValue === undefined){
             this.running = true
             let transformAxis, transformSign;
-            this.currentPacman.classList.remove(this.classDir)
+            this.currentInstance.classList.remove(this.classDir)
             let flag = 2;
             
             switch(this.currentDir){
@@ -120,7 +121,7 @@ class Pacman{
 
             this.transformAxis = transformAxis
             this.transformSign = transformSign
-            this.currentPacman.classList.add(this.classDir)
+            this.currentInstance.classList.add(this.classDir)
 
             this.movementEffect(flag)
         }else{
@@ -129,14 +130,16 @@ class Pacman{
     }
 
     changeInCell(flag){
-        this.currentPacman.style.transform = ""
-        this.pacmanContainer.removeChild(this.currentPacman)
+        this.currentInstance.style.transform = ""
+        this.pacmanContainer.removeChild(this.currentInstance)
         this.pacmanContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
-        this.pacmanContainer.appendChild(this.currentPacman)
-        if(flag){
-            this.pacmanContainer.removeChild(this.currentPacman)
-        }else{
-            this.movementResolve(this.currentDir)
+        this.pacmanContainer.appendChild(this.currentInstance)
+        if(!this.stop){
+            if(flag){
+                this.pacmanContainer.removeChild(this.currentInstance)
+            }else{
+                this.movementResolve(this.currentDir)
+            }
         }
     }
 

@@ -56,9 +56,16 @@ class Game{
     }
     
     rearrangeNodes(){
+        this.instances.map(instance => {
+            instance.stop = true
+        })
+        this.otherRound()
+    }
+
+    otherRound(){
         setTimeout(() => {
             this.instances.map(instance => {
-                instance.value = 2
+                instance.currentInstance.remove()
                 instance.setInstance(this.boardGame, this.width, this.height)
             })
             this.setup()

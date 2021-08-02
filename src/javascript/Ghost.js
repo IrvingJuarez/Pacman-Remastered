@@ -9,12 +9,13 @@ class Ghost{
         this.cellDistance = 24
         this.allPosibleDirs = ["left", "right", "up", "down"]
         
-        this.currentGhost = document.createElement("article")
-        this.currentGhost.classList.add("ghost")
-        this.currentGhost.classList.add(`${this.id}Ghost`)
+        this.currentInstance = document.createElement("article")
+        this.currentInstance.classList.add("ghost")
+        this.currentInstance.classList.add(`${this.id}Ghost`)
     }
     
     setInstance(boardGame, width, height){
+        this.stop = false
         this.directions = 4
         this.inactiveDatasetValue = undefined
         this.boardGame = boardGame
@@ -39,7 +40,7 @@ class Ghost{
         this.column = column
 
         this.ghostContainer = boardGame.childNodes[this.row].childNodes[this.column]
-        this.ghostContainer.appendChild(this.currentGhost)
+        this.ghostContainer.appendChild(this.currentInstance)
         this.movementResolve()
         this.goingOutOfJail()
     }
@@ -230,7 +231,7 @@ class Ghost{
     }
 
     movement(distance, axis, sign, direction, loop){
-        this.currentGhost.style.transform = `translate${axis}(${sign+distance}px)`
+        this.currentInstance.style.transform = `translate${axis}(${sign+distance}px)`
         distance += 2
 
         if(distance < this.cellDistance){
@@ -253,16 +254,18 @@ class Ghost{
     }
 
     changeCell(loop, direction, axis){
-        this.currentGhost.style.transform = ""
-        this.ghostContainer.removeChild(this.currentGhost)
+        this.currentInstance.style.transform = ""
+        this.ghostContainer.removeChild(this.currentInstance)
         this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
-        this.ghostContainer.appendChild(this.currentGhost)
+        this.ghostContainer.appendChild(this.currentInstance)
         this.getTarget()
 
-        if(loop){
-            this.escapeLoop(direction, axis)
-        }else{
-            this.movementResolve()
+        if(!this.stop){
+            if(loop){
+                this.escapeLoop(direction, axis)
+            }else{
+                this.movementResolve()
+            }
         }
     }
 
