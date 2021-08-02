@@ -14,8 +14,11 @@ const resolveGhost = (target, gameObject, width, height, boardGame, jailTime) =>
     }
 
     for(let item of ghosts){
-        let ghost = new Ghost(item, gameObject, target, boardGame, width, height, jailTime)
+        let ghost = new Ghost(item, gameObject, target, jailTime)
+        ghost.setInstance(boardGame, width, height)
     }
+
+    return ghosts
 }
 
 export default resolveGhost

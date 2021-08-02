@@ -1,7 +1,6 @@
 class Ghost{
-    constructor(id, gameObject, target, boardGame, screenWidth, screenHeight, jailTime){
+    constructor(id, gameObject, target, jailTime){
         this.id = id
-        this.boardGame = boardGame
         this.target = target
         this.game = gameObject
         this.jailTime = jailTime
@@ -15,11 +14,10 @@ class Ghost{
         this.currentGhost.classList.add("ghost")
         this.currentGhost.classList.add(`${this.id}Ghost`)
         this.inactiveDatasetValue = undefined
-
-        this.setGhost(screenWidth, screenHeight)
     }
 
-    setGhost(width, height){
+    setInstance(boardGame, width, height){
+        this.boardGame = boardGame
         let row, column;
 
         if(width >= 320 && width < 375){ // 320
@@ -40,7 +38,7 @@ class Ghost{
         this.row = row
         this.column = column
 
-        this.ghostContainer = this.boardGame.childNodes[this.row].childNodes[this.column]
+        this.ghostContainer = boardGame.childNodes[this.row].childNodes[this.column]
         this.ghostContainer.appendChild(this.currentGhost)
         this.movementResolve()
         this.goingOutOfJail()

@@ -8,13 +8,15 @@ const logic = () => {
     const screenWidth = screen.width;
     const screenHeight = screen.height;
     const jailTime = 5;
-    const game = new Game(jailTime)
+    const game = new Game(jailTime, boardGame, screenWidth, screenHeight)
+    const instances = []
     const pacman = new Pacman(game)
-    game.pacman = pacman
+    instances.push(pacman)
 
-    pacman.setPacman(boardGame, screenWidth, screenHeight)
-    resolveGhosts(pacman, game, screenWidth, screenHeight, boardGame, jailTime)
-    game.counterClock()
+    game.pacman = pacman
+    pacman.setInstance(boardGame, screenWidth, screenHeight)
+    let ghosts = resolveGhosts(pacman, game, screenWidth, screenHeight, boardGame, jailTime)
+    game.counterClock(instances, ghosts)
 }
 
 export default logic;

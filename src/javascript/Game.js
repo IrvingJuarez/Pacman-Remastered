@@ -1,9 +1,13 @@
 import logic from "./logic"
 
 class Game{
-    constructor(time){
+    constructor(time, boardGame, width, height){
         this.tag = document.getElementById("timer")
         this.time = time
+        this.boardGame = boardGame
+        this.width = width
+        this.height = height
+        this.instances = []
         this.container = document.getElementById("timerContainer")
         this.lifeContainer = document.querySelector(".LifeContainer")
         this.container.style.display = "flex"
@@ -16,15 +20,17 @@ class Game{
         }, 4000)
     }
 
-    counterClock(){
+    counterClock(pacman, ghosts){
         this.tag.innerHTML = this.time;
         this.time--
         if(this.time < 0){
             this.jailOpen()
             this.container.style.display = "none"
+            this.instances.push(pacman[0])
+            this.instances.push(...ghosts)
         }else{
             setTimeout(() => {
-                this.counterClock()
+                this.counterClock(pacman, ghosts)
             }, 1000)
         }
     }
@@ -55,7 +61,7 @@ class Game{
             arr.map(item => {
                 item.remove()
             })
-            logic()
+            console.log(this.instances)
         }, 2000)
     }
 }

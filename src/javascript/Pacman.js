@@ -11,7 +11,7 @@ class Pacman{
         this.currentDir = "ArrowLeft"
     }
 
-    setPacman(boardGame, width, height){
+    setInstance(boardGame, width, height){
         this.boardGame = boardGame
         var row, column, portalRow, portalColumn;
 
