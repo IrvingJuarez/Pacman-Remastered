@@ -3,7 +3,8 @@ import logic from "./logic"
 class Game{
     constructor(time, boardGame, width, height){
         this.tag = document.getElementById("timer")
-        this.time = time
+        this.belongedTime = time
+        this.time = this.belongedTime
         this.boardGame = boardGame
         this.width = width
         this.height = height
@@ -59,9 +60,16 @@ class Game{
             this.instances.map(instance => {
                 instance.setInstance(this.boardGame, this.width, this.height)
             })
-            document.documentElement.style.setProperty("--jailColor", "#00FFDE")
-            this.counterClock()
+            this.setup()
         }, 2000)
+    }
+
+    setup(){
+        this.time = this.belongedTime
+        this.container.style.display = "flex"
+        this.gameOverFlag = false
+        document.documentElement.style.setProperty("--jailColor", "#00FFDE")
+        this.counterClock()
     }
 }
 
