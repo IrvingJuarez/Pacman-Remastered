@@ -30,6 +30,7 @@ const createGrid = (height, width, container) => {
                 cell.dataset.value = 1
             }else{
                 foodQuantity++
+                cell.classList.add("food")
                 cell.classList.add(food)
             }
             row.appendChild(cell)

@@ -1,4 +1,5 @@
 import logic from "./logic"
+import pacmanImage from "../assets/images/pacmanPhoto.png"
 
 class Game{
     constructor(time, boardGame, width, height){
@@ -12,6 +13,15 @@ class Game{
         this.container = document.getElementById("timerContainer")
         this.lifeContainer = document.querySelector(".LifeContainer")
         this.container.style.display = "flex"
+        this.setFoodClass()
+    }
+
+    setFoodClass(){
+        if(this.width >= 1208){
+            this.foodClass = "desktopFood"
+        }else{
+            this.foodClass = "mobileFood"
+        }
     }
 
     jailOpen(){
@@ -39,7 +49,24 @@ class Game{
     }
 
     win(){
+        this.appendLife()
         this.rearrangeNodes()
+        this.refill()
+    }
+
+    refill(){
+        setTimeout(() => {
+            let refilled = [...document.querySelectorAll(".food")]
+            refilled.map(cell => {
+                cell.classList.add(this.foodClass)
+            })
+        }, 2000)
+    }
+
+    appendLife(){
+        let newLife = document.createElement("img")
+        newLife.src = pacmanImage
+        this.lifeContainer.append(newLife)
     }
 
     gameOver(){
