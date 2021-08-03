@@ -135,8 +135,17 @@ class Ghost{
     }
     
     escapeLoopMovement(direction, value){
-        this.updateCoordinates(direction)
-        this.setMovement(direction, value)
+        let lastBarrier = this.cellExpected(direction)
+
+        if(lastBarrier == this.inactiveDatasetValue){
+            lastBarrier = this.randomMovement()
+            console.log(lastBarrier)
+            debugger
+            this.escapeLoopMovement(lastBarrier, value)
+        }else{
+            this.updateCoordinates(direction)
+            this.setMovement(direction, value)
+        }
     }
 
     escapeLoop(direction, axis){
@@ -399,23 +408,30 @@ class Ghost{
         if(this.directions <= 2){
             direction = this.getSmartMovement()
         }else{
-            switch(direction){
-                case 0:
-                    direction = "left"
-                break;
-                case 1:
-                    direction = "right"
-                break;
-                case 2:
-                    direction = "up"
-                break;
-                case 3:
-                    direction = "down"
-                break;
-            }
+            direction = this.randomMovement()
         }
 
         return direction
+    }
+
+    randomMovement(){
+        let dir = Math.floor(Math.random() * 4)
+        let result
+        switch(dir){
+            case 0:
+                result = "left"
+            break;
+            case 1:
+                result = "right"
+            break;
+            case 2:
+                result = "up"
+            break;
+            case 3:
+                result = "down"
+            break;
+        }
+        return result
     }
 
     cellExpected(direction){

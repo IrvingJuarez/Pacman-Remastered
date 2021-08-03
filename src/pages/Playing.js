@@ -19,6 +19,11 @@ const Playing = () => {
                 </div>
                 <p class="LevelStatus">Level: <span class="LevelQuantity">0</span></p>
             </div>
+            <article class="ctaContainer">
+                <h2>The ghosts were faster than you</h2>
+                <div class="ctaAnimation"></div>
+                <div class="ctaButton">Try again</div>
+            </article>
         </section>
     `;
 

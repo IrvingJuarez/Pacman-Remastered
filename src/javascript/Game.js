@@ -55,9 +55,11 @@ class Game{
     }
 
     refill(){
+        this.otherRound()
         setTimeout(() => {
             let refilled = [...document.querySelectorAll(".food")]
             refilled.map(cell => {
+                this.pacman.foodQuantity++
                 cell.classList.add(this.foodClass)
             })
         }, 2000)
@@ -72,12 +74,17 @@ class Game{
     gameOver(){
         if(!this.gameOverFlag){
             if(this.lifeContainer.childElementCount <= 0){
-                console.log("Game over action")
+                this.farewell()
             }else{
                 this.removeLife()
             }
         }
         this.gameOverFlag = true
+    }
+
+    farewell(){
+        this.rearrangeNodes()
+        document.querySelector(".ctaContainer").style.display = "flex"
     }
 
     removeLife(){
