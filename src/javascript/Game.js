@@ -74,7 +74,7 @@ class Game{
     gameOver(){
         if(!this.gameOverFlag){
             if(this.lifeContainer.childElementCount <= 0){
-                this.farewell()
+                this.lastWindow("lose")
             }else{
                 this.removeLife()
             }
@@ -82,8 +82,21 @@ class Game{
         this.gameOverFlag = true
     }
 
-    farewell(){
+    lastWindow(status){
         this.rearrangeNodes()
+        this.render(status)
+    }
+    
+    render(status){
+        let winH2 = document.querySelector(".ctaContainer>h2")
+        let button = document.querySelector(".ctaButton")
+        if(status == "lose"){
+            winH2.textContent = "The ghosts were faster than you"
+            button.textContent = "Try again"
+        }else{
+            winH2.textContent = "You are oficially a Pacman Master"
+            button.textContent = "Share this on twitter!!"
+        }
         document.querySelector(".ctaContainer").style.display = "flex"
     }
 
