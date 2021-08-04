@@ -1,3 +1,5 @@
+const foodSound = require("../assets/sounds/Fruit.mp3")
+
 class Pacman{
     constructor(gameObject, foodQuantity){
         this.game = gameObject
@@ -6,6 +8,7 @@ class Pacman{
         this.currentInstance.classList.add("pacman")
         this.time = 30
         this.distance = 24
+        this.sound = new Audio("./Fruit.mp3")
     }
     
     setInstance(boardGame, width, height){
@@ -141,6 +144,7 @@ class Pacman{
         if(this.pacmanContainer.classList.contains(this.foodClass)){
             this.foodQuantity--
             this.pacmanContainer.classList.remove(this.foodClass)
+            this.sound.play()
         }
 
         if(this.foodQuantity <= 0){
