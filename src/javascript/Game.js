@@ -6,6 +6,8 @@ class Game{
         this.tag = document.getElementById("timer")
         this.belongedTime = time
         this.time = this.belongedTime
+        this.level = 0
+        this.levelContainer = document.querySelector(".LevelQuantity")
         this.boardGame = boardGame
         this.width = width
         this.height = height
@@ -13,6 +15,7 @@ class Game{
         this.container = document.getElementById("timerContainer")
         this.lifeContainer = document.querySelector(".LifeContainer")
         this.container.style.display = "flex"
+        this.renderLevel()
         this.setFoodClass()
     }
 
@@ -49,9 +52,28 @@ class Game{
     }
 
     win(){
+        this.renderLevel()
         this.appendLife()
+        this.faster()
         this.rearrangeNodes()
         this.refill()
+    }
+
+    renderLevel(){
+        this.level++
+        if(this.level >= 4){
+            this.render("win")
+        }else{
+            this.levelContainer.textContent = this.level
+        }
+    }
+
+    faster(){
+        this.instances.map(item => {
+            if(item.timeG){
+                item.timeG -= 5
+            }
+        })
     }
 
     refill(){

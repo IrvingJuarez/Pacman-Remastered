@@ -5,7 +5,7 @@ class Ghost{
         this.game = gameObject
         this.jailTime = jailTime
         this.targetDirs = []
-        this.time = 40
+        this.timeG = 40
         this.cellDistance = 24
         this.allPosibleDirs = ["left", "right", "up", "down"]
         
@@ -34,7 +34,7 @@ class Ghost{
             row = 10;
             column = 15;
             this.cellDistance = 40
-            this.time = 20
+            this.timeG = 20
         }
         this.row = row
         this.column = column
@@ -139,8 +139,6 @@ class Ghost{
 
         if(lastBarrier == this.inactiveDatasetValue){
             lastBarrier = this.randomMovement()
-            console.log(lastBarrier)
-            debugger
             this.escapeLoopMovement(lastBarrier, value)
         }else{
             this.updateCoordinates(direction)
@@ -261,7 +259,7 @@ class Ghost{
         if(distance < this.cellDistance){
             setTimeout(() => {
                 this.movement(distance, axis, sign, direction, loop)
-            }, this.time)
+            }, this.timeG)
         }else{
             if(loop){
                 this.changeCell(true, direction, axis)
