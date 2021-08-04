@@ -24,10 +24,11 @@ async function router(){
         render = Error404
     }
 
-    content.innerHTML = await render()
-
-    if(render == "playing-game"){
+    if(hash == "playing-game"){
+        content.innerHTML = await render()
         await getLayout()
+    }else{
+        content.innerHTML = await render()
     }
 }
 
