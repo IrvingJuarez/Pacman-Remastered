@@ -27,6 +27,9 @@ async function router(){
     if(hash == "playing-game"){
         content.innerHTML = await render()
         await getLayout()
+    }else if(hash == "/"){
+        content.innerHTML = await render()
+        await goFullscreen()
     }else{
         content.innerHTML = await render()
     }
