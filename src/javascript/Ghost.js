@@ -34,7 +34,7 @@ class Ghost{
             row = 10;
             column = 15;
             this.cellDistance = 40
-            this.time = 25
+            this.time = 20
         }
         this.row = row
         this.column = column
@@ -46,9 +46,9 @@ class Ghost{
     }
 
     movementResolve(){
-        let dir, status
+        let dir, status, value
         dir = this.getDirection()
-        this.value = this.cellExpected(dir)
+        value = this.cellExpected(dir)
 
         if(this.directions <= 2){
             status = "smart"
@@ -59,7 +59,7 @@ class Ghost{
         if(this.value == 2){
             this.game.gameOver()
         }else{
-            this.availability(this.value, dir, status)
+            this.availability(value, dir, status)
         }
     }
 
@@ -260,13 +260,7 @@ class Ghost{
 
         if(distance < this.cellDistance){
             setTimeout(() => {
-                let value
-                if(loop){
-                    value = true
-                }else{
-                    value = false
-                }
-                this.movement(distance, axis, sign, direction, value)
+                this.movement(distance, axis, sign, direction, loop)
             }, this.time)
         }else{
             if(loop){
