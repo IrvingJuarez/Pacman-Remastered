@@ -8,7 +8,7 @@ const StartGame = () => {
                 <span class="Subtitle">REMASTERED</span>
             </div>
             <button class="PlayButton">
-                <a href="#/playing-game/"></a>Play Game!
+                <a href="#/playing-game/">Play Game!</a>
             </button>
         </section>
     `;

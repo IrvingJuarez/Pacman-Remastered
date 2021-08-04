@@ -25,7 +25,10 @@ async function router(){
     }
 
     content.innerHTML = await render()
-    await getLayout()
+
+    if(render == "playing-game"){
+        await getLayout()
+    }
 }
 
 export default router;

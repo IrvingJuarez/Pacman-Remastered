@@ -3,7 +3,7 @@ const getHash = () => {
     if(validHash == ""){
         return "/"
     }else{
-        return validHash.slice(1, validHash.length - 1)
+        return validHash.slice(2, validHash.length - 1)
     }
 }
 
