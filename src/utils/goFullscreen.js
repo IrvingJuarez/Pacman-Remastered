@@ -1,7 +1,8 @@
 function goFullscreen(){
     let fullscreen = document.querySelector(".FullscreenButton")
+    let content = document.querySelector("#content")
     fullscreen.addEventListener("click", () => {
-        console.log("Hi")
+        content.requestFullscreen()
     })
 }
 
