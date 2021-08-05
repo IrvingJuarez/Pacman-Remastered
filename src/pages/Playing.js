@@ -1,6 +1,7 @@
 import styles from "../styles/Playing.css"
 import clock from "../assets/images/clock.svg"
 import pacmanImage from "../assets/images/pacmanPhoto.png"
+import foodSound from "../assets/sounds/Fruit.mp3"
 
 const Playing = () => {
 
