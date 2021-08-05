@@ -6,6 +6,7 @@ import Playing from "../pages/Playing";
 import goFullscreen from "../utils/goFullscreen";
 import getHash from "../utils/getHash"
 import getLayout from "../utils/getLayout"
+import mute from "../utils/mute"
 
 const routes = {
     "/": FullscreenMode,
@@ -27,6 +28,7 @@ async function router(){
     if(hash == "playing-game"){
         content.innerHTML = await render()
         await getLayout()
+        await mute()
     }else if(hash == "/"){
         content.innerHTML = await render()
         await goFullscreen()
