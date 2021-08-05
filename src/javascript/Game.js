@@ -15,6 +15,8 @@ class Game{
         this.container = document.getElementById("timerContainer")
         this.lifeContainer = document.querySelector(".LifeContainer")
         this.container.style.display = "flex"
+        this.deathSound = new Audio("./assets/sounds/Death.mp3")
+        this.winSound = new Audio("./assets/sounds/Intro.mp3")
         this.renderLevel()
         this.setFoodClass()
     }
@@ -52,6 +54,7 @@ class Game{
     }
 
     win(){
+        this.winSound.play()
         this.renderLevel()
         this.appendLife()
         this.faster()
@@ -77,7 +80,7 @@ class Game{
     }
 
     refill(){
-        this.otherRound()
+        this.otherRound("win")
         setTimeout(() => {
             let refilled = [...document.querySelectorAll(".food")]
             refilled.map(cell => {
@@ -94,6 +97,7 @@ class Game{
     }
 
     gameOver(){
+        this.deathSound.play()
         if(!this.gameOverFlag){
             if(this.lifeContainer.childElementCount <= 0){
                 this.lastWindow("lose")
@@ -137,7 +141,9 @@ class Game{
             this.otherRound()
     }
 
-    otherRound(){
+    otherRound(flag){
+        let time = flag ? 4000 : 2000
+
         if(this.instances.length <= 2 && this.level >= 3){
             let ghost = new Ghost("pink", this, this.pacman, 5)
             ghost.timeG = 30;
@@ -152,7 +158,7 @@ class Game{
                 instance.setInstance(this.boardGame, this.width, this.height)
             })
             this.setup()
-        }, 2000)
+        }, time)
     }
 
     setup(){

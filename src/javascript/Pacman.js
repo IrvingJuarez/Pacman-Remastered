@@ -11,7 +11,7 @@ class Pacman{
     
     setInstance(boardGame, width, height){
         this.stop = false
-        this.currentDir = "ArrowLeft"
+        this.currentDir = "ArrowLeft", this.newDir = "ArrowLeft"
         this.boardGame = boardGame
         var row, column, portalRow, portalColumn;
         this.foodClass = "mobileFood"
