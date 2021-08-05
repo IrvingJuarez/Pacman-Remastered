@@ -27,9 +27,9 @@
     font-weight: bold;
     border-color: var(--borderColor);
     background-color: var(--borderColor);
-    color: white;
 }
 .PlayButton a{
+    color: white;
     text-decoration: none;
 }
 
@@ -93,5 +93,6 @@
     .PlayButton{
         font-size: 28px;
         height: 80px;
+        width: 120%;
     }
 }

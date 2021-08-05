@@ -6,7 +6,8 @@
     color: white;
 }
 .GifContainerFull{
-    background-image: url("../assets/images/redGhost.png");
+    width: 100%;
+    background-image: url("../assets/images/logo.png");
 }
 .ContentFullscreenMode p{
     text-align: center;
@@ -36,7 +37,6 @@
         height: 226px;
     }
     .GifContainerFull{
-        width: 50px;
         height: 50px;
     }
     .ContentFullscreenMode p, .ContentFullscreenMode button{
@@ -54,7 +54,6 @@
         height: 228px;
     }
     .GifContainerFull{
-        width: 52px;
         height: 52px;
     }
     .ContentFullscreenMode p, .ContentFullscreenMode button{
@@ -72,7 +71,6 @@
         height: 412px;
     }
     .GifContainerFull{
-        width: 70px;
         height: 70px;
     }
     .ContentFullscreenMode p{
@@ -81,5 +79,6 @@
     .ContentFullscreenMode button{
         height: 80px;
         font-size: 28px;
+        width: 120%;
     }
 }
