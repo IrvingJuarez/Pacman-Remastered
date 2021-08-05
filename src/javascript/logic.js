@@ -10,13 +10,13 @@ const logic = (foodQuantity) => {
     const jailTime = 5;
     const game = new Game(jailTime, boardGame, screenWidth, screenHeight)
     const instances = []
-    // const pacman = new Pacman(game, foodQuantity)
-    // instances.push(pacman)
+    const pacman = new Pacman(game, foodQuantity)
+    instances.push(pacman)
 
-    // game.pacman = pacman
-    // pacman.setInstance(boardGame, screenWidth, screenHeight)
-    // let ghosts = resolveGhosts(pacman, game, screenWidth, screenHeight, boardGame, jailTime)
-    // game.counterClock(instances, ghosts)
+    game.pacman = pacman
+    pacman.setInstance(boardGame, screenWidth, screenHeight)
+    let ghosts = resolveGhosts(pacman, game, screenWidth, screenHeight, boardGame, jailTime)
+    game.counterClock(instances, ghosts)
 }
 
 export default logic;

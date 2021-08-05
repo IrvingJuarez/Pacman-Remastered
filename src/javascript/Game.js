@@ -1,4 +1,4 @@
-import logic from "./logic"
+import Ghost from "./Ghost"
 import pacmanImage from "../assets/images/pacmanPhoto.png"
 
 class Game{
@@ -138,9 +138,17 @@ class Game{
     }
 
     otherRound(){
+        if(this.instances.length <= 2 && this.level >= 3){
+            let ghost = new Ghost("pink", this, this.pacman, 5)
+            ghost.timeG = 30;
+            this.instances.push(ghost)
+        }
+
         setTimeout(() => {
             this.instances.map(instance => {
-                instance.currentInstance.remove()
+                if(instance.currentInstance.parentNode){
+                    instance.currentInstance.remove()
+                }
                 instance.setInstance(this.boardGame, this.width, this.height)
             })
             this.setup()
