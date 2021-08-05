@@ -43,6 +43,18 @@
     align-items: center;
     justify-content: space-between;
 }
+.levelSoundStatus{
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.sound-status{
+    height: 100%;
+    width: 22px;
+    margin-right: 10px;
+}
 .LifeContainer{
     display: flex;
     align-items: center;
@@ -130,5 +142,8 @@
     }
     .ctaContainer h2{
         font-size: 1.9rem;
+    }
+    .sound-status{
+        width: 42px;
     }
 }

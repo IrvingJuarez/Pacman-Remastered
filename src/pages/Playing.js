@@ -18,7 +18,10 @@ const Playing = () => {
                     <img src="${clock}">
                     <p id="timer" class="LevelStatus"></p>
                 </div>
-                <p class="LevelStatus">Level: <span class="LevelQuantity">0</span></p>
+                <div class="levelSoundStatus">
+                    <div class="sound-status soundOn"></div>
+                    <p class="LevelStatus">Level: <span class="LevelQuantity">0</span></p>
+                </div>
             </div>
             <article class="ctaContainer">
                 <h2></h2>
