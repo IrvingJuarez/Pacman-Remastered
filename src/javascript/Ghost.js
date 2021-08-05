@@ -34,7 +34,7 @@ class Ghost{
             row = 10;
             column = 15;
             this.cellDistance = 40
-            this.timeG = 25
+            this.timeG = 18
         }
         this.row = row
         this.column = column
@@ -75,15 +75,32 @@ class Ghost{
         }
     }
 
-    retrySmartMovement(direction){
-        let value, secondDir
-        secondDir = this.leftDir(direction)
-        value = this.noCenter(secondDir)
-
-        if(value == this.inactiveDatasetValue){
-            this.setEscapeLoop()
+    retrySmartMovement(direction, flag){
+        let value
+        if(flag){
+            let secondDir
+            secondDir = this.getNewDirs(direction)
+            value = this.cellExpected(secondDir)
+    
+            if(value == this.inactiveDatasetValue){
+                this.setEscapeLoop(secondDir)
+            }else{
+                this.escapeLoopMovement(secondDir, true)
+            }
         }else{
-            this.escapeLoopMovement(secondDir, false)
+            let randomDir
+            if(direction == "down" || direction == "up"){
+                randomDir = this.randomSmartMovement("left", "right")
+            }else{
+                randomDir = this.randomSmartMovement("up", "down")
+            }
+            value = this.cellExpected(randomDir)
+
+            if(value == this.inactiveDatasetValue){
+                this.retrySmartMovement(randomDir, true)
+            }else{
+                this.escapeLoopMovement(randomDir, true)
+            }
         }
     }
 
@@ -109,29 +126,18 @@ class Ghost{
         return value
     }
 
-    setEscapeLoop(){
-        let newXAxis, newYAxis, valueX, valueY, loopDir
-        newXAxis = this.getNewDirs(this.moveToInX, "X") //left
-        newYAxis = this.getNewDirs(this.moveToInY, "Y") //up
+    setEscapeLoop(lastDir){
+        let moveTo
 
-        valueX = this.cellExpected(newXAxis) //1
-        valueY = this.cellExpected(newYAxis) //undefined
-
-        if(valueX != this.inactiveDatasetValue && valueY != this.inactiveDatasetValue){
-            loopDir = this.randomSmartMovement(newXAxis, newYAxis)
-        }else if(valueX != this.inactiveDatasetValue){
-            loopDir = newXAxis
-        }else if(valueY != this.inactiveDatasetValue){
-            loopDir = newYAxis
+        if(lastDir == "left" || lastDir == "right"){
+            moveTo = this.getNewDirs(this.moveToInY)
         }else{
-            loopDir = null
+            moveTo = this.getNewDirs(this.moveToInX)
         }
 
-        if(loopDir){
-            this.escapeLoopMovement(loopDir, true)
-        }else{
-            this.setEscapeLoop()
-        }
+        console.log(moveTo)
+        debugger
+        this.escapeLoopMovement(moveTo, true)
     }
     
     escapeLoopMovement(direction, value){
