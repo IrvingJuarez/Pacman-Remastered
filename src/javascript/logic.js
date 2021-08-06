@@ -1,6 +1,7 @@
 import Game from "./Game"
 import Pacman from "./Pacman"
 import resolveGhosts from "../utils/resolveGhosts"
+import mute from "../utils/mute"
 
 const logic = (foodQuantity) => {
     const mainContainer = document.getElementById("content")
@@ -17,6 +18,7 @@ const logic = (foodQuantity) => {
     pacman.setInstance(boardGame, screenWidth, screenHeight)
     let ghosts = resolveGhosts(pacman, game, screenWidth, screenHeight, boardGame, jailTime)
     game.counterClock(instances, ghosts)
+    mute(pacman, game)
 }
 
 export default logic;

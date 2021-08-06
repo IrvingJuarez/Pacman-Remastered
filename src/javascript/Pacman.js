@@ -142,7 +142,9 @@ class Pacman{
         if(this.pacmanContainer.classList.contains(this.foodClass)){
             this.foodQuantity--
             this.pacmanContainer.classList.remove(this.foodClass)
-            this.sound.play()
+            if(!this.mute){
+                this.sound.play()
+            }
         }
 
         if(this.foodQuantity <= 0){

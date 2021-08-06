@@ -54,7 +54,9 @@ class Game{
     }
 
     win(){
-        this.winSound.play()
+        if(!this.mute){
+            this.winSound.play()
+        }
         this.renderLevel()
         this.appendLife()
         this.faster()
@@ -97,7 +99,9 @@ class Game{
     }
 
     gameOver(){
-        this.deathSound.play()
+        if(!this.mute){
+            this.deathSound.play()
+        }
         if(!this.gameOverFlag){
             if(this.lifeContainer.childElementCount <= 0){
                 this.lastWindow("lose")
