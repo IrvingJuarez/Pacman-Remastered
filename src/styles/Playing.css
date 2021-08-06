@@ -100,7 +100,7 @@
     left: 50%;
     transform: translateX(-50%);
     display: none;
-    width: 95vw;
+    width: 93vw;
     max-width: 360px;
     height: 90vh;
     border: 4px solid var(--borderColor);
@@ -116,9 +116,8 @@
 }
 .ctaAnimation{
     width: 90%;
-    height: 20%;
+    height: 155px;
     margin: 20px 0;
-    border: 1px solid white;
 }
 .ctaButton{
     width: 80%;
@@ -127,6 +126,7 @@
     border: 2px solid var(--borderColor);
     text-align: center;
     border-radius: 15px;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 1210px){
@@ -141,7 +141,7 @@
         font-size: 1.5rem;
     }
     .ctaContainer h2{
-        font-size: 1.9rem;
+        font-size: 2.2rem;
     }
     .sound-status{
         width: 42px;

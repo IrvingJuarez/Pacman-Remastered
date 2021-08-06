@@ -1,5 +1,7 @@
 import Ghost from "./Ghost"
 import pacmanImage from "../assets/images/pacmanPhoto.png"
+import loser from "../assets/gifs/loser.gif"
+import winner from "../assets/gifs/winner.gif"
 
 class Game{
     constructor(time, boardGame, width, height){
@@ -122,14 +124,34 @@ class Game{
     render(status){
         let winH2 = document.querySelector(".ctaContainer>h2")
         let button = document.querySelector(".ctaButton")
+        let imgContainer = document.querySelector(".ctaAnimation")
+
         if(status == "lose"){
-            winH2.textContent = "The ghosts were faster than you"
+            winH2.textContent = "Try again & teach them who you are."
             button.textContent = "Try again"
+            imgContainer.style.backgroundImage = `url(${loser})`
         }else{
             winH2.textContent = "You are oficially a Pacman Master"
             button.textContent = "Share this on twitter!!"
+            imgContainer.style.width = "60%"
+            imgContainer.style.backgroundImage = `url(${winner})`
         }
+
+        if(this.width >= 1210){
+            this.desktop(status, imgContainer)
+        }
+
         document.querySelector(".ctaContainer").style.display = "flex"
+    }
+
+    desktop(state, container){
+        if(state == "lose"){
+            container.style.width = "50%"
+            container.style.height = "355px"
+        }else{
+            container.style.width = "40%"
+            container.style.height = "455px"
+        }
     }
 
     removeLife(){
