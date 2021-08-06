@@ -1,9 +1,13 @@
 .ContentStartGame{
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     color: white;
+}
+.ContentStartGame p{
+    text-align: center;
 }
 .Logo{
     display: flex;
@@ -11,6 +15,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 10px;
 }
 .LogoImage{
     width: 100%;
@@ -23,6 +28,7 @@
 }
 .PlayButton{
     width: 100%;
+    margin-bottom: 10px;
     border-radius: 15px;
     font-weight: bold;
     border-color: var(--borderColor);
@@ -36,8 +42,7 @@
 /* 320Design */
 @media (min-width: 320px) and (max-width: 374px){
     .ContentStartGame{
-        width: 230px;
-        height: 136px;
+        width: 90%;
     }
     .Logo{
         height: 74px;
@@ -57,8 +62,7 @@
 /* 375Design */
 @media (min-width: 375px){
     .ContentStartGame{
-        width: 230px;
-        height: 140px;
+        width: 300px;
     }
     .Logo{
         height: 74px;
@@ -79,7 +83,6 @@
 @media (min-width: 1210px){
     .ContentStartGame{
         width: 369px;
-        height: 232px;
     }
     .Logo{
         height: 122px;
@@ -94,5 +97,9 @@
         font-size: 28px;
         height: 80px;
         width: 120%;
+    }
+    .ContentStartGame p{
+        width: 130%;
+        font-size: 1.4rem;
     }
 }

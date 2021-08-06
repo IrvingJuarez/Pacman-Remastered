@@ -10,6 +10,7 @@ const StartGame = () => {
             <button class="PlayButton">
                 <a href="#/playing-game/">Play Game!</a>
             </button>
+            <p>If you are in desktop, remember you can zoom-in or zoom-out to adjust the size of the game board.</p>
         </section>
     `;
 
