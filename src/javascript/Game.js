@@ -89,7 +89,7 @@ class Game{
                 this.pacman.foodQuantity++
                 cell.classList.add(this.foodClass)
             })
-        }, 2000)
+        }, 4000)
     }
 
     appendLife(){
@@ -114,7 +114,9 @@ class Game{
 
     lastWindow(status){
         this.rearrangeNodes()
-        this.render(status)
+        setTimeout(() => {
+            this.render(status)
+        }, 2000)
     }
     
     render(status){
