@@ -26,7 +26,7 @@ const Playing = () => {
             <article class="ctaContainer">
                 <h2></h2>
                 <div class="ctaAnimation"></div>
-                <div class="ctaButton"><a href="/"></a></div>
+                <div class="ctaButton"><a href="#"></a></div>
             </article>
         </section>
     `;

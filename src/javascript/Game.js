@@ -94,6 +94,10 @@ class Game{
         }, 4000)
     }
 
+    again(){
+        window.location.reload(true)
+    }
+
     appendLife(){
         let newLife = document.createElement("img")
         newLife.src = pacmanImage
@@ -124,15 +128,18 @@ class Game{
     render(status){
         let winH2 = document.querySelector(".ctaContainer>h2")
         let button = document.querySelector(".ctaButton")
+        let anchor = document.querySelector(".ctaButton a")
         let imgContainer = document.querySelector(".ctaAnimation")
 
         if(status == "lose"){
             winH2.textContent = "Try again & teach them who you are."
-            button.textContent = "Try again"
+            anchor.textContent = "Try again"
+            button.addEventListener("click", this.again)
             imgContainer.style.backgroundImage = `url(${loser})`
         }else{
             winH2.textContent = "You are oficially a Pacman Master"
-            button.textContent = "Share this on twitter!!"
+            anchor.textContent = "Share this on twitter!!"
+            anchor.href = "https://twitter.com/intent/tweet?text=Just%20killed%20off%20%E2%9A%A1%EF%B8%8Fghosts%20in%20the%20%40juarez1_irving%20Pacman%20Arcade%20Game%F0%9F%8E%89"
             imgContainer.style.width = "60%"
             imgContainer.style.backgroundImage = `url(${winner})`
         }
